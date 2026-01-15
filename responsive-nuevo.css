@@ -1,0 +1,906 @@
+/* ===================================================
+   RESPONSIVE OPTIMIZATION: MÓVIL | TABLET | DESKTOP
+   ===================================================
+   
+   DISEÑO: Profesional, limpio, sin overlaps
+   MOBILE FIRST: Optimizado para pequeños pantallas
+   
+   =================================================== */
+
+/* ===================================================
+   MOBILE (< 480px) - PROFESIONAL Y LIMPIO
+   =================================================== */
+
+@media (max-width: 480px) {
+    /* GLOBAL */
+    html, body {
+        overflow-x: hidden;
+    }
+
+    .section {
+        padding: 40px 0 !important;
+    }
+
+    .section--light {
+        padding: 40px 0 !important;
+    }
+
+    .section--dark {
+        padding: 40px 0 !important;
+    }
+
+    /* CONTAINER */
+    .container {
+        padding: 0 16px !important;
+        max-width: 100% !important;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+        padding: 12px 0;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+        background: rgba(28, 20, 15, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(200, 162, 90, 0.1);
+    }
+
+    .header__wrapper {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 12px;
+        align-items: center;
+        padding: 0 16px;
+    }
+
+    .logo {
+        font-size: 16px;
+        font-weight: 600;
+        white-space: nowrap;
+        grid-column: 1;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: center;
+        grid-column: 2;
+    }
+
+    .nav ul {
+        display: flex;
+        gap: 8px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav a {
+        font-size: 10px;
+        padding: 4px 8px;
+        color: rgba(245, 241, 236, 0.7);
+        transition: color 300ms ease;
+        white-space: nowrap;
+    }
+
+    .nav a:hover {
+        color: var(--gold);
+    }
+
+    .header .btn--primary {
+        padding: 8px 12px;
+        font-size: 10px;
+        grid-column: 3;
+        white-space: nowrap;
+    }
+
+    /* ===== HERO ===== */
+    .hero-fullscreen {
+        padding-top: 60px;
+        min-height: auto;
+        padding-bottom: 40px;
+    }
+
+    .hero-fullscreen__content {
+        padding: 24px 0;
+        gap: 20px;
+    }
+
+    .hero-fullscreen__title {
+        font-size: 28px;
+        line-height: 1.25;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+    }
+
+    .hero-fullscreen__subtitle {
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 400;
+    }
+
+    .hero-zone-header {
+        margin-bottom: 8px;
+    }
+
+    .hero-badge {
+        font-size: 11px;
+        padding: 6px 12px;
+        display: inline-block;
+        margin-bottom: 12px;
+    }
+
+    .hero-bio-panel {
+        gap: 12px;
+    }
+
+    .hero-bio-panel p {
+        font-size: 13px;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .hero-specialties {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 12px 0;
+    }
+
+    .specialty-chip {
+        padding: 8px 12px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+
+    .hero-ctas-primary {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 16px;
+    }
+
+    .hero-ctas-primary .btn {
+        width: 100%;
+        padding: 12px 18px;
+        font-size: 13px;
+        border-radius: 6px;
+        text-align: center;
+    }
+
+    .hero-ctas-secondary {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+    }
+
+    .quick-link {
+        padding: 10px 14px;
+        font-size: 12px;
+        text-align: center;
+        border-radius: 6px;
+    }
+
+    /* ===== ESPECIALIDADES ===== */
+    .specialties {
+        gap: 28px;
+    }
+
+    .specialties__header {
+        gap: 12px;
+    }
+
+    .specialties__title {
+        font-size: 28px;
+        line-height: 1.25;
+        font-weight: 700;
+    }
+
+    .specialties__subtitle {
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 400;
+    }
+
+    .specialties__divider {
+        width: 50px;
+        height: 3px;
+    }
+
+    .specialties__filters {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 0;
+    }
+
+    .specialties__chip {
+        padding: 9px 14px;
+        font-size: 12px;
+        border-radius: 6px;
+        white-space: nowrap;
+    }
+
+    .specialties__cta {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 0;
+    }
+
+    .specialties__cta .btn {
+        width: 100%;
+        padding: 12px 18px;
+        font-size: 13px;
+        text-align: center;
+        border-radius: 6px;
+    }
+
+    .specialties__actions {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .specialties__action-link {
+        padding: 9px 12px;
+        font-size: 12px;
+        text-align: center;
+        border-radius: 6px;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .specialties__grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .specialties__list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .specialties__item {
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(200, 162, 90, 0.1);
+    }
+
+    .specialties__item:last-child {
+        border-bottom: none;
+    }
+
+    .specialties__item-title {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+
+    .specialties__item-desc {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .specialties__image-frame {
+        aspect-ratio: 1/1;
+        max-height: 280px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .specialties__experience-card {
+        padding: 16px;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .specialties__experience-number {
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    .specialties__experience-label {
+        font-size: 12px;
+        margin-top: 6px;
+    }
+
+    /* ===== SERVICIOS (CURLY, RUBIOS, ORGÁNICO) ===== */
+    .service {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .service__content {
+        gap: 12px;
+    }
+
+    .service__eyebrow {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    .service__title {
+        font-size: 26px;
+        line-height: 1.2;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+    }
+
+    .service__divider {
+        width: 50px;
+        height: 3px;
+    }
+
+    .service__lead {
+        font-size: 14px;
+        line-height: 1.6;
+        font-weight: 400;
+    }
+
+    .service__section-title {
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 8px;
+    }
+
+    .service__list {
+        gap: 8px;
+    }
+
+    .service__list li {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .service__image-wrapper {
+        aspect-ratio: 1/1;
+        max-height: 260px;
+        border-radius: 8px;
+        overflow: hidden;
+        order: -1;
+    }
+
+    /* ===== ABOUT (SOBRE BEGOÑA) ===== */
+    .about {
+        gap: 28px;
+    }
+
+    .about__header {
+        gap: 12px;
+    }
+
+    .about__title {
+        font-size: 28px;
+        line-height: 1.25;
+        font-weight: 700;
+    }
+
+    .about__subtitle {
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 400;
+    }
+
+    .about__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .about__content {
+        gap: 14px;
+    }
+
+    .about__section-title {
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .about__text {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .about__heading {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-top: 10px;
+        margin-bottom: 6px;
+    }
+
+    .about__list {
+        gap: 8px;
+    }
+
+    .about__list li {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .about__stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .about__stat {
+        padding: 14px;
+        border-radius: 8px;
+    }
+
+    .about__stat-number {
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    .about__stat-label {
+        font-size: 12px;
+        margin-top: 6px;
+        font-weight: 500;
+    }
+
+    /* ===== SANTA PERPÈTUA ===== */
+    .santa {
+        gap: 28px;
+    }
+
+    .santa__header {
+        gap: 10px;
+    }
+
+    .santa__title {
+        font-size: 28px;
+        line-height: 1.25;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .santa__subtitle {
+        font-size: 14px;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    .santa__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .santa__content {
+        gap: 14px;
+    }
+
+    .santa__lead {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .santa__heading {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-top: 8px;
+        margin-bottom: 6px;
+    }
+
+    .santa__list {
+        gap: 8px;
+    }
+
+    .santa__list li {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .santa__chips {
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .santa__ctas {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 0;
+        margin: 0;
+    }
+
+    .santa__ctas .btn {
+        width: 100%;
+        padding: 12px 18px;
+        font-size: 13px;
+        text-align: center;
+        border-radius: 6px;
+    }
+
+    .santa__highlight {
+        padding: 20px 16px;
+        gap: 12px;
+        border-radius: 8px;
+        margin-top: 8px;
+    }
+
+    .santa__highlight-icon {
+        font-size: 44px;
+    }
+
+    .santa__highlight-title {
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    .santa__highlight-text {
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .santa__highlight-divider {
+        width: 30px;
+        height: 2px;
+        margin: 6px auto;
+    }
+
+    .santa__highlight-small {
+        font-size: 11px;
+        text-align: center;
+        line-height: 1.5;
+    }
+}
+
+/* ===================================================
+   TABLET (480px - 768px) - INTERMEDIO
+   =================================================== */
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .section {
+        padding: 48px 0 !important;
+    }
+
+    .container {
+        padding: 0 20px !important;
+    }
+
+    /* HEADER */
+    .header {
+        padding: 14px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(28, 20, 15, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(200, 162, 90, 0.1);
+    }
+
+    .header__wrapper {
+        gap: 24px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav {
+        display: flex;
+    }
+
+    .nav ul {
+        gap: 20px;
+    }
+
+    .nav a {
+        font-size: 12px;
+    }
+
+    .header .btn--primary {
+        padding: 10px 18px;
+        font-size: 12px;
+    }
+
+    /* HERO */
+    .hero-fullscreen {
+        padding-top: 70px;
+    }
+
+    .hero-fullscreen__content {
+        padding: 40px 0;
+        gap: 28px;
+    }
+
+    .hero-fullscreen__title {
+        font-size: 36px;
+        line-height: 1.2;
+    }
+
+    .hero-fullscreen__subtitle {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .hero-bio-panel {
+        gap: 14px;
+    }
+
+    .specialty-chip {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+
+    .hero-ctas-primary {
+        gap: 14px;
+    }
+
+    .hero-ctas-primary .btn {
+        min-width: 160px;
+        padding: 13px 26px;
+        font-size: 13px;
+    }
+
+    .quick-link {
+        padding: 11px 16px;
+        font-size: 12px;
+    }
+
+    /* ESPECIALIDADES */
+    .specialties__title {
+        font-size: 36px;
+    }
+
+    .specialties__subtitle {
+        font-size: 15px;
+    }
+
+    .specialties__chip {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+
+    .specialties__cta .btn {
+        min-width: 160px;
+        padding: 13px 26px;
+        font-size: 13px;
+    }
+
+    .specialties__action-link {
+        padding: 10px 14px;
+        font-size: 12px;
+    }
+
+    .specialties__item-title {
+        font-size: 16px;
+    }
+
+    .specialties__item-desc {
+        font-size: 14px;
+    }
+
+    /* SERVICIOS */
+    .service {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .service__title {
+        font-size: 32px;
+    }
+
+    .service__lead {
+        font-size: 14px;
+    }
+
+    .service__image-wrapper {
+        aspect-ratio: 1/1.1;
+        max-height: 400px;
+    }
+
+    /* ABOUT */
+    .about__title {
+        font-size: 36px;
+    }
+
+    .about__subtitle {
+        font-size: 15px;
+    }
+
+    .about__grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .about__section-title {
+        font-size: 26px;
+    }
+
+    .about__text {
+        font-size: 14px;
+    }
+
+    .about__stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .about__stat-number {
+        font-size: 36px;
+    }
+
+    /* SANTA */
+    .santa__title {
+        font-size: 36px;
+    }
+
+    .santa__subtitle {
+        font-size: 15px;
+    }
+
+    .santa__grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .santa__lead {
+        font-size: 14px;
+    }
+
+    .santa__highlight-title {
+        font-size: 26px;
+    }
+
+    .santa__highlight {
+        padding: 28px 20px;
+    }
+}
+
+/* ===================================================
+   DESKTOP (> 768px) - MANTIENE ESTILOS BASE
+   =================================================== */
+
+@media (min-width: 769px) {
+    .section {
+        padding: 64px 0 !important;
+    }
+
+    .container {
+        padding: 0 24px !important;
+    }
+
+    .header {
+        padding: 18px 0;
+    }
+
+    .header__wrapper {
+        gap: 40px;
+    }
+
+    .logo {
+        font-size: 26px;
+    }
+
+    .nav {
+        display: flex;
+    }
+
+    .nav ul {
+        gap: 40px;
+    }
+
+    .nav a {
+        font-size: 13px;
+    }
+
+    .header .btn--primary {
+        padding: 10px 24px;
+        font-size: 13px;
+    }
+
+    .hero-fullscreen__title {
+        font-size: 48px;
+    }
+
+    .hero-fullscreen__subtitle {
+        font-size: 16px;
+    }
+
+    .specialty-chip {
+        padding: 11px 19px;
+        font-size: 13px;
+    }
+
+    .hero-ctas-primary {
+        gap: 18px;
+    }
+
+    .hero-ctas-primary .btn {
+        min-width: 200px;
+        font-size: 15px;
+        padding: 14px 32px;
+    }
+
+    .specialties__title {
+        font-size: 56px;
+    }
+
+    .specialties__subtitle {
+        font-size: 16px;
+    }
+
+    .specialties__chip {
+        padding: 12px 20px;
+    }
+
+    .specialties__cta {
+        gap: 16px;
+    }
+
+    .specialties__cta .btn {
+        min-width: 220px;
+    }
+
+    .specialties__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+    }
+
+    .specialties__item {
+        padding: 24px 0;
+    }
+
+    .specialties__item-title {
+        font-size: 18px;
+    }
+
+    .specialties__item-desc {
+        font-size: 15px;
+    }
+
+    .service {
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    .service__title {
+        font-size: 42px;
+    }
+
+    .service__image-wrapper {
+        aspect-ratio: 1/1.1;
+    }
+
+    .about__title {
+        font-size: 56px;
+    }
+
+    .about__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+    }
+
+    .about__stats {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .santa__title {
+        font-size: 56px;
+    }
+
+    .santa__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+}

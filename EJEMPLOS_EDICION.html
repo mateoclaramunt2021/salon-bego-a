@@ -1,0 +1,254 @@
+<!-- 
+    EJEMPLOS DE EDICIÓN RÁPIDA - Salón Begoña Gómez
+    
+    Este archivo muestra dónde y cómo editar los elementos más comunes
+    sin necesidad de buscar en todo el código.
+    
+    INSTRUCCIONES:
+    1. Abre index.html con VS Code
+    2. Presiona Ctrl+G y ve a la línea indicada
+    3. Encuentra el texto y cámbialo
+    4. Guarda con Ctrl+S
+    5. Recarga en navegador con F5
+-->
+
+<!-- 
+    ============================================
+    1. CAMBIAR TELÉFONO
+    ============================================
+    
+    Busca: 602 44 99 95
+    Reemplaza por: tu número
+    
+    Aparece en múltiples lugares (Header, Hero, Contacto, Footer)
+    RECOMENDACIÓN: Usa Ctrl+H (Buscar y Reemplazar) y "Replace All"
+-->
+
+<!-- 
+    ============================================
+    2. CAMBIAR INSTAGRAM
+    ============================================
+    
+    Busca: salonbegonagomezbelleza
+    Reemplaza por: tu usuario
+    
+    Aparece en:
+    - Línea ~72: Link en Hero
+    - Línea ~485: Sección Reservar
+    - Línea ~560: Footer
+-->
+
+<!-- 
+    ============================================
+    3. CAMBIAR PRECIOS (Ejemplo)
+    ============================================
+    
+    Actual (línea ~350):
+    <li><span>Corte de mujer</span> <span class="price">desde 35€</span></li>
+    
+    Nuevo:
+    <li><span>Corte de mujer</span> <span class="price">desde 40€</span></li>
+    
+    FÁCIL: Busca "desde 35€" y cámbialo
+-->
+
+<!-- 
+    ============================================
+    4. CAMBIAR HORARIO
+    ============================================
+    
+    Ubicación: Línea ~435 (Tabla de horario)
+    
+    Actual:
+    <tr>
+        <td>Lun - Mié, Vie - Sáb</td>
+        <td>9:30 - 19:00</td>
+    </tr>
+    
+    Nuevo ejemplo (si quieres cambiar):
+    <tr>
+        <td>Lun - Mié, Vie - Sáb</td>
+        <td>10:00 - 20:00</td>
+    </tr>
+-->
+
+<!-- 
+    ============================================
+    5. CAMBIAR RESEÑA
+    ============================================
+    
+    Ubicación: Línea ~410
+    
+    Actual:
+    <p class="resena__text">"Llevo años en este salón..."</p>
+    <p class="resena__author">— María G.</p>
+    
+    Nuevo (tu reseña real):
+    <p class="resena__text">"Tu testimonial aquí..."</p>
+    <p class="resena__author">— Nombre Cliente</p>
+-->
+
+<!-- 
+    ============================================
+    6. CAMBIAR FOTO DE GALERÍA
+    ============================================
+    
+    Ubicación: Línea ~370 (Galería)
+    
+    Actual:
+    <img src="assets/gallery-01.jpg" alt="Corte Curly profesional" loading="lazy">
+    
+    Proceso:
+    1. Reemplaza la foto en /assets/gallery-01.jpg (600x600px)
+    2. La web usa automáticamente tu nueva foto
+    3. El alt-text es para SEO (puedes cambiarlo también)
+-->
+
+<!-- 
+    ============================================
+    7. CAMBIAR ENLACE DE RESERVAR
+    ============================================
+    
+    Ubicación: Línea ~480
+    
+    Actual:
+    <a href="https://booking.com">Reservar en Booksy</a>
+    
+    Nuevo (con tu enlace Booksy):
+    <a href="https://booksy.com/es-es/salon-begona-gomez">Reservar</a>
+-->
+
+<!-- 
+    ============================================
+    8. CAMBIAR DIRECCIÓN
+    ============================================
+    
+    Ubicación: Línea ~425
+    
+    Actual:
+    <p>Carrer de Pompeu Fabra, 8<br>08860 Castelldefels, Barcelona</p>
+    
+    Nuevo:
+    <p>Tu Calle, Número<br>Tu código postal, Tu Ciudad</p>
+-->
+
+<!-- 
+    ============================================
+    CAMBIOS EN CSS (styles.css)
+    ============================================
+    
+    Para cambiar COLORES:
+    
+    1. Abre styles.css
+    2. Ve a línea 10 (:root)
+    3. Cambia los valores:
+    
+    --color-dark: #0F1115;      ← Color fondo oscuro
+    --color-gold: #C8A25A;      ← Color dorado (botones)
+    --color-nude: #D8B4A0;      ← Color rosa/nude
+    --color-white: #F5F1EC;     ← Blanco/crema
+    
+    EJEMPLO: Si quieres un dorado más brillante
+    --color-gold: #FFD700;
+-->
+
+<!-- 
+    ============================================
+    CAMBIOS EN SCRIPT.JS
+    ============================================
+    
+    NO necesitas cambiar nada en script.js para usar la web
+    
+    Está hecho para:
+    - Menú móvil (automático)
+    - Galería con lightbox (automático)
+    - Carrusel de reseñas (automático)
+    - Animaciones (automático)
+    
+    ¡Todo funciona sin tocar JavaScript!
+-->
+
+<!-- 
+    ============================================
+    CHECKLIST DE PERSONALIZACIÓN
+    ============================================
+    
+    Antes de publicar, revisa:
+    
+    □ Cambié el teléfono (602 44 99 95 → mi número)
+    □ Cambié Instagram (salonbegonagomezbelleza → mi usuario)
+    □ Actualicé precios en la sección Servicios
+    □ Cambié horario en la tabla de Contacto
+    □ Reemplacé las imágenes en /assets/ (9 fotos)
+    □ Cambié direcció (si es necesario)
+    □ Edité reseñas con testimonios reales
+    □ Probé en móvil y escritorio
+    □ Probé los botones Reservar, Llamar, WhatsApp
+    
+    ¡Cuando todo esté listo, puedes publicar online!
+-->
+
+<!-- 
+    ============================================
+    ATAJOS ÚTILES EN VS CODE
+    ============================================
+    
+    Ctrl+F       = Buscar una palabra
+    Ctrl+H       = Buscar y Reemplazar
+    Ctrl+G       = Ir a línea específica
+    Ctrl+S       = Guardar
+    Ctrl+/       = Comentar/Descomentar
+    Alt+↑↓       = Mover línea arriba/abajo
+    
+    IMPORTANTE: Cuando uses "Replace All" con Ctrl+H
+    ten cuidado de no cambiar algo importante sin querer.
+    Siempre puedes deshacer con Ctrl+Z
+-->
+
+<!-- 
+    ============================================
+    TAMAÑO DE IMÁGENES RECOMENDADO
+    ============================================
+    
+    Galería (9 fotos):
+    - Tamaño: 600x600 píxeles (cuadradas ideales)
+    - Formato: JPG o PNG
+    - Peso máximo: 200KB cada una
+    
+    Hero (opcional):
+    - Tamaño: 1200x600 píxeles
+    - Formato: JPG
+    - Peso máximo: 300KB
+    
+    CÓMO COMPRIMIR IMÁGENES (Gratis):
+    - TinyPNG.com
+    - Squoosh.app (Google)
+    - ImageOptimizer.com
+-->
+
+<!-- 
+    ============================================
+    COLORES ALTERNATIVOS (Ejemplos)
+    ============================================
+    
+    Si quieres cambiar toda la paleta:
+    
+    OPCIÓN 1 - Más Cálido:
+    --color-dark: #2C2016;
+    --color-gold: #D4A574;
+    --color-nude: #E8C4B0;
+    
+    OPCIÓN 2 - Más Minimalista:
+    --color-dark: #1F1F1F;
+    --color-gold: #8B8B8B;
+    --color-nude: #D3D3D3;
+    
+    OPCIÓN 3 - Más Vibrante:
+    --color-dark: #1a1a1a;
+    --color-gold: #E6B800;
+    --color-nude: #F4D9D0;
+    
+    Prueba uno y recarga (F5)
+-->
+
+<!-- ¡Fin de los ejemplos de edición rápida! -->

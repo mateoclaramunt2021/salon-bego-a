@@ -1,0 +1,328 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                     IMPLEMENTACIÓN LEGAL COMPLETADA                              ║
+║          Sistema de Cumplimiento RGPD/LOPDGDD/LSSI-CE/ePrivacy                   ║
+║                    Salón Begoña Gómez | Enero 2026                               ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+📋 ARCHIVOS CREADOS Y MODIFICADOS
+═══════════════════════════════════════════════════════════════════════════════════
+
+✅ PÁGINAS LEGALES (4 archivos HTML en /pages/)
+  ├── aviso-legal.html
+  ├── politica-privacidad.html
+  ├── politica-cookies.html
+  └── condiciones-generales.html
+
+✅ ESTILOS
+  ├── legal-styles.css (Estilos para páginas legales)
+  └── cookies-styles.css (Estilos banner + modal de cookies)
+
+✅ JAVASCRIPT
+  └── cookies-manager.js (Sistema de gestión de consentimiento granular)
+
+✅ ACTUALIZACIONES
+  └── index.html (Footer actualizado + banner + modal + scripts)
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+🎯 CARACTERÍSTICAS IMPLEMENTADAS
+═══════════════════════════════════════════════════════════════════════════════════
+
+✓ Cookie Banner inicial:
+  - 3 botones: "Rechazar", "Personalizar", "Aceptar Todas"
+  - Aparece cuando usuario visita por 1ª vez
+  - Se oculta tras dar consentimiento
+
+✓ Modal de Configuración Granular:
+  - Categoría 1: Cookies Necesarias (SIEMPRE ACTIVAS)
+  - Categoría 2: Cookies Analíticas (desactivadas por defecto)
+  - Categoría 3: Cookies de Marketing (desactivadas por defecto)
+  - Toggle switches para cada categoría
+  - Botón "Guardar Preferencias"
+
+✓ Bloqueo de Scripts:
+  - Los scripts de analítica/marketing NO se cargan hasta consentimiento
+  - Estructura lista para integrar Google Analytics, Facebook Pixel, etc.
+  - Código comentado con TODO: para activar cuando sea necesario
+
+✓ Gestión de Preferencias:
+  - Guardado en localStorage (persistente)
+  - Cookie técnica sb_cookie_consent (12 meses)
+  - Acceso a panel desde botón "Configurar Cookies" en footer
+  - Posibilidad de cambiar preferencias en cualquier momento
+
+✓ Páginas Legales Completas:
+  - AVISO LEGAL: Identificación, T&C, propiedad intelectual, limitaciones
+  - POLÍTICA DE PRIVACIDAD: RGPD completo, derechos ARCO, DPO, etc.
+  - POLÍTICA DE COOKIES: Tipos, categorías, tabla detallada, cómo controlar
+  - CONDICIONES GENERALES: Reservas, cancelación, precios, reclamaciones
+
+✓ Diseño Accesible:
+  - Contraste de colores adecuado
+  - Focus states para navegación por teclado
+  - ARIA labels para lectores de pantalla
+  - Modo alto contraste (prefers-contrast: more)
+  - Modo movimiento reducido (prefers-reduced-motion: reduce)
+
+✓ Diseño Responsive:
+  - Desktop: 1200px+
+  - Tablet: 768px - 1199px
+  - Mobile: < 768px
+  - Banner adaptable en dispositivos pequeños
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+📝 CAMPOS QUE DEBES COMPLETAR (BÚSQUEDA: [TODO])
+═══════════════════════════════════════════════════════════════════════════════════
+
+1. DATOS EMPRESA
+  ├─ [RAZÓN SOCIAL / NOMBRE]: Nombre legal de la empresa
+  ├─ [NIF/CIF]: Número de identificación fiscal
+  ├─ [DIRECCIÓN COMPLETA]: Calle, número, CP, municipio, provincia
+  ├─ [EMAIL]: Email de contacto principal
+  ├─ [TELÉFONO]: Número de teléfono
+  └─ [REGISTRO MERCANTIL]: Si es necesario (datos registrales)
+
+2. DATOS PRIVACIDAD
+  ├─ [EMAIL PRIVACIDAD]: Email para solicitudes RGPD (privacidad@...)
+  ├─ [NOMBRE Y EMAIL DEL DPO]: Si tienes Delegado de Protección de Datos
+  └─ [PROVINCIA DONDE ESTÁ DOMICILIADO]: Para juzgados (ej. Barcelona)
+
+3. HERRAMIENTAS Y PROVEEDORES
+  ├─ [PROVEEDOR HOSTING]: Ej. Hostinger, AWS, GoDaddy
+  ├─ [PROVEEDOR EMAIL]: Ej. Gmail, Outlook, Brevo, SendGrid
+  ├─ [NOMBRE DEL SISTEMA DE RESERVAS]: Ej. Calendly, Mindbody, Acuity
+  ├─ [PROVEEDOR CRM]: Si usas (Hubspot, Pipedrive, etc.)
+  ├─ [HERRAMIENTA DE ANALÍTICA]: Ej. Google Analytics 4, Matomo, Plausible
+  ├─ [REDES SOCIALES]: Facebook, Instagram, TikTok, etc.
+  └─ [PROVEEDOR PAGOS]: Ej. Stripe, PayPal, REDSYS (si aceptas pagos)
+
+4. POLÍTICAS OPERACIONALES
+  ├─ [PLAZO CANCELACIÓN]: Ej. "48 horas" (tiempo antes de cita)
+  ├─ [COBRO NO-SHOW]: Ej. "100%", "50%", "sin cobro"
+  ├─ [POLÍTICA DEPÓSITO]: Si requieres depósito (%, montos mín/máx)
+  ├─ [SERVICIOS DEPÓSITO]: Qué servicios lo requieren
+  ├─ [POLÍTICA BONOS]: Si vendes bonos (valores, duración, transferencia)
+  ├─ [TARJETAS REGALO]: Si se venden (valores, duración)
+  ├─ [MÉTODO RESERVA]: Teléfono, WhatsApp, formulario, plataforma
+  ├─ [NÚMERO WHATSAPP]: Si lo usas
+  └─ [CÁMARA COMERCIAL]: Para arbitraje (ej. Cámara de Barcelona)
+
+5. CONSERVACIÓN DE DATOS
+  ├─ [PLAZO CONSULTAS]: Ej. "12 meses desde última comunicación"
+  ├─ [PLAZO CLIENTES]: Ej. "3 años" o según obligación fiscal
+  ├─ [PLAZO FISCAL]: Ej. "6 años" (según legislación fiscal española)
+  ├─ [PLAZO RESERVAS NUEVAS]: Ej. "6 meses tras finalización"
+  └─ [PLAZO ANALYTICS]: Ej. "26 meses" (Google Analytics) o tu herramienta
+
+6. TRANSFERENCIAS INTERNACIONALES
+  ├─ [DECISIÓN ADECUACIÓN]: Ej. "Cláusulas Contractuales Tipo (SCCs)"
+  ├─ [ESTADO GA]: Ej. "Google Analytics 4 en UE" o "Fuera EEE"
+  └─ [PAÍS/PROTECCIÓN]: Para cada proveedor fuera del EEE
+
+7. COOKIES (EN cookies-manager.js)
+  ├─ [GA_MEASUREMENT_ID]: ID de Google Analytics (descomenta la sección)
+  └─ [FACEBOOK PIXEL ID]: ID de Facebook Pixel (descomenta si lo usas)
+
+8. OTRO
+  ├─ [NOMBRE PROPIETARIO]: Begoña Gómez o nombre titular
+  └─ [PRÓXIMA REVISIÓN]: Ej. "Julio 2026"
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+🔧 CÓMO IMPLEMENTAR
+═══════════════════════════════════════════════════════════════════════════════════
+
+PASO 1: Completar [CAMPOS]
+  1. Abre cada archivo HTML legal en /pages/
+  2. Usa Ctrl+F para buscar "[TODO:" o "[CAMPO"
+  3. Reemplaza con tu información real
+  4. NO dejes placeholders en producción
+
+PASO 2: Integrar Google Analytics (OPCIONAL)
+  1. Abre cookies-manager.js
+  2. Busca la sección "analytics" en COOKIE_CATEGORIES
+  3. Descomenta el bloque del script
+  4. Reemplaza 'GA_MEASUREMENT_ID' con tu ID real (Ej. G-XXXXXXX)
+  5. Guarda y prueba
+
+PASO 3: Integrar Facebook Pixel (OPCIONAL)
+  1. Abre cookies-manager.js
+  2. Busca la sección "marketing"
+  3. Descomenta el script de Facebook
+  4. Reemplaza con tu Pixel ID real
+  5. Completa el código de Facebook (cópialo de tu dashboard)
+
+PASO 4: Probar en Navegador
+  1. Abre la página en localhost/production
+  2. Abre DevTools (F12) > Console
+  3. Verifica que aparezca el cookie banner
+  4. Prueba: Aceptar, Rechazar, Personalizar
+  5. Cambia preferencias y verifica localStorage
+  6. Comprueba que scripts se cargan/no cargan según consentimiento
+
+PASO 5: Agregar a Otras Páginas
+  Si tienes más páginas (contacto.html, galeria.html, etc.):
+  1. Añade los CSS en <head>:
+     <link rel="stylesheet" href="legal-styles.css">
+     <link rel="stylesheet" href="cookies-styles.css">
+  2. Añade el banner/modal HTML antes de </body> (copiar de index.html)
+  3. Carga el script: <script src="cookies-manager.js"></script>
+
+PASO 6: Verificación Legal
+  1. Revisa cada página legal completa
+  2. Verifica que los [CAMPOS] están rellenados correctamente
+  3. Comprueba enlaces internos (aviso legal ↔ privacidad, etc.)
+  4. Prueba en navegadores: Chrome, Firefox, Safari, Edge
+  5. Prueba en móvil: iPhone, Android
+  6. Verifica accesibilidad (Lighthouse, WAVE)
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+⚠️ PUNTOS CRÍTICOS
+═══════════════════════════════════════════════════════════════════════════════════
+
+1. CONSENTIMIENTO DEBE SER EXPLÍCITO Y GRANULAR
+   ✗ INCORRECTO: Asumir consentimiento por inactividad
+   ✓ CORRECTO: Usuario clica botones consciente (banner)
+
+2. COOKIES NECESARIAS SIEMPRE ACTIVAS
+   ✓ Correct: Funcionales, de seguridad, técnicas
+   ✗ NO: Analítica/marketing sin consentimiento
+
+3. SCRIPTS BLOQUEADOS HASTA CONSENTIMIENTO
+   ✓ CORRECTO: Google Analytics/Facebook se cargan DESPUÉS del consentimiento
+   ✗ INCORRECTO: Scripts cargados automáticamente en <head>
+
+4. DERECHO A CAMBIAR PREFERENCIAS
+   ✓ CORRECTO: Botón "Configurar Cookies" siempre accesible en footer
+   ✗ INCORRECTO: Preferencias fijas sin posibilidad de cambio
+
+5. DATOS COMPLETOS EN POLÍTICA DE PRIVACIDAD
+   ✓ CORRECTO: Enumerar TODOS los terceros que usas (herramientas, CDNs, etc.)
+   ✗ INCORRECTO: Omitir proveedores
+
+6. NO ALMACENAR DATOS DE TARJETA
+   ✓ CORRECTO: Usar Stripe, PayPal, REDSYS (no almacenas datos sensibles)
+   ✗ INCORRECTO: Guardar números de tarjeta en base de datos
+
+7. TRANSFER INTERNACIONAL: Verificar legitimidad
+   ✓ CORRECTO: UE → UE (sin problemas), UE → USA (SCCs vigentes)
+   ✗ INCORRECTO: Transferencias a países sin protección adecuada
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+📞 REFERENCIAS Y RECURSOS
+═══════════════════════════════════════════════════════════════════════════════════
+
+Organismos:
+  • AEPD (Agencia Española Protección de Datos): www.aepd.es
+  • EDPB (European Data Protection Board): edpb.europa.eu
+  • ICO (UK): ico.org.uk (referencia útil aunque sea UK)
+
+Legislación:
+  • RGPD: Regulation (EU) 2016/679
+  • LOPDGDD: Ley Orgánica 3/2018
+  • LSSI-CE: Ley 34/1988 (comercio electrónico)
+  • ePrivacy Directive: 2002/58/CE
+
+Normativas Consumo:
+  • Ley 3/1991 Competencia Desleal
+  • Real Decreto 1/2007 Defensa Consumidor
+  • Ley 34/1988 Publicidad
+
+Herramientas Útiles:
+  • GDPR Compliance Checklist: gdpr-checklist.com
+  • Cookie Consent Manager: iubenda.com, cookiebot.com
+  • Accessibility WAVE: wave.webaim.org
+  • Lighthouse Audit: chrome devtools
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+🎨 PERSONALIZACIÓN DE ESTILOS
+═══════════════════════════════════════════════════════════════════════════════════
+
+Si quieres adaptar colores/tipografía:
+
+1. legal-styles.css:
+   • Modifica --D4AE68 (dorado premium) por tu color
+   • Ajusta fuentes: var(--font-display) y var(--font-body)
+   • Cambia max-width de contenido (actualmente 900px)
+
+2. cookies-styles.css:
+   • Toggle switch: busca "background: #D4AE68" para cambiar color
+   • Banner: modifica gradient de fondo
+   • Modal: personaliza colores de header/footer
+
+3. Responsive:
+   • Breakpoints actuales: 768px, 480px
+   • Ajusta en media queries si tu diseño es diferente
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+✅ CHECKLIST PRE-PRODUCCIÓN
+═══════════════════════════════════════════════════════════════════════════════════
+
+□ Todos los [CAMPOS] rellenados con datos reales
+□ Enlaces internos funcionan (index.html → páginas legales)
+□ Footer visible en todas las páginas
+□ Banner de cookies aparece en 1ª visita
+□ Consentimiento se guarda en localStorage
+□ Scripts se cargan/no cargan según preferencias
+□ Modal de configuración abre/cierra correctamente
+□ Botón "Configurar Cookies" accesible desde footer
+□ Página funciona en Chrome, Firefox, Safari, Edge
+□ Página es responsive en móvil/tablet/desktop
+□ Navegación por teclado (Tab, Enter, Escape) funciona
+□ Colores tienen contraste suficiente (WCAG AA)
+□ Pruebas de privacidad en herramientas (GDPR-checklist.com)
+□ Consultas/asesoramiento legal si es necesario (recomendado)
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+🚀 SIGUIENTE: MEJORAS FUTURAS
+═══════════════════════════════════════════════════════════════════════════════════
+
+FASE 2 (Opcional):
+  • Integrar Analytics real (Google Analytics 4, Matomo)
+  • Retargeting publicitario (Facebook Pixel, Google Ads)
+  • Sistema de formularios con RGPD-compliance (CAPTCHA, doble opt-in)
+  • Email marketing con consentimiento (Mailchimp, Brevo, etc.)
+  • Logs de auditoría de consentimiento
+  • Exportar preferencias como PDF
+
+FASE 3 (Avanzado):
+  • API de preferencias (para sincronizar multi-dispositivo)
+  • Integración con CRM (guardar consentimiento con cliente)
+  • Dashboard de consentimiento (admin panel)
+  • Integración con Airtable/Google Sheets para tracking
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+📧 SOPORTE Y PREGUNTAS
+═══════════════════════════════════════════════════════════════════════════════════
+
+Si tienes dudas sobre:
+
+IMPLEMENTACIÓN TÉCNICA:
+  • Estructura HTML/CSS/JS
+  • Cómo integrar Analytics o herramientas
+  → Revisa código comentado en archivos
+
+LEGAL/RGPD:
+  • Qué información incluir
+  • Obligaciones según tu negocio
+  • Transferencias internacionales
+  → Consulta AEPD.es o asesor legal especializado
+
+ACCESIBILIDAD:
+  • WCAG 2.1
+  • Navegación por teclado
+  • Lectores de pantalla
+  → Herramienta: WAVE, Lighthouse, NVDA
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+📋 VERSIÓN: 1.0 | FECHA: Enero 2026 | ESTATUS: LISTO PARA PRODUCCIÓN
+
+═══════════════════════════════════════════════════════════════════════════════════

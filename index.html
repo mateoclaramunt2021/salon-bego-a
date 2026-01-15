@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Salón Begoña Gómez | Peluquería premium en Castelldefels: Curly, Rubios, Color orgánico.">
+    <title>Salón Begoña Gómez | Peluquería Premium</title>
+    <!-- PACK A TIPOGRÁFICO: Cormorant Garamond + Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- PACK B (comentado): Playfair Display + Manrope -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet"> -->
+    <!-- DESIGN SYSTEM (DEBE IR PRIMERO) -->
+    <link rel="stylesheet" href="design-system.css">
+    <!-- ESTILOS ESPECÍFICOS DEL SITIO -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- RESPONSIVE OPTIMIZATION: MÓVIL | TABLET | DESKTOP -->
+    <link rel="stylesheet" href="responsive.css">
+    <!-- HERO SIDEBAR: CTAs EN LATERAL DERECHO -->
+    <link rel="stylesheet" href="hero-sidebar.css">
+    <!-- LEGAL PAGES & COOKIES STYLES -->
+    <link rel="stylesheet" href="legal-styles.css">
+    <link rel="stylesheet" href="cookies-styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__wrapper">
+                <a href="index.html" class="logo">
+                    <img src="assets/LOGO.png" alt="Salón Begoña Gómez" class="logo-img">
+                    <span class="logo-text">Salón Begoña Gómez</span>
+                </a>
+                
+                <!-- Hamburger Menu (Mobile Only) -->
+                <button class="header__hamburger" id="hamburger-menu" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="nav" id="mobile-menu">
+                    <ul>
+                        <li><a href="pages/especialidades.html">Especialidades</a></li>
+                        <li><a href="pages/sobre-begona.html">Sobre Begoña</a></li>
+                        <li><a href="pages/galeria.html">Galería</a></li>
+                        <li><a href="pages/resenas.html">Reseñas</a></li>
+                        <li><a href="pages/contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+                <a href="pages/contacto.html" class="btn btn--primary btn--sm">Reservar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Premium Fullscreen -->
+    <section class="hero-fullscreen">
+        <div class="hero-fullscreen__overlay"></div>
+        <div class="hero-fullscreen__content">
+            <!-- ZONA 1: HEADER PREMIUM (EYEBROW + TÍTULO + SUBTÍTULO) -->
+            <div class="hero-zone-header">
+                <div class="hero-badge">✨ Nueva apertura: Santa Perpètua (zona spa)</div>
+                
+                <h1 class="hero-fullscreen__title">
+                    Begoña Gómez.<br>
+                    Belleza con<br>calma y criterio.
+                </h1>
+                
+                <div class="hero-signature-line"></div>
+                
+                <p class="hero-fullscreen__subtitle">
+                    Más de 21 años de experiencia en peluquería. Especialista en rizo, transiciones a canas y rubios saludables.
+                </p>
+            </div>
+
+            <!-- ZONA 2: PANEL EDITORIAL (BIO + DIVIDER) -->
+            <div class="hero-zone-panel">
+                <div class="hero-bio-panel">
+                    <p>Madrileña, empecé en moda y estética. Llevo 21 años cuidando cabello desde la salud y la tranquilidad.</p>
+                    <div class="hero-panel-divider"></div>
+                    <p>Hoy te atiendo en Castelldefels y pronto en Santa Perpètua, con experiencia enfocada al bienestar capilar.</p>
+                </div>
+            </div>
+
+            <!-- ZONA 3: ESPECIALIDADES + ACCIONES PREMIUM -->
+            <div class="hero-zone-actions">
+                <!-- CHIPS DE ESPECIALIDADES -->
+                <div class="hero-specialties">
+                    <span class="specialty-chip">Curly (corte en seco)</span>
+                    <span class="specialty-chip">Transición a canas</span>
+                    <span class="specialty-chip">Rubios (balayage/babylights)</span>
+                    <span class="specialty-chip">Coloración orgánica</span>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: MENÚ RESERVAS PREMIUM -->
+            <div class="hero-ctas-wrapper">
+                <div class="booking-menu">
+                    <button class="booking-btn" data-dropdown="castelldefels">
+                        Reservar Castelldefels
+                    </button>
+                    <div class="booking-dropdown" id="dropdown-castelldefels" hidden>
+                        <a href="https://wa.me/34602449995" target="_blank" class="booking-option">
+                            <span class="option-icon">💬</span>
+                            <span class="option-text">WhatsApp</span>
+                        </a>
+                        <a href="tel:+34602449995" class="booking-option">
+                            <span class="option-icon">📞</span>
+                            <span class="option-text">Llamar</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="booking-menu">
+                    <button class="booking-btn" data-dropdown="santaperpeuta">
+                        Reservar Santa Perpètua
+                    </button>
+                    <div class="booking-dropdown" id="dropdown-santaperpeuta" hidden>
+                        <a href="https://wa.me/34672928374" target="_blank" class="booking-option">
+                            <span class="option-icon">💬</span>
+                            <span class="option-text">WhatsApp</span>
+                        </a>
+                        <a href="tel:+34672928374" class="booking-option">
+                            <span class="option-icon">📞</span>
+                            <span class="option-text">Llamar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CURLY -->
+    <section class="section section--light service-section">
+        <div class="container">
+            <div class="service">
+                <div class="service__content">
+                    <div class="service__header">
+                        <span class="service__eyebrow">MÉTODO CURLY</span>
+                        <h3 class="service__title">Potencia tus Rizos Naturales</h3>
+                        <div class="service__divider"></div>
+                    </div>
+                    <p class="service__lead">El Método Curly es la revolución en cuidado de cabello ondulado y rizado. Aplicamos esta filosofía con precisión profesional para realzar la belleza natural de tus rizos.</p>
+                    
+                    <h4 class="service__section-title">¿Qué Incluye?</h4>
+                    <ul class="service__list">
+                        <li>✓ Corte especializado en técnica Curly</li>
+                        <li>✓ Diagnóstico del tipo de rizo</li>
+                        <li>✓ Hidratación profunda</li>
+                        <li>✓ Asesoramiento de productos</li>
+                        <li>✓ Rutina de cuidado personalizada</li>
+                    </ul>
+                    <a href="pages/contacto.html" class="btn btn--primary btn--lg">Reservar Curly</a>
+                </div>
+                <div class="service__image-wrapper">
+                    <img src="assets/curly.jpg" alt="Método Curly" class="service__image" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RUBIOS -->
+    <section class="section section--light service-section">
+        <div class="container">
+            <div class="service">
+                <div class="service__content">
+                    <div class="service__header">
+                        <span class="service__eyebrow">RUBIOS IMPECABLES</span>
+                        <h3 class="service__title">Tonos Perfectos y Saludables</h3>
+                        <div class="service__divider"></div>
+                    </div>
+                    <p class="service__lead">Especialistas en técnicas de blanqueamiento y tonificación. Dominamos todas las técnicas: balayage, babylights, mechas, ombré.</p>
+                    
+                    <h4 class="service__section-title">Servicios</h4>
+                    <ul class="service__list">
+                        <li>✓ Balayage profesional</li>
+                        <li>✓ Babylights y micromechas</li>
+                        <li>✓ Blanqueamiento seguro</li>
+                        <li>✓ Tonificación precisa</li>
+                        <li>✓ Mantenimiento color</li>
+                    </ul>
+                    <a href="pages/contacto.html" class="btn btn--primary btn--lg">Reservar Rubios</a>
+                </div>
+                <div class="service__image-wrapper">
+                    <img src="assets/rubio.webp" alt="Rubios Impecables" class="service__image" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANSICIONES A CANAS -->
+    <section class="section section--light service-section">
+        <div class="container">
+            <div class="service">
+                <div class="service__content">
+                    <div class="service__header">
+                        <span class="service__eyebrow">TRANSICIONES A CANAS</span>
+                        <h3 class="service__title">Un Cambio Elegante y Natural</h3>
+                        <div class="service__divider"></div>
+                    </div>
+                    <p class="service__lead">El cambio hacia canas naturales es una decisión valiente y hermosa. Te acompañamos en cada paso de la transición con técnicas profesionales que hacen el proceso suave, elegante y sin comprometer la salud de tu cabello.</p>
+                    
+                    <h4 class="service__section-title">Nuestra Estrategia</h4>
+                    <ul class="service__list">
+                        <li>✓ Diagnóstico y plan personalizado</li>
+                        <li>✓ Coloración estratégica de raíces</li>
+                        <li>✓ Balayage para integración natural</li>
+                        <li>✓ Tratamientos de hidratación</li>
+                        <li>✓ Seguimiento continuo</li>
+                    </ul>
+                    <a href="pages/contacto.html" class="btn btn--primary btn--lg">Reservar Transición</a>
+                </div>
+                <div class="service__image-wrapper">
+                    <img src="assets/transiciona canas 2.jpg" alt="Transiciones a Canas" class="service__image" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE BEGOÑA -->
+    <section class="section section--dark" id="sobre-begona">
+        <div class="container">
+            <div class="about">
+                <div class="about__header">
+                    <h2 class="about__title">Sobre Begoña Gómez</h2>
+                    <p class="about__subtitle">Más de 21 años transformando cabello con criterio y calma</p>
+                </div>
+                
+                <div class="about__grid">
+                    <div class="about__content">
+                        <h3 class="about__section-title">Peluquera Profesional Especializada</h3>
+                        <p class="about__text">Con más de 21 años de experiencia, Begoña Gómez es referente en técnicas modernas de cabello cuidado con salud capilar.</p>
+                        
+                        <h4 class="about__heading">Especialización</h4>
+                        <ul class="about__list">
+                            <li>Método Curly (International Curly Hair Academy)</li>
+                            <li>Técnicas de Coloración Avanzada</li>
+                            <li>Cuidado Capilar Orgánico</li>
+                            <li>Balayage & Técnicas Modernas</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="about__stats">
+                        <div class="about__stat">
+                            <div class="about__stat-number">21+</div>
+                            <p class="about__stat-label">Años de Experiencia</p>
+                        </div>
+                        <div class="about__stat">
+                            <div class="about__stat-number">1000+</div>
+                            <p class="about__stat-label">Clientes Satisfechas</p>
+                        </div>
+                        <div class="about__stat">
+                            <div class="about__stat-number">4</div>
+                            <p class="about__stat-label">Especialidades</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUEVA APERTURA SANTA PERPÈTUA -->
+    <section class="section section--light" id="santa-perpeuta">
+        <div class="container">
+            <div class="santa">
+                <div class="santa__header">
+                    <h2 class="santa__title">Nueva Apertura en Santa Perpètua</h2>
+                    <p class="santa__subtitle">Un espacio de calma y cuidado capilar con zona spa premium</p>
+                </div>
+                
+                <div class="santa__grid">
+                    <div class="santa__content">
+                        <p class="santa__lead">En Santa Perpètua estamos creando un espacio pensado para desconectar, cuidar tu cabello y vivir una experiencia de bienestar. Incluye diagnóstico capilar, masaje y zona spa con cama de masaje.</p>
+                        
+                        <h3 class="santa__heading">Qué Encontrarás</h3>
+                        <ul class="santa__list">
+                            <li>Diagnóstico capilar personalizado</li>
+                            <li>Masaje capilar relajante</li>
+                            <li>Zona spa con cama de masaje</li>
+                            <li>Enfoque en salud capilar y bienestar</li>
+                            <li>Coloración orgánica (óleos y barros naturales)</li>
+                        </ul>
+
+                        <h3 class="santa__heading">Especialidades Destacadas</h3>
+                        <div class="santa__chips">
+                            <span class="chip">Transiciones a Canas</span>
+                            <span class="chip">Curly (Corte en Seco)</span>
+                            <span class="chip">Rubios (Balayage & Babylights)</span>
+                        </div>
+
+                        <div class="santa__ctas">
+                            <a href="pages/contacto.html#santa-perpeuta" class="btn btn--primary btn--lg">Reservar Santa Perpètua</a>
+                            <a href="https://www.google.com/maps/search/Genís+Sala+25+Santa+Perpètua+de+Mogoda" target="_blank" class="btn btn--secondary btn--lg">📍 Cómo Llegar</a>
+                        </div>
+                    </div>
+
+                    <div class="santa__highlight">
+                        <div class="santa__highlight-icon">✨</div>
+                        <h3 class="santa__highlight-title">Santa Perpètua</h3>
+                        <p class="santa__highlight-text">Bienestar Premium</p>
+                        <div class="santa__highlight-divider"></div>
+                        <p class="santa__highlight-small">Próxima apertura:<br/>Genís Sala, 25</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="action-bar">
+        <div class="container">
+            <h2>¿Listo para transformar tu cabello?</h2>
+            <p>Reserva tu cita ahora</p>
+            <div class="action-bar-buttons">
+                <a href="pages/contacto.html" class="btn btn--primary btn--lg">Reservar Online</a>
+                <a href="tel:+34602449995" class="btn btn--secondary btn--lg">📞 Llamar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>Salón Begoña</h4>
+                    <p>Peluquería Premium</p>
+                    <p>Estil Navia SL</p>
+                </div>
+                <div>
+                    <h4>Castelldefels</h4>
+                    <p>📞 +34 602 44 99 95</p>
+                    <p>Pompeu Fabra 8</p>
+                </div>
+                <div>
+                    <h4>Santa Perpètua</h4>
+                    <p>📞 +34 672 92 83 74</p>
+                    <p>Genís Sala, 25</p>
+                </div>
+            </div>
+            <div class="footer-legal">
+                <ul>
+                    <li><a href="pages/aviso-legal.html">Aviso Legal</a></li>
+                    <li><a href="pages/politica-privacidad.html">Privacidad</a></li>
+                    <li><a href="pages/politica-cookies.html">Cookies</a></li>
+                    <li><a href="pages/condiciones-generales.html">Condiciones</a></li>
+                    <li><a href="#" id="cookie-settings-link" class="cookie-settings-trigger">⚙️ Cookies</a></li>
+                </ul>
+            </div>
+            <p>&copy; 2026 Estil Navia SL. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner" role="region" aria-label="Aviso de cookies">
+        <div class="cookie-banner__content">
+            <div class="cookie-banner__message">
+                <h3>Preferencias de Cookies</h3>
+                <p>Utilizamos cookies para mejorar tu experiencia. Puedes aceptar todas o personalizar tus preferencias.</p>
+            </div>
+            <div class="cookie-banner__buttons">
+                <button id="cookie-reject-btn" class="btn btn--secondary">Rechazar</button>
+                <button id="cookie-configure-btn" class="btn btn--secondary">Personalizar</button>
+                <button id="cookie-accept-btn" class="btn btn--primary">Aceptar Todas</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Settings Modal -->
+    <div id="cookie-modal" class="cookie-modal" role="dialog" aria-labelledby="cookie-modal-title" aria-hidden="true">
+        <div class="cookie-modal__backdrop"></div>
+        <div class="cookie-modal__content">
+            <div class="cookie-modal__header">
+                <h2 id="cookie-modal-title">Preferencias de Cookies</h2>
+                <button class="cookie-modal__close" id="cookie-modal-close" aria-label="Cerrar">&times;</button>
+            </div>
+            <div class="cookie-modal__body">
+                <!-- Necesarias (siempre activas) -->
+                <div class="cookie-category">
+                    <div class="cookie-category__header">
+                        <div>
+                            <h3>Cookies Necesarias</h3>
+                            <p>Requeridas para el funcionamiento básico del sitio. No se pueden desactivar.</p>
+                        </div>
+                        <input type="checkbox" id="cookie-necessary" class="cookie-toggle" disabled checked>
+                    </div>
+                </div>
+
+                <!-- Analíticas -->
+                <div class="cookie-category">
+                    <div class="cookie-category__header">
+                        <div>
+                            <h3>Cookies Analíticas</h3>
+                            <p>Nos ayudan a entender cómo usas el sitio y mejorarlo. Completamente anónimas.</p>
+                        </div>
+                        <input type="checkbox" id="cookie-analytics" class="cookie-toggle">
+                    </div>
+                </div>
+
+                <!-- Marketing -->
+                <div class="cookie-category">
+                    <div class="cookie-category__header">
+                        <div>
+                            <h3>Cookies de Marketing</h3>
+                            <p>Nos permiten mostrar publicidad relevante y medir su efectividad.</p>
+                        </div>
+                        <input type="checkbox" id="cookie-marketing" class="cookie-toggle">
+                    </div>
+                </div>
+            </div>
+            <div class="cookie-modal__footer">
+                <button id="cookie-modal-save" class="btn btn--primary">Guardar Preferencias</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="booking-menu.js"></script>
+    <script src="mobile-menu.js"></script>
+    <script src="cookies-manager.js"></script>
+</body>
+</html>

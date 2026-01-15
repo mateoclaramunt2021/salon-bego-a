@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mis Especialidades - Salón Begoña Gómez">
+    <title>Mis Especialidades | Salón Begoña Gómez</title>
+        <!-- PACK A TIPOGR�FICO: Cormorant Garamond + Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- PACK B (comentado): Playfair Display + Manrope -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet"> -->
+    <!-- DESIGN SYSTEM (DEBE IR PRIMERO) -->
+    <link rel="stylesheet" href="../design-system.css">
+    <!-- ESTILOS ESPECÍFICOS DEL SITIO -->
+    <link rel="stylesheet" href="../styles.css">
+    <!-- RESPONSIVE OPTIMIZATION: M�VIL | TABLET | DESKTOP -->
+    <link rel="stylesheet" href="../responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__wrapper">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/LOGO.png" alt="Salón Begoña Gómez" class="logo-img">
+                    <span class="logo-text">Salón Begoña Gómez</span>
+                </a>
+                
+                <!-- Hamburger Menu (Mobile Only) -->
+                <button class="header__hamburger" id="hamburger-menu" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="nav" id="mobile-menu">
+                    <ul>
+                        <li><a href="especialidades.html" class="active">Especialidades</a></li>
+                        <li><a href="sobre-begona.html">Sobre Begoña</a></li>
+                        <li><a href="galeria.html">Galería</a></li>
+                        <li><a href="resenas.html">Reseñas</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+                <a href="contacto.html" class="btn btn--primary btn--sm">Reservar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal - ESPECIALIDADES HERO PREMIUM -->
+    <section class="section section--dark specialties-hero">
+        <div class="container">
+            <div class="specialties-hero__inner">
+                <div class="specialties-hero__eyebrow">SERVICIOS</div>
+                <h1 class="specialties-hero__title">Mis Especialidades</h1>
+                <p class="specialties-hero__subtitle">Técnicas de excelencia en cada servicio capilar</p>
+                <div class="specialties-hero__divider"></div>
+                <p class="specialties-hero__description">Curly, transiciones a canas, rubios y coloración orgánica con enfoque en salud capilar</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtros de Especialidades Premium - TABS LUXURY -->
+
+    <!-- Especialidad 1: Curly -->
+    <section class="section section--light especialidad-content" data-especialidad="curly">
+        <div class="container">
+            <div class="grid-2">
+                <div>
+                    <h2 class="title-2 mb-4">Método Curly</h2>
+                    <p class="text mb-4">El Método Curly es una filosofía del cuidado capilar enfocada en entender y respetar la naturaleza del cabello rizado. Realizamos un exhaustivo diagnóstico rizológico para adaptarnos a tus necesidades específicas.</p>
+                    
+                    <p class="text mb-6">Nuestro corte en seco garantiza resultados precisos, permitiéndote ver cómo lucirá tu rizo antes de finalizar el servicio. Cada línea está diseñada para realzar tus rizos y darles volumen, definición y movimiento natural.</p>
+
+                    <h3 class="font-display font-weight-600 text-gold mb-4">Servicios Incluidos</h3>
+                    <ul class="list-unstyled mb-6">
+                        <li>✓ Diagnóstico rizológico personalizado</li>
+                        <li>✓ Corte en seco especializado</li>
+                        <li>✓ Asesoramiento de productos</li>
+                        <li>✓ Rutina de cuidado domiciliario</li>
+                        <li>✓ Seguimiento personalizado</li>
+                    </ul>
+
+                    <h3 class="font-display font-weight-600 text-gold mb-4">Beneficios</h3>
+                    <p class="text mb-6">Tus rizos lucirán más definidos, con más volumen y vida. Aprenderás técnicas para mantener tu cabello saludable. Conseguirás resultados duraderos que realzan tu belleza natural.</p>
+
+                    <a href="contacto.html" class="btn btn--primary btn--lg">Reservar Corte Curly</a>
+                </div>
+                <div>
+                    <img src="../assets/curly.jpg" alt="Método Curly" class="page-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Especialidad 2: Transiciones a Canas -->
+    <section class="section section--light especialidad-content" data-especialidad="transiciones">
+        <div class="container">
+            <div class="grid-2">
+                <div>
+                    <h2 class="title-2 mb-4">Transiciones a Canas</h2>
+                    <p class="text mb-4">El cambio hacia canas naturales es una decisión valiente y hermosa. Te acompañamos en cada paso de la transición con técnicas profesionales que hacen el proceso suave, elegante y sin comprometer la salud de tu cabello.</p>
+                    
+                    <p class="text mb-6">No se trata solo de dejar crecer las raíces. Creamos un plan personalizado de coloración estratégica que integra tus canas con elegancia, usando tonos base y técnicas de balayage que crean un efecto natural y sofisticado.</p>
+
+                    <h3 class="font-display font-weight-600 text-gold mb-4">Servicios Incluidos</h3>
+                    <ul class="list-unstyled mb-6">
+                        <li>✓ Diagnóstico y plan de transición personalizado</li>
+                        <li>✓ Coloración estratégica de raíces</li>
+                        <li>✓ Balayage para integración natural</li>
+                        <li>✓ Tratamientos de hidratación especializada</li>
+                        <li>✓ Mantenimiento y seguimiento continuo</li>
+                    </ul>
+
+                    <h3 class="font-display font-weight-600 text-gold mb-4">Beneficios</h3>
+                    <p class="text mb-6">Una transición sin estrés y con resultados hermosos. Canas integradas de forma natural y elegante. Cabello sano y luminoso durante todo el proceso de cambio.</p>
+
+                    <a href="contacto.html" class="btn btn--primary btn--lg">Reservar Transición a Canas</a>
+                </div>
+                <div>
+                    <img src="../assets/transiciona canas 2.jpg" alt="Transiciones a Canas" class="page-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Especialidad 3: Rubios -->
+    <section class="section section--light especialidad-content" data-especialidad="rubios">
+        <div class="container">
+            <div class="grid-2">
+                <div>
+                    <h2 class="title-2 mb-4">Especialistas en Rubios</h2>
+                    <p class="text mb-4">Los rubios profesionales requieren precisión, arte y conocimiento profundo de la colorimetría. Cada mechas, cada balayage es una obra única diseñada para ti.</p>
+                    
+                    <p class="text mb-6">No creemos en los "rubios de catálogo". Creamos rubios a medida de tu tono de piel, tu estilo y tus preferencias. Utilizamos técnicas de balayage artesanal para resultados naturales y sofisticados.</p>
+
+                    <h3 class="font-display font-weight-600 text-gold mb-4">Técnicas que Ofrecemos</h3>
+                    <ul class="list-unstyled mb-6">
+                        <li>✓ Mechas tradicionales personalizadas</li>
+                        <li>✓ Balayage artesanal natural</li>
+                        <li>✓ Babylights y técnicas modernas</li>
+                        <li>✓ Matizado profesional individualizado</li>
+                        <li>✓ Tratamientos de mantenimiento</li>
+                    </ul>
+
+                    <h3 class="font-display font-weight-600 text-gold mb-4">Beneficios</h3>
+                    <p class="text mb-6">Rubios con movimiento y profundidad que atraen la luz. Cabello saludable sin quemaduras. Resultados duraderos con bajo mantenimiento.</p>
+
+                    <a href="contacto.html" class="btn btn--primary btn--lg">Reservar Rubios</a>
+                </div>
+                <div>
+                    <img src="../assets/balayage.webp" alt="Rubios Impecables" class="page-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Especialidad 3: Orgánico -->
+    <section class="section section--light especialidad-content" data-especialidad="organico">
+        <div class="container">
+            <div class="grid-2">
+                <div>
+                    <h2 class="title-2 mb-4">COLOR ORGÁNICO</h2>
+                    <h3 class="font-display font-weight-600 text-gold mb-4">Coloración Natural Sin Químicos</h3>
+                    <p class="text mb-6">La coloración orgánica utiliza tintes naturales y libres de PPD, amoniaco y otros químicos dañinos. Tinte potente con máxima salud capilar.</p>
+
+                    <h3 class="font-display font-weight-600 text-gold mb-4">Procesos Naturales</h3>
+                    <ul class="list-unstyled mb-6">
+                        <li>✓ Tintes sin PPD ni amoniaco</li>
+                        <li>✓ Pigmentos naturales</li>
+                        <li>✓ Máxima cobertura de canas</li>
+                        <li>✓ Tratamiento capilar incluido</li>
+                        <li>✓ Colores permanentes</li>
+                    </ul>
+
+                    <a href="contacto.html" class="btn btn--primary btn--lg">Reservar Orgánico</a>
+                </div>
+                <div>
+                    <img src="../assets/color orgoanico.jpg" alt="Color Orgánico" class="page-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Especialidad 4: Alisados -->
+    <!-- Especialidad 4: Alisados -->
+    <section class="section section--light especialidad-content" data-especialidad="alisados">
+        <div class="container">
+            <div class="grid-2">
+                <div>
+                    <h2 class="title-2 mb-4">Alisados Profesionales</h2>
+                    <p class="text mb-4">El alisado es arte y técnica. Ofrecemos tratamientos de alisado de última generación que transforman tu cabello manteniendo su salud, brillo y movimiento natural.</p>
+                    
+                    <p class="text mb-6">Nuestros alisados no son simples planchados. Son tratamientos profundos que restructuran la fibra capilar desde adentro. Cada procedimiento es personalizado según el tipo de cabello, porosidad y objetivo que busques.</p>
+
+                    <h3 class="font-display font-weight-600 text-gold mb-4">Tipos de Alisado</h3>
+                    <ul class="list-unstyled mb-6">
+                        <li>✓ Alisado brasileño con queratina pura</li>
+                        <li>✓ Alisado japonés profesional (rebonding)</li>
+                        <li>✓ Alisado con tratamiento de botox capilar</li>
+                        <li>✓ Alisado con colágeno hidrolizado</li>
+                        <li>✓ Alisado ruso con aminoácidos</li>
+                    </ul>
+
+                    <h3 class="font-display font-weight-600 text-gold mb-4">Beneficios</h3>
+                    <p class="text mb-6">Cabello 100% liso, brillante y sedoso durante meses. Reducción de encrespamiento. Facilita el peinado diario. Cabello más fuerte y resistente. Movimiento natural sin efecto plástico.</p>
+
+                    <a href="contacto.html" class="btn btn--primary btn--lg">Reservar Alisado</a>
+                </div>
+                <div>
+                    <img src="../assets/alisado.webp" alt="Alisado Profesional" class="page-image" loading="lazy">
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>Salón Begoña Gómez</h4>
+                    <p>Peluquería premium</p>
+                </div>
+                <div>
+                    <h4>Castelldefels</h4>
+                    <p>📞 +34 602 44 99 95</p>
+                    <p>📍 Castelldefels, Barcelona</p>
+                </div>
+                <div>
+                    <h4>Santa Perpètua</h4>
+                    <p>📞 +34 672 92 83 74</p>
+                    <p>📍 Genís Sala, 25 - Santa Perpètua</p>
+                </div>
+            </div>
+            <p>&copy; 2026 Salón Begoña Gómez. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../mobile-menu.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galería - Salón Begoña Gómez">
+    <title>Galería | Salón Begoña Gómez</title>
+        <!-- PACK A TIPOGR�FICO: Cormorant Garamond + Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- PACK B (comentado): Playfair Display + Manrope -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet"> -->
+    <!-- DESIGN SYSTEM (DEBE IR PRIMERO) -->
+    <link rel="stylesheet" href="../design-system.css">
+    <!-- ESTILOS ESPECÍFICOS DEL SITIO -->
+    <link rel="stylesheet" href="../styles.css">
+    <!-- RESPONSIVE OPTIMIZATION: M�VIL | TABLET | DESKTOP -->
+    <link rel="stylesheet" href="../responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__wrapper">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/LOGO.png" alt="Salón Begoña Gómez" class="logo-img">
+                    <span class="logo-text">Salón Begoña Gómez</span>
+                </a>
+                
+                <!-- Hamburger Menu (Mobile Only) -->
+                <button class="header__hamburger" id="hamburger-menu" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="nav" id="mobile-menu">
+                    <ul>
+                        <li><a href="especialidades.html">Especialidades</a></li>
+                        <li><a href="sobre-begona.html">Sobre Begoña</a></li>
+                        <li><a href="galeria.html" class="active">Galería</a></li>
+                        <li><a href="resenas.html">Reseñas</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+                <a href="contacto.html" class="btn btn--primary btn--sm">Reservar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <section class="section section--dark">
+        <div class="container">
+            <h1 class="title-1">Nuestro Trabajo</h1>
+            <p class="lead">Galería de trabajos y transformaciones capilares</p>
+        </div>
+    </section>
+
+    <section class="section section--light">
+        <div class="container">
+            <div class="grid-4">
+                <a href="../assets/trabajo 1.webp" class="gallery-item" data-lightbox="gallery" data-title="Rubios Impecables - Balayage Artesanal">
+                    <img src="../assets/trabajo 1.webp" alt="Rubios Impecables - Balayage Artesanal" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span class="gallery-icon">🔍</span>
+                    </div>
+                </a>
+                <a href="../assets/trabajo 2.webp" class="gallery-item" data-lightbox="gallery" data-title="Transición a Canas - Natural y Elegante">
+                    <img src="../assets/trabajo 2.webp" alt="Transición a Canas - Natural y Elegante" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span class="gallery-icon">🔍</span>
+                    </div>
+                </a>
+                <a href="../assets/trabajo 3.webp" class="gallery-item" data-lightbox="gallery" data-title="Color Orgánico Saludable - Vibrante">
+                    <img src="../assets/trabajo 3.webp" alt="Color Orgánico Saludable - Vibrante" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span class="gallery-icon">🔍</span>
+                    </div>
+                </a>
+                <a href="../assets/trabajo5.webp" class="gallery-item" data-lightbox="gallery" data-title="Alisado Profesional - Brillo y Movimiento">
+                    <img src="../assets/trabajo5.webp" alt="Alisado Profesional - Brillo y Movimiento" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span class="gallery-icon">🔍</span>
+                    </div>
+                </a>
+                <a href="../assets/curly.webp" class="gallery-item" data-lightbox="gallery" data-title="Balayage Pelirrojo - Premium">
+                    <img src="../assets/curly.webp" alt="Balayage Pelirrojo - Premium" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span class="gallery-icon">🔍</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="action-bar">
+        <div class="container">
+            <h2>¿Te gustaría una transformación?</h2>
+            <p>Reserva tu cita ahora y descubre los resultados que ves en nuestra galería</p>
+            <div class="action-bar-buttons">
+                <a href="contacto.html" class="btn btn--primary btn--lg">Reservar Ahora</a>
+                <a href="tel:+34602449995" class="btn btn--secondary btn--lg">📞 Llamar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>Salón Begoña Gómez</h4>
+                    <p>Peluquería premium</p>
+                </div>
+                <div>
+                    <h4>Castelldefels</h4>
+                    <p>📞 +34 602 44 99 95</p>
+                    <p>📍 Castelldefels, Barcelona</p>
+                </div>
+                <div>
+                    <h4>Santa Perpètua</h4>
+                    <p>📞 +34 672 92 83 74</p>
+                    <p>📍 Genís Sala, 25 - Santa Perpètua</p>
+                </div>
+            </div>
+            <p>&copy; 2024 Salón Begoña Gómez</p>
+        </div>
+    </footer>
+
+    <script src="../mobile-menu.js"></script>
+</body>
+</html>
+
+
+

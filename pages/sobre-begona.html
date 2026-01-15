@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sobre Begoña Gómez - Salón Begoña Gómez">
+    <title>Sobre Begoña | Salón Begoña Gómez</title>
+        <!-- PACK A TIPOGR�FICO: Cormorant Garamond + Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- PACK B (comentado): Playfair Display + Manrope -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet"> -->
+    <!-- DESIGN SYSTEM (DEBE IR PRIMERO) -->
+    <link rel="stylesheet" href="../design-system.css">
+    <!-- ESTILOS ESPECÍFICOS DEL SITIO -->
+    <link rel="stylesheet" href="../styles.css">
+    <!-- RESPONSIVE OPTIMIZATION: M�VIL | TABLET | DESKTOP -->
+    <link rel="stylesheet" href="../responsive.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__wrapper">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/LOGO.png" alt="Salón Begoña Gómez" class="logo-img">
+                    <span class="logo-text">Salón Begoña Gómez</span>
+                </a>
+                
+                <!-- Hamburger Menu (Mobile Only) -->
+                <button class="header__hamburger" id="hamburger-menu" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="nav" id="mobile-menu">
+                    <ul>
+                        <li><a href="especialidades.html">Especialidades</a></li>
+                        <li><a href="sobre-begona.html" class="active">Sobre Begoña</a></li>
+                        <li><a href="galeria.html">Galería</a></li>
+                        <li><a href="resenas.html">Reseñas</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+                <a href="contacto.html" class="btn btn--primary btn--sm">Reservar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal - SOBRE BEGOÑA DETALLES -->
+    <section id="sobre-begona" class="section section--light">
+        <div class="container">
+            <!-- EYEBROW PREMIUM -->
+            <div class="eyebrow mb-4">La firma detrás del salón</div>
+
+            <div class="grid-2">
+                <!-- COLUMNA TEXTO (Izquierda) -->
+                <div>
+                    <!-- TÍTULO + SUBTÍTULO -->
+                    <h1 class="title-1 mb-2">Begoña Gómez</h1>
+                    <p class="lead mb-4">Belleza con calma y criterio. Salud capilar antes que cualquier transformación.</p>
+
+                    <!-- DIVISOR VISUAL -->
+                    <div class="divider--gold mb-6"></div>
+
+                    <!-- PÁRRAFO PRINCIPAL -->
+                    <p class="text mb-6">Madrileña de origen con formación en estética y más de 21 años ejerciendo peluquería. Comenzó su carrera en moda —desfiles, catálogos y televisión en Barcelona— antes de especializarse en cuidado capilar integral. Su método se basa en diagnóstico profundo y prioridad a la salud del cabello antes de cualquier transformación. Tras 18 años en Barcelona donde abrió su salón en Castelldefels, expande su experiencia en Santa Perpètua con zona spa y masaje capilar. Cada sesión es una pausa de calma donde la técnica y el criterio convergen.</p>
+
+                    <!-- ESPECIALIDADES -->
+                    <h3 class="title-2 mb-4">Especialidades</h3>
+                    <ul class="list-unstyled mb-6">
+                        <li class="mb-3">
+                            <strong>Transiciones a canas</strong>
+                            <span class="text-muted">Coloración inteligente que respeta tu naturalidad sin comprometer la salud</span>
+                        </li>
+                        <li class="mb-3">
+                            <strong>Curly</strong>
+                            <span class="text-muted">Cortes en seco que potencian tu textura natural y volumen</span>
+                        </li>
+                        <li class="mb-3">
+                            <strong>Rubios</strong>
+                            <span class="text-muted">Balayage y babylights con cuidado extremo y técnica artesanal</span>
+                        </li>
+                        <li class="mb-3">
+                            <strong>Coloración orgánica</strong>
+                            <span class="text-muted">Óleos y barros que transforman manteniendo vitalidad capilar</span>
+                        </li>
+                    </ul>
+
+                    <!-- DIVISOR VISUAL -->
+                    <div class="divider--gold mb-6"></div>
+
+                    <!-- MÉTODO DE TRABAJO -->
+                    <h3 class="title-2 mb-4">Método</h3>
+                    <div style="display: flex; gap: var(--space-4); mb-6;">
+                        <div style="flex: 1;">
+                            <div class="text-gold font-display font-weight-700 text-2xl">01</div>
+                            <p class="text font-weight-600">Diagnóstico capilar profundo</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="text-gold font-display font-weight-700 text-2xl">02</div>
+                            <p class="text font-weight-600">Preparación y cuidado integral</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="text-gold font-display font-weight-700 text-2xl">03</div>
+                            <p class="text font-weight-600">Transformación con acabado sereno</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMNA DERECHA: IMAGEN + STATS CARD -->
+                <div>
+                    <!-- IMAGEN -->
+                    <div class="mb-6">
+                        <div class="card">
+                            <img src="../assets/beñona%20biografia.jpeg" alt="Begoña Gómez - Peluquera Profesional" class="about-image">
+                        </div>
+                    </div>
+
+                    <!-- TARJETA DE STATS -->
+                    <div class="card p-5">
+                        <h4 class="font-display font-weight-600 mb-4">Experiencia</h4>
+                        <div class="grid-2">
+                            <div class="text-center">
+                                <div class="text font-display font-weight-700" style="font-size: 28px;">21+</div>
+                                <p class="text-muted text-sm">Años en peluquería</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="text font-display font-weight-700" style="font-size: 28px;">18</div>
+                                <p class="text-muted text-sm">Años en Barcelona</p>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">2</div>
+                                <div class="stat-label">Sedes</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">4</div>
+                                <div class="stat-label">Áreas clave</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA DOBLE -->
+            <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+                <a href="contacto.html#castelldefels" class="btn btn--primary btn--lg">Reservar Castelldefels</a>
+                <a href="contacto.html#santa-perpeuta" class="btn btn--primary btn--lg">Reservar Santa Perpètua</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>Salón Begoña Gómez</h4>
+                    <p>Peluquería premium</p>
+                </div>
+                <div>
+                    <h4>Castelldefels</h4>
+                    <p>📞 +34 602 44 99 95</p>
+                    <p>📍 Castelldefels, Barcelona</p>
+                </div>
+                <div>
+                    <h4>Santa Perpètua</h4>
+                    <p>📞 +34 672 92 83 74</p>
+                    <p>📍 Genís Sala, 25 - Santa Perpètua</p>
+                </div>
+            </div>
+            <p>&copy; 2026 Salón Begoña Gómez. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../mobile-menu.js"></script>
+</body>
+</html>
+
+
+

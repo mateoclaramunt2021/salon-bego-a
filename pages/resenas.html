@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reseñas - Salón Begoña Gómez">
+    <title>Reseñas | Salón Begoña Gómez</title>
+        <!-- PACK A TIPOGR�FICO: Cormorant Garamond + Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- PACK B (comentado): Playfair Display + Manrope -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet"> -->
+    <!-- DESIGN SYSTEM (DEBE IR PRIMERO) -->
+    <link rel="stylesheet" href="../design-system.css">
+    <!-- ESTILOS ESPECÍFICOS DEL SITIO -->
+    <link rel="stylesheet" href="../styles.css">
+    <!-- RESPONSIVE OPTIMIZATION: M�VIL | TABLET | DESKTOP -->
+    <link rel="stylesheet" href="../responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__wrapper">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/LOGO.png" alt="Salón Begoña Gómez" class="logo-img">
+                    <span class="logo-text">Salón Begoña Gómez</span>
+                </a>
+                
+                <!-- Hamburger Menu (Mobile Only) -->
+                <button class="header__hamburger" id="hamburger-menu" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="nav" id="mobile-menu">
+                    <ul>
+                        <li><a href="especialidades.html">Especialidades</a></li>
+                        <li><a href="sobre-begona.html">Sobre Begoña</a></li>
+                        <li><a href="galeria.html">Galería</a></li>
+                        <li><a href="resenas.html" class="active">Reseñas</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+                <a href="contacto.html" class="btn btn--primary btn--sm">Reservar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <section class="section section--dark">
+        <div class="container">
+            <h1 class="title-1">Lo que Dicen Nuestras Clientas</h1>
+            <p class="lead">Valoración 4,6/5 basada en 352 reseñas</p>
+        </div>
+    </section>
+
+    <section class="section section--light">
+        <div class="container">
+            <div class="grid-3">
+                <div class="card">
+                    <div class="stars">★★★★★</div>
+                    <p class="text">"Llevo años en este salón y no cambio. Begoña entiende perfectamente qué necesita mi cabello. Curly de 10."</p>
+                    <p class="text font-weight-600"><strong>— María G.</strong></p>
+                </div>
+
+                <div class="card">
+                    <div class="stars">★★★★★</div>
+                    <p class="text">"El balayage que me hicieron es increíble. Rubio natural, sin daño. Los tratamientos que utilizan son de calidad."</p>
+                    <p class="text font-weight-600"><strong>— Sandra M.</strong></p>
+                </div>
+
+                <div class="card">
+                    <div class="stars">★★★★★</div>
+                    <p class="text">"Probé el color orgánico y mi cabello nunca se había visto tan sano. El resultado es precioso. ¡Volveré seguro!"</p>
+                    <p class="text font-weight-600"><strong>— Paula S.</strong></p>
+                </div>
+
+                <div class="card">
+                    <div class="stars">★★★★★</div>
+                    <p class="text">"Profesionales de verdad. Begoña conoce todas las técnicas modernas. Muy feliz con mi keratin y brillo."</p>
+                    <p class="text font-weight-600"><strong>— Lorena T.</strong></p>
+                </div>
+
+                <div class="card">
+                    <div class="stars">★★★★★</div>
+                    <p class="text">"La atención es excepcional y el ambiente super relajante. Mi cabello está transformado."</p>
+                    <p class="text font-weight-600"><strong>— Judith L.</strong></p>
+                </div>
+
+                <div class="card">
+                    <div class="stars">★★★★★</div>
+                    <p class="text">"Vengo por el corte curly y me quedo por el trato. Begoña es una artesana del cabello."</p>
+                    <p class="text font-weight-600"><strong>— Ana P.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="action-bar">
+        <div class="container">
+            <h2>Únete a Nuestras Clientas Satisfechas</h2>
+            <p>Vive la experiencia Begoña Gómez</p>
+            <div class="action-bar-buttons">
+                <a href="contacto.html" class="btn btn--primary btn--lg">Reservar Ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>Salón Begoña Gómez</h4>
+                    <p>Peluquería premium</p>
+                </div>
+                <div>
+                    <h4>Castelldefels</h4>
+                    <p>📞 +34 602 44 99 95</p>
+                    <p>📍 Castelldefels, Barcelona</p>
+                </div>
+                <div>
+                    <h4>Santa Perpètua</h4>
+                    <p>📞 +34 672 92 83 74</p>
+                    <p>📍 Genís Sala, 25 - Santa Perpètua</p>
+                </div>
+            </div>
+            <p>&copy; 2026 Salón Begoña Gómez. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../mobile-menu.js"></script>
+</body>
+</html>
+
+
+
