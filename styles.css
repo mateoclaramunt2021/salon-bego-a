@@ -123,7 +123,8 @@
 
 .header .btn--primary:hover {
     box-shadow: 0 8px 24px rgba(200, 162, 90, 0.5);
-    transform: translateY(-3px);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(200, 162, 90, 0.2);
 }
 
 /* Responsive header */
@@ -3582,7 +3583,7 @@ section {
     border-color: var(--color-gold);
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(200, 162, 90, 0.2);
-
+}
 /* ===================================================
    SERVICE SECTIONS  CURLY / RUBIOS / ORG�NICO
    =================================================== */
@@ -4101,14 +4102,759 @@ section {
     }
 }
 
+/* ===================================================
+   LÍNEA DE PRODUCTOS BEGOÑA GÓMEZ - PREMIUM
+   =================================================== */
+
+.products-section {
+    background: linear-gradient(180deg, #0F1115 0%, #1A1D23 50%, #0F1115 100%);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.products-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200, 162, 90, 0.4), transparent);
+}
+
+.products-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200, 162, 90, 0.4), transparent);
+}
+
+.products {
+    position: relative;
+    z-index: 1;
+}
+
+.products__header {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.products__eyebrow {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #C8A25A;
+    background: linear-gradient(135deg, rgba(200, 162, 90, 0.2) 0%, rgba(200, 162, 90, 0.1) 100%);
+    padding: 12px 28px;
+    border-radius: 50px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(200, 162, 90, 0.3);
+}
+
+.products__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.products__divider {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, #C8A25A, #D4AE68);
+    margin: 0 auto 24px;
+    border-radius: 2px;
+}
+
+.products__subtitle {
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.products__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    margin-bottom: 60px;
+}
+
+.product-card {
+    background: linear-gradient(145deg, rgba(26, 29, 35, 0.95) 0%, rgba(15, 17, 21, 0.98) 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(200, 162, 90, 0.15);
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 50px rgba(200, 162, 90, 0.2), 0 8px 24px rgba(0, 0, 0, 0.4);
+    border-color: rgba(200, 162, 90, 0.4);
+}
+
+.product-card__badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: linear-gradient(135deg, #C8A25A 0%, #D4AE68 100%);
+    color: #0F1115;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(200, 162, 90, 0.3);
+}
+
+.product-card__image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1A1D23 0%, #0F1115 100%);
+}
+
+.product-card__image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(15, 17, 21, 0.8), transparent);
+    pointer-events: none;
+}
+
+.product-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover .product-card__image img {
+    transform: scale(1.08);
+}
+
+.product-card__content {
+    padding: 28px 24px;
+    text-align: center;
+    background: linear-gradient(180deg, transparent 0%, rgba(200, 162, 90, 0.03) 100%);
+}
+
+.product-card__title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.product-card__description {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.65;
+}
+
+.products__cta {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.products__note {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 24px;
+    letter-spacing: 0.3px;
+}
+
+.products__cta .btn--primary {
+    padding: 18px 48px;
+    font-size: 15px;
+}
+
+/* Responsive Productos */
+@media (max-width: 1200px) {
+    .products__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-section {
+        padding: 70px 0;
+    }
+    
+    .products__header {
+        margin-bottom: 50px;
+    }
+    
+    .products__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    
+    .product-card__content {
+        padding: 20px 16px;
+    }
+    
+    .product-card__title {
+        font-size: 18px;
+    }
+    
+    .product-card__description {
+        font-size: 13px;
+    }
+    
+    .product-card__badge {
+        font-size: 10px;
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .products__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .products__title {
+        font-size: 2rem;
+    }
+    
+    .product-card {
+        border-radius: 16px;
+    }
+}
+
 /* ===== FILTER TABS - ESPECIALIDADES ===== */
 .especialidad-content {
-    display: none !important;
-    opacity: 0;
+    display: block !important;
+    opacity: 1;
     transition: opacity 0.4s ease;
 }
 
 .especialidad-content.active {
     display: block !important;
     opacity: 1;
+}
+
+/* Hidden state for filter tabs when needed */
+.especialidad-content.hidden {
+    display: none !important;
+    opacity: 0;
+}
+
+/* ===================================================
+   PÁGINA DE CONTACTO - PREMIUM
+   =================================================== */
+
+.contact-hero {
+    text-align: center;
+    padding: 60px 40px;
+}
+
+.contact-hero .title-1 {
+    margin-bottom: 16px;
+}
+
+.contact-hero .lead {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin: 60px 0;
+}
+
+.contact-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 241, 236, 0.9) 100%);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(200, 162, 90, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(200, 162, 90, 0.15);
+    border-color: rgba(200, 162, 90, 0.4);
+}
+
+.contact-card__header {
+    margin-bottom: 32px;
+    border-bottom: 2px solid rgba(200, 162, 90, 0.2);
+    padding-bottom: 20px;
+}
+
+.contact-card__header .title-2 {
+    margin-bottom: 8px;
+    color: #0F1115;
+}
+
+.contact-card__header .text {
+    color: rgba(15, 17, 21, 0.6);
+}
+
+.contact-card__info {
+    margin-bottom: 32px;
+}
+
+.info-item {
+    margin-bottom: 24px;
+}
+
+.info-item h4 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: #C8A25A;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-item p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: rgba(15, 17, 21, 0.7);
+    line-height: 1.6;
+}
+
+.link-primary {
+    color: #C8A25A;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.link-primary:hover {
+    color: #D4AE68;
+}
+
+.schedule-table {
+    width: 100%;
+    font-size: 14px;
+    border-collapse: collapse;
+}
+
+.schedule-table tr {
+    border-bottom: 1px solid rgba(200, 162, 90, 0.1);
+}
+
+.schedule-table td {
+    padding: 8px 0;
+    color: rgba(15, 17, 21, 0.7);
+}
+
+.schedule-table td:first-child {
+    font-weight: 500;
+}
+
+.schedule-table td:last-child {
+    text-align: right;
+    color: #C8A25A;
+    font-weight: 600;
+}
+
+.contact-card__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.contact-card__actions .btn {
+    font-size: 14px;
+    padding: 12px 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-card__actions .btn:nth-child(3) {
+    grid-column: 1 / -1;
+}
+
+/* Responsive Contact */
+@media (max-width: 1024px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-card {
+        padding: 28px;
+    }
+    
+    .contact-card__actions {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .contact-card__actions .btn {
+        width: 100%;
+    }
+    
+    .contact-hero {
+        padding: 40px 20px;
+    }
+}
+
+/* ===================================================
+   PÁGINA DE ESPECIALIDADES - ULTRA PREMIUM DESIGN
+   =================================================== */
+
+/* Hero Section Especialidades */
+.specialties-hero {
+    padding: 120px 40px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0F1115 0%, #1A1D23 50%, #0F1115 100%);
+}
+
+.specialties-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(200, 162, 90, 0.6), transparent);
+    box-shadow: 0 0 30px rgba(200, 162, 90, 0.3);
+}
+
+.specialties-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(200, 162, 90, 0.6), transparent);
+    box-shadow: 0 0 30px rgba(200, 162, 90, 0.3);
+}
+
+.specialties-hero__inner {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.specialties-hero__eyebrow {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #D4AE68;
+    background: linear-gradient(135deg, rgba(200, 162, 90, 0.25) 0%, rgba(200, 162, 90, 0.1) 100%);
+    padding: 14px 32px;
+    border-radius: 50px;
+    margin-bottom: 32px;
+    border: 1.5px solid rgba(200, 162, 90, 0.4);
+    box-shadow: 0 8px 24px rgba(200, 162, 90, 0.15);
+}
+
+.specialties-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 8vw, 4.5rem);
+    color: #FFFFFF;
+    margin-bottom: 24px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.specialties-hero__subtitle {
+    font-family: var(--font-body);
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 32px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+.specialties-hero__divider {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #C8A25A, #D4AE68, #C8A25A);
+    margin: 0 auto 28px;
+    border-radius: 3px;
+    box-shadow: 0 0 20px rgba(200, 162, 90, 0.4);
+}
+
+.specialties-hero__description {
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.9;
+    letter-spacing: 0.3px;
+}
+
+/* Especialidades Content Cards */
+.especialidad-content {
+    padding: 100px 40px;
+    border-top: 1px solid rgba(200, 162, 90, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.especialidad-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -200px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(200, 162, 90, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.especialidad-content::after {
+    content: '';
+    position: absolute;
+    bottom: -200px;
+    left: -200px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(200, 162, 90, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.especialidad-content:nth-child(even) {
+    background: linear-gradient(180deg, rgba(245, 241, 236, 0.6) 0%, #FFFFFF 100%);
+}
+
+.especialidad-content:nth-child(odd) {
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(245, 241, 236, 0.4) 100%);
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 100px;
+    align-items: stretch;
+    position: relative;
+    z-index: 1;
+}
+
+.grid-2 > div:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.page-image {
+    width: 100%;
+    height: 600px;
+    border-radius: 24px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.15),
+        0 0 40px rgba(200, 162, 90, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(200, 162, 90, 0.2);
+    object-fit: cover;
+}
+
+.especialidad-content:hover .page-image {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.2),
+        0 0 60px rgba(200, 162, 90, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border-color: rgba(200, 162, 90, 0.5);
+}
+
+/* Typography for Especialidades */
+.especialidad-content .title-2 {
+    color: #0F1115;
+    margin-bottom: 16px;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    letter-spacing: -0.01em;
+}
+
+.especialidad-content .text {
+    color: rgba(15, 17, 21, 0.75);
+    line-height: 1.75;
+    font-size: 15px;
+}
+
+.mb-4 {
+    margin-bottom: 16px;
+}
+
+.mb-6 {
+    margin-bottom: 24px;
+}
+
+.list-unstyled {
+    list-style: none;
+    padding: 0;
+    background: linear-gradient(135deg, rgba(200, 162, 90, 0.05) 0%, rgba(200, 162, 90, 0.02) 100%);
+    padding: 20px 24px;
+    border-radius: 16px;
+    border-left: 4px solid #C8A25A;
+}
+
+.list-unstyled li {
+    color: rgba(15, 17, 21, 0.8);
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.list-unstyled li:last-child {
+    margin-bottom: 0;
+}
+
+.list-unstyled li::before {
+    content: none;
+}
+
+.list-unstyled li:hover {
+    color: #C8A25A;
+    padding-left: 8px;
+}
+
+/* Botones mejorados */
+.especialidad-content .btn {
+    padding: 16px 40px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    font-size: 13px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 16px;
+}
+
+.especialidad-content .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.5s ease;
+    z-index: -1;
+}
+
+.especialidad-content .btn:hover::before {
+    left: 100%;
+}
+
+@media (max-width: 1200px) {
+    .grid-2 {
+        gap: 70px;
+    }
+    
+    .page-image {
+        height: 500px;
+    }
+    
+    .especialidad-content {
+        padding: 80px 30px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .grid-2 {
+        grid-template-columns: 1fr 1.1fr;
+        gap: 50px;
+    }
+    
+    .page-image {
+        height: 450px;
+    }
+    
+    .especialidad-content {
+        padding: 60px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .page-image {
+        height: 400px;
+    }
+    
+    .especialidad-content {
+        padding: 40px 20px;
+    }
+    
+    .specialties-hero {
+        padding: 80px 20px;
+    }
+    
+    .specialties-hero__title {
+        font-size: 2.2rem;
+    }
+    
+    .specialties-hero__subtitle {
+        font-size: 16px;
+    }
+    
+    .page-image {
+        border-radius: 16px;
+    }
 }

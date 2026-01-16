@@ -3,18 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contacto - Salón Begoña Gómez">
+    <meta name="description" content="Contacto - Salón Begoña Gómez | Reserva tu cita en Castelldefels o Santa Perpètua">
     <title>Contacto | Salón Begoña Gómez</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- PACK A TIPOGRÁFICO: Cormorant Garamond + Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- DESIGN SYSTEM (DEBE IR PRIMERO) -->
+    <link rel="stylesheet" href="../design-system.css">
+    <!-- ESTILOS ESPECÍFICOS DEL SITIO -->
     <link rel="stylesheet" href="../styles.css">
+    <!-- RESPONSIVE OPTIMIZATION -->
+    <link rel="stylesheet" href="../responsive.css">
+    <!-- LEGAL & COOKIES STYLES -->
+    <link rel="stylesheet" href="../legal-styles.css">
+    <link rel="stylesheet" href="../cookies-styles.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header__wrapper">
-                <a href="../index.html" class="logo">Salón Begoña Gómez</a>
-                <nav class="nav">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/LOGO.png" alt="Salón Begoña Gómez" class="logo-img">
+                    <span class="logo-text">Salón Begoña Gómez</span>
+                </a>
+                
+                <!-- Hamburger Menu (Mobile Only) -->
+                <button class="header__hamburger" id="hamburger-menu" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="nav" id="mobile-menu">
                     <ul>
                         <li><a href="especialidades.html">Especialidades</a></li>
                         <li><a href="sobre-begona.html">Sobre Begoña</a></li>
@@ -28,71 +50,143 @@
         </div>
     </header>
 
-    <!-- Contenido Principal -->
-    <section class="page-hero">
+    <!-- Hero Contact Section -->
+    <section class="section section--dark" id="contact-hero">
         <div class="container">
-            <h1>Contacto</h1>
-            <p>Ubicanos en Castelldefels o contacta directamente</p>
+            <div class="contact-hero">
+                <h1 class="title-1">Reserva Tu Cita</h1>
+                <p class="lead">Elige tu ubicación y servicio. Te esperamos con los brazos abiertos.</p>
+            </div>
         </div>
     </section>
 
-    <section class="page-content">
+    <!-- Contact Information & Booking -->
+    <section class="section section--light">
         <div class="container">
             <div class="contact-grid">
-                <div>
-                    <h2>Información de Contacto</h2>
-                    
-                    <h3>📍 Dirección</h3>
-                    <p>Carrer de Pompeu Fabra, 8<br>08860 Castelldefels, Barcelona</p>
-
-                    <h3>📞 Teléfono</h3>
-                    <p><a href="tel:+34602449995">+34 602 44 99 95</a></p>
-
-                    <h3>⏰ Horario</h3>
-                    <table class="horario">
-                        <tr>
-                            <td>Lun - Mié, Vie - Sáb</td>
-                            <td><strong>9:30 - 19:00</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Jueves</td>
-                            <td><strong>9:30 - 20:30</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Domingo</td>
-                            <td><strong>10:00 - 18:00</strong></td>
-                        </tr>
-                    </table>
-
-                    <h3>Síguenos</h3>
-                    <ul class="social-links">
-                        <li><a href="https://www.instagram.com/salonbegonaoficial/" target="_blank">Instagram</a></li>
-                        <li><a href="https://wa.me/34936351245" target="_blank">WhatsApp</a></li>
-                    </ul>
-                </div>
-
-                <div id="reservar">
-                    <h2>Reserva Tu Cita</h2>
-                    <p>Elige tu servicio y horario cómodo</p>
-                    
-                    <div class="cta-buttons">
-                        <a href="https://booksy.com/es-es/dl/show-business/77540?utm_medium=c2c_referral" class="btn btn--secondary btn--lg" target="_blank">Reservar por Boksy</a>
-                        <a href="tel:+34936351245" class="btn btn--secondary btn--lg">Llamar para Reservar</a>
+                <!-- Castelldefels -->
+                <div class="contact-card">
+                    <div class="contact-card__header">
+                        <h2 class="title-2">📍 Castelldefels</h2>
+                        <p class="text">Ubicación principal</p>
                     </div>
                     
-                    <p style="margin-top: 30px; font-size: 14px; color: #666;">
-                        También puedes encontrarnos en Instagram @salonbegonaoficial para conocer promociones y novedades.
-                    </p>
+                    <div class="contact-card__info">
+                        <div class="info-item">
+                            <h4>Dirección</h4>
+                            <p>Carrer de Pompeu Fabra, 8<br>08860 Castelldefels, Barcelona</p>
+                        </div>
+                        
+                        <div class="info-item">
+                            <h4>Teléfono</h4>
+                            <p><a href="tel:+34602449995" class="link-primary">+34 602 44 99 95</a></p>
+                        </div>
+                        
+                        <div class="info-item">
+                            <h4>Horario</h4>
+                            <table class="schedule-table">
+                                <tr>
+                                    <td>Lun - Mié</td>
+                                    <td><strong>9:30 - 19:00</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Jueves</td>
+                                    <td><strong>9:30 - 20:30</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Viernes - Sábado</td>
+                                    <td><strong>9:30 - 19:00</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Domingo</td>
+                                    <td><strong>10:00 - 18:00</strong></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card__actions">
+                        <a href="https://wa.me/34602449995?text=Hola%20Begoña%2C%20me%20gustaría%20reservar%20una%20cita" target="_blank" class="btn btn--primary btn--lg">💬 WhatsApp</a>
+                        <a href="tel:+34602449995" class="btn btn--secondary btn--lg">📞 Llamar</a>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Carrer+de+Pompeu+Fabra+8+Castelldefels" target="_blank" class="btn btn--secondary btn--lg">📍 Cómo Llegar</a>
+                    </div>
+                </div>
+
+                <!-- Santa Perpètua -->
+                <div class="contact-card">
+                    <div class="contact-card__header">
+                        <h2 class="title-2">✨ Santa Perpètua</h2>
+                        <p class="text">Próxima apertura - Zona Spa Premium</p>
+                    </div>
+                    
+                    <div class="contact-card__info">
+                        <div class="info-item">
+                            <h4>Dirección</h4>
+                            <p>Genís Sala, 25<br>08130 Santa Perpètua de Mogoda, Barcelona</p>
+                        </div>
+                        
+                        <div class="info-item">
+                            <h4>Teléfono</h4>
+                            <p><a href="tel:+34672928374" class="link-primary">+34 672 92 83 74</a></p>
+                        </div>
+                        
+                        <div class="info-item">
+                            <h4>Horario</h4>
+                            <table class="schedule-table">
+                                <tr>
+                                    <td>Lun - Mié</td>
+                                    <td><strong>10:00 - 20:00</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Jueves</td>
+                                    <td><strong>10:00 - 21:00</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Viernes - Sábado</td>
+                                    <td><strong>10:00 - 20:00</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Domingo</td>
+                                    <td><strong>11:00 - 19:00</strong></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card__actions">
+                        <a href="https://wa.me/34672928374?text=Hola%20Begoña%2C%20me%20gustaría%20reservar%20una%20cita" target="_blank" class="btn btn--primary btn--lg">💬 WhatsApp</a>
+                        <a href="tel:+34672928374" class="btn btn--secondary btn--lg">📞 Llamar</a>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Genís+Sala+25+Santa+Perpètua+de+Mogoda" target="_blank" class="btn btn--secondary btn--lg">📍 Cómo Llegar</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Mapa -->
-    <section class="page-content">
+    <!-- Map Section -->
+    <section class="section section--light">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 30px;">Ubícanos en el Mapa</h2>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2990.5589662527606!2d1.9753449!3d41.28555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a8b9c3c3c3c3%3A0x123456789!2sCarrer%20de%20Pompeu%20Fabra%2C%208%2C%2008860%20Castelldefels%2C%20Barcelona!5e0!3m2!1ses!2ses!4v1704813600" width="100%" height="450" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="title-2">Ubícanos en el Mapa</h2>
+                <p class="text">Fácil acceso desde Barcelona y alrededores</p>
+            </div>
+            
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2990.5589662527606!2d1.9753449!3d41.28555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a8b9c3c3c3c3%3A0x123456789!2sCarrer%20de%20Pompeu%20Fabra%2C%208%2C%2008860%20Castelldefels%2C%20Barcelona!5e0!3m2!1ses!2ses!4v1704813600" width="100%" height="500" style="border:0; border-radius: 16px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <!-- Redes Sociales -->
+    <section class="section section--dark">
+        <div class="container">
+            <div style="text-align: center;">
+                <h2 class="title-1">Síguenos en Redes</h2>
+                <p class="lead" style="color: rgba(255, 255, 255, 0.7); margin-bottom: 40px;">Descubre trabajos, promociones y consejos de cuidado capilar</p>
+                
+                <div class="social-links" style="display: flex; gap: 20px; justify-content: center;">
+                    <a href="https://www.instagram.com/salonbegonaoficial/" target="_blank" class="btn btn--secondary btn--lg">📸 Instagram</a>
+                    <a href="https://wa.me/34602449995" target="_blank" class="btn btn--secondary btn--lg">💬 WhatsApp</a>
+                </div>
+            </div>
         </div>
     </section>
 
