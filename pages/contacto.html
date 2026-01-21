@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contacto - Salón Begoña Gómez | Reserva tu cita en Castelldefels o Santa Perpètua">
+    <meta name="description" content="Contacto - Salón Begoña Gómez">
     <title>Contacto | Salón Begoña Gómez</title>
     <!-- PACK A TIPOGRÁFICO: Cormorant Garamond + Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,9 +13,11 @@
     <link rel="stylesheet" href="../design-system.css">
     <!-- ESTILOS ESPECÍFICOS DEL SITIO -->
     <link rel="stylesheet" href="../styles.css">
-    <!-- RESPONSIVE OPTIMIZATION -->
+    <!-- RESPONSIVE OPTIMIZATION: MÓVIL | TABLET | DESKTOP -->
     <link rel="stylesheet" href="../responsive.css">
-    <!-- LEGAL & COOKIES STYLES -->
+    <!-- HERO SIDEBAR: CTAs EN LATERAL DERECHO -->
+    <link rel="stylesheet" href="../hero-sidebar.css">
+    <!-- LEGAL PAGES & COOKIES STYLES -->
     <link rel="stylesheet" href="../legal-styles.css">
     <link rel="stylesheet" href="../cookies-styles.css">
 </head>
@@ -50,143 +52,108 @@
         </div>
     </header>
 
-    <!-- Hero Contact Section -->
-    <section class="section section--dark" id="contact-hero">
-        <div class="container">
-            <div class="contact-hero">
-                <h1 class="title-1">Reserva Tu Cita</h1>
-                <p class="lead">Elige tu ubicación y servicio. Te esperamos con los brazos abiertos.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Information & Booking -->
-    <section class="section section--light">
-        <div class="container">
-            <div class="contact-grid">
-                <!-- Castelldefels -->
-                <div class="contact-card">
-                    <div class="contact-card__header">
-                        <h2 class="title-2">📍 Castelldefels</h2>
-                        <p class="text">Ubicación principal</p>
-                    </div>
-                    
-                    <div class="contact-card__info">
-                        <div class="info-item">
-                            <h4>Dirección</h4>
-                            <p>Carrer de Pompeu Fabra, 8<br>08860 Castelldefels, Barcelona</p>
-                        </div>
-                        
-                        <div class="info-item">
-                            <h4>Teléfono</h4>
-                            <p><a href="tel:+34602449995" class="link-primary">+34 602 44 99 95</a></p>
-                        </div>
-                        
-                        <div class="info-item">
-                            <h4>Horario</h4>
-                            <table class="schedule-table">
-                                <tr>
-                                    <td>Lun - Mié</td>
-                                    <td><strong>9:30 - 19:00</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Jueves</td>
-                                    <td><strong>9:30 - 20:30</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Viernes - Sábado</td>
-                                    <td><strong>9:30 - 19:00</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Domingo</td>
-                                    <td><strong>10:00 - 18:00</strong></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-card__actions">
-                        <a href="https://wa.me/34602449995?text=Hola%20Begoña%2C%20me%20gustaría%20reservar%20una%20cita" target="_blank" class="btn btn--primary btn--lg">💬 WhatsApp</a>
-                        <a href="tel:+34602449995" class="btn btn--secondary btn--lg">📞 Llamar</a>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=Carrer+de+Pompeu+Fabra+8+Castelldefels" target="_blank" class="btn btn--secondary btn--lg">📍 Cómo Llegar</a>
-                    </div>
-                </div>
-
-                <!-- Santa Perpètua -->
-                <div class="contact-card">
-                    <div class="contact-card__header">
-                        <h2 class="title-2">✨ Santa Perpètua</h2>
-                        <p class="text">Próxima apertura - Zona Spa Premium</p>
-                    </div>
-                    
-                    <div class="contact-card__info">
-                        <div class="info-item">
-                            <h4>Dirección</h4>
-                            <p>Genís Sala, 25<br>08130 Santa Perpètua de Mogoda, Barcelona</p>
-                        </div>
-                        
-                        <div class="info-item">
-                            <h4>Teléfono</h4>
-                            <p><a href="tel:+34672928374" class="link-primary">+34 672 92 83 74</a></p>
-                        </div>
-                        
-                        <div class="info-item">
-                            <h4>Horario</h4>
-                            <table class="schedule-table">
-                                <tr>
-                                    <td>Lun - Mié</td>
-                                    <td><strong>10:00 - 20:00</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Jueves</td>
-                                    <td><strong>10:00 - 21:00</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Viernes - Sábado</td>
-                                    <td><strong>10:00 - 20:00</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Domingo</td>
-                                    <td><strong>11:00 - 19:00</strong></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-card__actions">
-                        <a href="https://wa.me/34672928374?text=Hola%20Begoña%2C%20me%20gustaría%20reservar%20una%20cita" target="_blank" class="btn btn--primary btn--lg">💬 WhatsApp</a>
-                        <a href="tel:+34672928374" class="btn btn--secondary btn--lg">📞 Llamar</a>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=Genís+Sala+25+Santa+Perpètua+de+Mogoda" target="_blank" class="btn btn--secondary btn--lg">📍 Cómo Llegar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Map Section -->
-    <section class="section section--light">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <h2 class="title-2">Ubícanos en el Mapa</h2>
-                <p class="text">Fácil acceso desde Barcelona y alrededores</p>
-            </div>
-            
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2990.5589662527606!2d1.9753449!3d41.28555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a8b9c3c3c3c3%3A0x123456789!2sCarrer%20de%20Pompeu%20Fabra%2C%208%2C%2008860%20Castelldefels%2C%20Barcelona!5e0!3m2!1ses!2ses!4v1704813600" width="100%" height="500" style="border:0; border-radius: 16px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-    </section>
-
-    <!-- Redes Sociales -->
+    <!-- Contenido Principal -->
     <section class="section section--dark">
         <div class="container">
-            <div style="text-align: center;">
-                <h2 class="title-1">Síguenos en Redes</h2>
-                <p class="lead" style="color: rgba(255, 255, 255, 0.7); margin-bottom: 40px;">Descubre trabajos, promociones y consejos de cuidado capilar</p>
-                
-                <div class="social-links" style="display: flex; gap: 20px; justify-content: center;">
-                    <a href="https://www.instagram.com/salonbegonaoficial/" target="_blank" class="btn btn--secondary btn--lg">📸 Instagram</a>
-                    <a href="https://wa.me/34602449995" target="_blank" class="btn btn--secondary btn--lg">💬 WhatsApp</a>
+            <div class="specialties-hero__eyebrow">RESERVAS</div>
+            <h1 class="title-1">Contacta con Nosotras</h1>
+            <p class="lead">Elige tu sede y reserva tu cita de belleza</p>
+            <div class="hero-signature-line" style="margin: 30px auto;"></div>
+        </div>
+    </section>
+
+    <section class="section section--light">
+        <div class="container">
+            <!-- SECCIÓN HEADER PREMIUM -->
+            <div class="contact-section-header" style="margin-bottom: 60px;">
+                <h2 class="title-2 mb-4">Nuestras Sedes</h2>
+                <p class="text mb-4">Dos espacios dedicados a tu bienestar y belleza capilar</p>
+                <div class="contact-divider-header"></div>
+            </div>
+
+            <!-- CONTACT CARDS GRID -->
+            <div class="contact-cards-grid">
+                <!-- TARJETA CASTELLDEFELS -->
+                <div class="contact-card premium-contact-card" id="castelldefels">
+                    <div class="card-premium-border"></div>
+                    <div class="card-premium-glow"></div>
+                    
+                    <div class="card-header">
+                        <div class="card-location-icon">📍</div>
+                        <h3 class="card-title">Castelldefels</h3>
+                        <p class="card-subtitle">Barcelona, Costa Brava</p>
+                    </div>
+
+                    <div class="card-divider-premium"></div>
+
+                    <div class="card-body">
+                        <div class="info-block premium-info-block">
+                            <h4 class="info-label">DIRECCIÓN</h4>
+                            <p class="info-text">Carrer de Pompeu Fabra, 8<br><span class="text-sm">08860 Castelldefels</span></p>
+                        </div>
+                        <div class="info-block premium-info-block">
+                            <h4 class="info-label">TELÉFONO</h4>
+                            <p class="info-text"><a href="tel:+34602449995" class="contact-link">+34 602 44 99 95</a></p>
+                        </div>
+                        <div class="info-block premium-info-block">
+                            <h4 class="info-label">HORARIO</h4>
+                            <div class="horario-premium">
+                                <p><strong>Lunes</strong> <span class="horario-time">Cerrado</span></p>
+                                <p><strong>Mar-Vie</strong> <span class="horario-time">9:30 - 19:30</span></p>
+                                <p><strong>Sábado</strong> <span class="horario-time">9:00 - 14:00</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer premium-footer">
+                        <a href="https://wa.me/34602449995" target="_blank" class="btn btn-cta-primary">✨ Reservar</a>
+                    </div>
+                </div>
+
+                <!-- TARJETA SANTA PERPÈTUA -->
+                <div class="contact-card premium-contact-card" id="santa-perpeuta">
+                    <div class="card-premium-border"></div>
+                    <div class="card-premium-glow"></div>
+                    
+                    <div class="card-header">
+                        <div class="card-location-icon">✨</div>
+                        <h3 class="card-title">Santa Perpètua</h3>
+                        <p class="card-subtitle">Barcelona, Nueva Apertura</p>
+                    </div>
+
+                    <div class="card-divider-premium"></div>
+
+                    <div class="card-body">
+                        <div class="info-block premium-info-block">
+                            <h4 class="info-label">DIRECCIÓN</h4>
+                            <p class="info-text">Genís Sala 25<br><span class="text-sm">08130 Santa Perpètua de Mogoda</span></p>
+                        </div>
+                        <div class="info-block premium-info-block">
+                            <h4 class="info-label">TELÉFONO</h4>
+                            <p class="info-text"><a href="tel:+34672928374" class="contact-link">+34 672 92 83 74</a></p>
+                        </div>
+                        <div class="info-block premium-info-block">
+                            <h4 class="info-label">ESPECIALIDAD</h4>
+                            <p class="info-text feature-text">🧖 Spa premium con cama de masaje<br>🔍 Diagnóstico capilar avanzado<br>✨ Bienestar integral</p>
+                        </div>
+                    </div>
+
+                    <div class="card-footer premium-footer">
+                        <a href="https://wa.me/34672928374" target="_blank" class="btn btn-cta-primary">✨ Reservar</a>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Mapa -->
+    <section class="section section--dark">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <div class="specialties-hero__eyebrow">UBICACIÓN</div>
+                <h2 class="title-2">Encuéntranos</h2>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2990.5589662527606!2d1.9753449!3d41.28555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a8b9c3c3c3c3%3A0x123456789!2sCarrer%20de%20Pompeu%20Fabra%2C%208%2C%2008860%20Castelldefels%2C%20Barcelona!5e0!3m2!1ses!2ses!4v1704813600" width="100%" height="450" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
 

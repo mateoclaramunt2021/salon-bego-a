@@ -2913,11 +2913,257 @@ section {
     margin-bottom: 6px;
 }
 
-.special-feature {
-    font-size: 13px;
+/* ============================================
+   PREMIUM CONTACT CARDS - MEJORADO COMPACTO
+   ============================================ */
+
+.premium-contact-card {
+    background: linear-gradient(135deg, rgba(200, 162, 90, 0.08) 0%, rgba(200, 162, 90, 0.02) 100%);
+    border: 2px solid transparent;
+    border-radius: 20px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+    background-clip: padding-box;
+}
+
+.card-premium-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--color-gold), rgba(200, 162, 90, 0.6), var(--color-gold));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.7;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.card-premium-glow {
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(200, 162, 90, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.premium-contact-card:hover {
+    box-shadow: 0 28px 100px rgba(200, 162, 90, 0.3), inset 0 1px 0 rgba(200, 162, 90, 0.2);
+    transform: translateY(-12px);
+    background: linear-gradient(135deg, rgba(200, 162, 90, 0.14) 0%, rgba(200, 162, 90, 0.04) 100%);
+}
+
+.premium-contact-card:hover .card-premium-border {
+    opacity: 1;
+}
+
+.premium-contact-card:hover .card-premium-glow {
+    opacity: 1;
+}
+
+.card-location-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+.card-header {
+    margin-bottom: 16px;
+}
+
+.card-header .card-title {
+    font-size: 24px;
+    font-weight: 700;
     color: var(--color-gold);
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+}
+
+.card-header .card-subtitle {
+    font-size: 12px;
+    color: rgba(200, 162, 90, 0.8);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.card-divider-premium {
+    height: 2px;
+    background: linear-gradient(90deg, rgba(200, 162, 90, 0.2), rgba(200, 162, 90, 0.5), rgba(200, 162, 90, 0.2));
+    margin: 16px 0;
+}
+
+.premium-info-block {
+    margin-bottom: 18px;
+}
+
+.premium-info-block:last-child {
+    margin-bottom: 0;
+}
+
+.premium-info-block .info-label {
+    font-size: 9px;
+    color: rgba(200, 162, 90, 1);
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.premium-info-block .info-text {
+    font-size: 14px;
+    color: rgba(245, 241, 236, 0.95);
+    line-height: 1.6;
     font-weight: 500;
-    font-style: italic;
+}
+
+.horario-premium {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+}
+
+.horario-premium p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(245, 241, 236, 0.85);
+}
+
+.horario-premium p strong {
+    color: rgba(200, 162, 90, 1);
+    font-weight: 700;
+}
+
+.horario-time {
+    color: var(--color-gold);
+    font-weight: 800;
+    font-size: 12px;
+}
+
+.feature-text {
+    color: rgba(245, 241, 236, 0.9) !important;
+    line-height: 1.7;
+    font-size: 13px;
+}
+
+.premium-footer {
+    margin-top: 20px;
+    padding-top: 0;
+    border-top: none;
+}
+
+/* ============================================
+   BOTONES CTA PREMIUM COMPACTOS
+   ============================================ */
+
+.btn-cta-secondary {
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: rgba(200, 162, 90, 0.12);
+    border: 1.5px solid rgba(200, 162, 90, 0.45);
+    color: rgba(200, 162, 90, 1);
+    text-align: center;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    font-family: var(--font-body);
+}
+
+.btn-cta-secondary:hover {
+    background: rgba(200, 162, 90, 0.32);
+    border-color: rgba(200, 162, 90, 0.85);
+    box-shadow: 0 12px 28px rgba(200, 162, 90, 0.25);
+    transform: translateY(-5px);
+}
+
+.btn-cta-primary {
+    padding: 14px 24px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    border-radius: 10px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient(135deg, var(--color-gold), rgba(200, 162, 90, 0.9));
+    color: var(--color-dark);
+    border: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 12px 36px rgba(200, 162, 90, 0.35);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-body);
+}
+
+.btn-cta-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.25);
+    transition: left 0.45s ease;
+    z-index: 1;
+}
+
+.btn-cta-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+    z-index: 0;
+}
+
+.btn-cta-primary:hover {
+    box-shadow: 0 18px 52px rgba(200, 162, 90, 0.45);
+    transform: translateY(-7px);
+    background: linear-gradient(135deg, rgba(200, 162, 90, 1), var(--color-gold));
+}
+
+.btn-cta-primary:hover::before {
+    left: 100%;
+}
+
+.btn-cta-primary:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+.text-sm {
+    font-size: 11px;
+    opacity: 0.8;
 }
 
 .card-actions {
@@ -4856,5 +5102,363 @@ section {
     
     .page-image {
         border-radius: 16px;
+    }
+}
+/* =====================================================
+   CORRECCIÓN GLOBAL: TEXTO OSCURO EN FONDOS CLAROS
+   Última actualización: 2026-01-19
+   ===================================================== */
+
+/* Secciones con fondo claro - Texto oscuro obligatorio */
+.section--light,
+.section--light *,
+.section--white,
+.section--white *,
+.page-content,
+.page-content *,
+.service-section,
+.service-section *,
+.especialidad-detail,
+.especialidad-detail *,
+.cta,
+.cta * {
+    color: #1a1a1a !important;
+}
+
+/* Elementos específicos que deben ser oscuros */
+.section--light h1,
+.section--light h2,
+.section--light h3,
+.section--light h4,
+.section--light h5,
+.section--light h6,
+.section--light p,
+.section--light span,
+.section--light li,
+.section--light label,
+.section--light .service__title,
+.section--light .service__lead,
+.section--light .service__section-title,
+.section--light .service__eyebrow,
+.service-section h1,
+.service-section h2,
+.service-section h3,
+.service-section h4,
+.service-section p,
+.service-section span,
+.service-section li,
+.page-content h1,
+.page-content h2,
+.page-content h3,
+.page-content h4,
+.page-content p,
+.page-content li {
+    color: #1a1a1a !important;
+}
+
+/* Eyebrows y badges dorados en secciones claras */
+.section--light .service__eyebrow,
+.section--light .eyebrow,
+.service-section .service__eyebrow,
+.service-section .eyebrow {
+    color: #C8A25A !important;
+}
+
+/* Listas en secciones claras */
+.section--light .service__list li,
+.section--light ul li,
+.service-section .service__list li,
+.service-section ul li {
+    color: #2a2a2a !important;
+}
+
+/* Servicios específicos */
+.service__content h3,
+.service__content h4,
+.service__content p,
+.service__content li,
+.service__title,
+.service__lead,
+.service__section-title {
+    color: #1a1a1a !important;
+}
+
+.service__eyebrow {
+    color: #C8A25A !important;
+}
+
+.service__list li {
+    color: #2a2a2a !important;
+}
+
+/* Santa Perpètua sección clara */
+#santa-perpeuta h2,
+#santa-perpeuta h3,
+#santa-perpeuta p,
+#santa-perpeuta li,
+.santa__title,
+.santa__subtitle,
+.santa__lead,
+.santa__heading,
+.santa__list li {
+    color: #1a1a1a !important;
+}
+
+.santa__heading {
+    color: #C8A25A !important;
+}
+
+/* Chips en secciones claras */
+.section--light .chip,
+#santa-perpeuta .chip {
+    color: #C8A25A !important;
+    background: rgba(200, 162, 90, 0.15) !important;
+    border-color: rgba(200, 162, 90, 0.4) !important;
+}
+
+/* Highlight box en Santa Perpètua */
+.santa__highlight {
+    background: linear-gradient(135deg, rgba(200, 162, 90, 0.12) 0%, rgba(200, 162, 90, 0.05) 100%) !important;
+    border: 2px solid rgba(200, 162, 90, 0.3) !important;
+}
+
+.santa__highlight-title,
+.santa__highlight-text,
+.santa__highlight-small {
+    color: #1a1a1a !important;
+}
+
+.santa__highlight-icon {
+    color: #C8A25A !important;
+}
+
+/* Productos section */
+.products-section {
+    background: #0F1115 !important;
+}
+
+.products-section h2,
+.products-section h3,
+.products-section p,
+.products-section .products__title,
+.products-section .products__subtitle,
+.product-card__title,
+.product-card__description {
+    color: #F5F1EC !important;
+}
+
+.products__eyebrow {
+    color: #C8A25A !important;
+}
+
+/* CTA section (action-bar) con fondo dorado */
+.action-bar,
+.action-bar h2,
+.action-bar p {
+    color: #0F1115 !important;
+}
+
+/* Botones - mantener colores correctos */
+.btn--primary {
+    background-color: #C8A25A !important;
+    color: #0F1115 !important;
+    border-color: #C8A25A !important;
+}
+
+.btn--secondary {
+    background-color: transparent !important;
+    color: #C8A25A !important;
+    border-color: #C8A25A !important;
+}
+
+.section--light .btn--primary,
+.service-section .btn--primary {
+    background-color: #C8A25A !important;
+    color: #0F1115 !important;
+}
+
+.section--light .btn--secondary,
+.service-section .btn--secondary {
+    color: #C8A25A !important;
+    border-color: #C8A25A !important;
+}
+
+/* =====================================================
+   SANTA PERPÈTUA - PREMIUM COMPACT SECTION
+   ===================================================== */
+
+.santa-premium {
+    background: linear-gradient(135deg, #1a1d23 0%, #252830 100%);
+    padding: 60px 0;
+    border-top: 1px solid rgba(200, 162, 90, 0.2);
+    border-bottom: 1px solid rgba(200, 162, 90, 0.2);
+}
+
+.santa-premium__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.santa-premium__info {
+    flex: 1;
+}
+
+.santa-premium__badge {
+    display: inline-block;
+    background: rgba(200, 162, 90, 0.15);
+    color: #C8A25A !important;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border: 1px solid rgba(200, 162, 90, 0.3);
+    margin-bottom: 16px;
+}
+
+.santa-premium__title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 48px);
+    font-weight: 700;
+    color: white !important;
+    background: none !important;
+    -webkit-text-fill-color: white !important;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+}
+
+.santa-premium__tagline {
+    font-size: 18px;
+    color: white !important;
+    background: none !important;
+    -webkit-text-fill-color: white !important;
+    font-weight: 600;
+    margin: 0 0 24px 0;
+    letter-spacing: 0.5px;
+}
+
+.santa-premium__features {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.santa-feature {
+    font-size: 14px;
+    color: rgba(245, 241, 236, 0.85) !important;
+    font-weight: 500;
+}
+
+.santa-premium__chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.santa-chip {
+    display: inline-block;
+    background: rgba(200, 162, 90, 0.1);
+    color: #C8A25A !important;
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(200, 162, 90, 0.25);
+}
+
+.santa-premium__cta-box {
+    background: linear-gradient(135deg, rgba(200, 162, 90, 0.08) 0%, rgba(200, 162, 90, 0.02) 100%);
+    border: 2px solid rgba(200, 162, 90, 0.3);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    min-width: 280px;
+}
+
+.santa-premium__location {
+    margin-bottom: 24px;
+}
+
+.santa-premium__address {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #F5F1EC !important;
+    margin-bottom: 4px;
+}
+
+.santa-premium__city {
+    display: block;
+    font-size: 13px;
+    color: rgba(245, 241, 236, 0.6) !important;
+}
+
+.santa-premium__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.santa-premium__buttons .btn {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.santa-premium__buttons .btn--primary {
+    background: linear-gradient(135deg, #C8A25A 0%, #D8AA65 100%) !important;
+    color: #0F1115 !important;
+    border: none !important;
+    box-shadow: 0 8px 24px rgba(200, 162, 90, 0.3);
+}
+
+.santa-premium__buttons .btn--primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(200, 162, 90, 0.4);
+}
+
+.santa-premium__buttons .btn--secondary {
+    background: transparent !important;
+    color: #C8A25A !important;
+    border: 2px solid rgba(200, 162, 90, 0.4) !important;
+}
+
+.santa-premium__buttons .btn--secondary:hover {
+    background: rgba(200, 162, 90, 0.1) !important;
+    border-color: #C8A25A !important;
+}
+
+/* Responsive Santa Premium */
+@media (max-width: 768px) {
+    .santa-premium {
+        padding: 48px 0;
+    }
+    
+    .santa-premium__wrapper {
+        flex-direction: column;
+        gap: 32px;
+        text-align: center;
+    }
+    
+    .santa-premium__features {
+        justify-content: center;
+    }
+    
+    .santa-premium__chips {
+        justify-content: center;
+    }
+    
+    .santa-premium__cta-box {
+        width: 100%;
+        max-width: 320px;
     }
 }
