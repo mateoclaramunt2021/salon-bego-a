@@ -1,0 +1,27 @@
+# Salon Begona Gomez - Robots.txt
+# Permitir a todos los buscadores
+
+User-agent: *
+Allow: /
+Allow: /pages/
+Allow: /assets/
+
+# Especificar sitemap
+Sitemap: https://begona.com/sitemap.xml
+
+# Bloquear archivos innecesarios
+Disallow: /admin/
+Disallow: /*.py$
+Disallow: /.*\.txt$
+
+# Google específicamente
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# Delays
+User-agent: *
+Crawl-delay: 1
