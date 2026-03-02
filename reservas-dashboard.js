@@ -151,9 +151,9 @@
     ];
 
     const MEMBERSHIPS = [
-        { id: 'plan-esencial', name: 'Esencial', price: '399€/año' },
-        { id: 'plan-premium', name: 'Premium', price: '699€/año' },
-        { id: 'plan-vip', name: 'VIP', price: '999€/año' }
+        { id: 'plan-esencial', name: 'Esencial', price: '599€/año' },
+        { id: 'plan-premium', name: 'Premium', price: '999€/año' },
+        { id: 'plan-vip', name: 'VIP', price: '1.499€/año' }
     ];
 
     const PRICE_ITEMS = [
