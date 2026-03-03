@@ -82,14 +82,8 @@ onAuthStateChanged(auth, async (user) => {
 
     } catch (e) {
         console.error('[Dashboard] Init error:', e);
-    } finally {
-        // ALWAYS hide loading — even if everything crashed
-        const loading = $('#db-loading');
-        const main = $('#db-main');
-        if (loading) loading.hidden = true;
-        if (main) main.hidden = false;
-        console.log('[Dashboard] ✓ Ready');
     }
+    console.log('[Dashboard] ✓ Ready');
 
     // Init interactions (each wrapped so one failure doesn't block others)
     const inits = [

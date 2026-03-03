@@ -12,12 +12,6 @@
 </head>
 <body class="db-body">
 
-    <!-- ░░ LOADING ░░ -->
-    <div id="db-loading" class="db-loading">
-        <div class="db-loading__spinner"></div>
-        <p>Cargando Dashboard...</p>
-    </div>
-
     <!-- ░░ SIDEBAR ░░ -->
     <aside id="db-sidebar" class="db-sidebar">
         <div class="db-sidebar__brand">
@@ -82,7 +76,7 @@
     </aside>
 
     <!-- ░░ MAIN CONTENT ░░ -->
-    <main id="db-main" class="db-main" hidden>
+    <main id="db-main" class="db-main">
     
         <!-- Mobile header -->
         <header class="db-mobile-header">
@@ -659,18 +653,6 @@
 
     </main>
 
-    <!-- Failsafe: if module JS fails entirely, hide loading after 8s -->
-    <script>
-        setTimeout(function() {
-            var ld = document.getElementById('db-loading');
-            var mn = document.getElementById('db-main');
-            if (ld && !ld.hidden) {
-                ld.hidden = true;
-                if (mn) mn.hidden = false;
-                console.warn('[Dashboard] Failsafe timeout: forced loading hide');
-            }
-        }, 8000);
-    </script>
     <script type="module" src="../dashboard-app.js"></script>
 </body>
 </html>
