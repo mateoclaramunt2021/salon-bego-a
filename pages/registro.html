@@ -35,7 +35,6 @@
                         <li><a href="contacto.html">Contacto</a></li>
                         <li><a href="reservas.html">Reservas</a></li>
                         <li><a href="mi-cuenta.html">Mi Cuenta</a></li>
-                        <li><a href="mi-cuenta.html">Mi Cuenta</a></li>
                     </ul>
                 </nav>
                 <a href="reservas.html" class="btn btn--primary btn--sm">Reservar</a>
@@ -257,13 +256,22 @@
         // ═══════════════════════════════════════════════
         // CHECK IF ALREADY LOGGED IN
         // ═══════════════════════════════════════════════
+        let isRegistering = false; // Flag to prevent redirect during registration
+
         onAuthStateChanged(auth, async (user) => {
+            if (isRegistering) return; // Don't redirect while registering
             if (user) {
-                const profile = await getClientProfile(user.uid);
-                if (isAdmin(user.email)) {
-                    window.location.href = 'dashboard.html';
-                } else if (profile) {
-                    window.location.href = 'mi-cuenta.html';
+                try {
+                    if (isAdmin(user.email)) {
+                        window.location.href = 'dashboard.html';
+                        return;
+                    }
+                    const profile = await getClientProfile(user.uid);
+                    if (profile) {
+                        window.location.href = 'mi-cuenta.html';
+                    }
+                } catch (e) {
+                    console.error('Error checking auth state:', e);
                 }
             }
         });
@@ -399,6 +407,7 @@
             submitBtn.querySelector('.auth-submit__text').hidden = true;
             submitBtn.querySelector('.auth-submit__loading').hidden = false;
             submitBtn.disabled = true;
+            isRegistering = true; // Prevent auth listener redirect
 
             try {
                 // 1. Create Firebase Auth user
@@ -418,13 +427,8 @@
                 successEl.hidden = false;
                 document.getElementById('success-client-number').textContent = clientNumber;
 
-                // 4. If they had a pending plan, store it
-                const pendingPlan = sessionStorage.getItem('pendingPlan');
-                if (pendingPlan) {
-                    sessionStorage.setItem('pendingPlan', pendingPlan);
-                }
-
             } catch (err) {
+                isRegistering = false;
                 const messages = {
                     'auth/email-already-in-use': 'Ya existe una cuenta con este email. ¿Quieres iniciar sesión?',
                     'auth/weak-password': 'La contraseña debe tener al menos 6 caracteres',

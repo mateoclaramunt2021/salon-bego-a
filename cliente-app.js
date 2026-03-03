@@ -44,26 +44,45 @@ onAuthStateChanged(auth, async (user) => {
     }
 
     currentUser = user;
-    clientProfile = await getClientProfile(user.uid);
 
-    if (!clientProfile) {
-        window.location.href = 'registro.html';
-        return;
+    try {
+        clientProfile = await getClientProfile(user.uid);
+    } catch (e) {
+        console.error('Error loading profile:', e);
+        clientProfile = null;
     }
 
-    // Load services catalog
+    if (!clientProfile) {
+        // Profile doesn't exist yet (still creating?), wait 2s and retry once
+        await new Promise(r => setTimeout(r, 2000));
+        try {
+            clientProfile = await getClientProfile(user.uid);
+        } catch (e) {
+            console.error('Retry failed:', e);
+        }
+        if (!clientProfile) {
+            window.location.href = 'registro.html';
+            return;
+        }
+    }
+
+    // Load services catalog (non-blocking — use defaults on fail)
     await loadServices();
 
     // Render everything
-    renderWelcome();
-    renderStats();
-    renderLevel();
-    renderBookingServices();
-    renderMembership();
-    renderCoupons();
-    renderWalletCard();
-    renderProfile();
-    loadAppointments();
+    try {
+        renderWelcome();
+        renderStats();
+        renderLevel();
+        renderBookingServices();
+        renderMembership();
+        renderCoupons();
+        renderWalletCard();
+        renderProfile();
+        loadAppointments();
+    } catch (e) {
+        console.error('Error rendering portal:', e);
+    }
 
     // Show main, hide loading
     $('#cp-loading').hidden = true;
@@ -100,7 +119,10 @@ async function loadServices() {
         // Sort by category
         services.sort((a, b) => (a.categoria || '').localeCompare(b.categoria || ''));
     } catch (e) {
-        // Fallback to defaults
+        console.warn('No se pudieron cargar servicios de Firestore, usando defaults');
+    }
+    // Use fallback defaults if Firestore is empty or failed
+    if (services.length === 0) {
         services = [
             { id: 'corte-mujer', nombre: 'Corte Mujer', precio: 45, duracion: 45, categoria: 'cortes' },
             { id: 'corte-curly-seco', nombre: 'Corte Curly en Seco', precio: 60, duracion: 60, categoria: 'cortes' },
