@@ -347,6 +347,7 @@ textarea.db-input { resize: vertical; }
     display: flex; align-items: center; justify-content: center;
     padding: 20px;
 }
+.db-modal[hidden] { display: none !important; }
 .db-modal__content {
     background: var(--db-card);
     border: 1px solid var(--db-border);
