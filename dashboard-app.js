@@ -29,56 +29,77 @@ const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 // AUTH CHECK
 // ═══════════════════════════════════════════════
 onAuthStateChanged(auth, async (user) => {
+    console.log('[Dashboard] Auth state:', user ? user.email : 'no user');
     if (!user) {
         window.location.href = 'registro.html';
         return;
     }
     if (!isAdmin(user.email)) {
+        console.warn('[Dashboard] Not admin, redirecting...');
         window.location.href = 'mi-cuenta.html';
         return;
     }
 
-    $('#db-admin-name').textContent = user.email.split('@')[0];
-    const today = new Date();
-    const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    $('#db-fecha-hoy').textContent = today.toLocaleDateString('es-ES', opts);
-    $('#db-agenda-date').value = today.toISOString().split('T')[0];
+    try {
+        $('#db-admin-name').textContent = user.email.split('@')[0];
+        const today = new Date();
+        const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        $('#db-fecha-hoy').textContent = today.toLocaleDateString('es-ES', opts);
+        if ($('#db-agenda-date')) {
+            $('#db-agenda-date').value = today.toISOString().split('T')[0];
+        }
 
-    // Load all data
-    await Promise.all([
-        loadClients(),
-        loadAppointments(),
-        loadSales(),
-        loadCoupons(),
-        loadServices()
-    ]);
+        // Load all data (failures are caught inside each function)
+        await Promise.all([
+            loadClients(),
+            loadAppointments(),
+            loadSales(),
+            loadCoupons(),
+            loadServices()
+        ]);
+        console.log('[Dashboard] Data loaded:', { clients: allClients.length, appointments: allAppointments.length, sales: allSales.length, coupons: allCoupons.length, services: allServices.length });
 
-    renderKPIs();
-    renderTodayAppointments();
-    renderRecentActivity();
-    renderClientsTable();
-    renderServicesGrid();
-    renderMemberships();
-    renderLoyalty();
-    renderCouponsTable();
-    renderSchedule();
+        // Render (each wrapped individually so one failure doesn't block the rest)
+        const renders = [
+            ['KPIs', renderKPIs],
+            ['TodayAppointments', renderTodayAppointments],
+            ['RecentActivity', renderRecentActivity],
+            ['ClientsTable', renderClientsTable],
+            ['ServicesGrid', renderServicesGrid],
+            ['Memberships', renderMemberships],
+            ['Loyalty', renderLoyalty],
+            ['CouponsTable', renderCouponsTable],
+            ['Schedule', renderSchedule]
+        ];
+        for (const [name, fn] of renders) {
+            try { fn(); } catch (e) { console.error(`[Dashboard] Error rendering ${name}:`, e); }
+        }
 
-    // Hide loading, show main
+    } catch (e) {
+        console.error('[Dashboard] Init error:', e);
+    }
+
+    // Always hide loading and show main, even if some renders failed
     $('#db-loading').hidden = true;
     $('#db-main').hidden = false;
 
-    // Init interactions
-    initNavigation();
-    initModals();
-    initServiceForm();
-    initCouponForm();
-    initPointsForm();
-    initWhatsApp();
-    initExportCSV();
-    initAgendaFilters();
-    initReviewRequest();
-    initLogout();
-    initMobileMenu();
+    // Init interactions (each wrapped so one failure doesn't block others)
+    const inits = [
+        ['Navigation', initNavigation],
+        ['Modals', initModals],
+        ['ServiceForm', initServiceForm],
+        ['CouponForm', initCouponForm],
+        ['PointsForm', initPointsForm],
+        ['WhatsApp', initWhatsApp],
+        ['ExportCSV', initExportCSV],
+        ['AgendaFilters', initAgendaFilters],
+        ['ReviewRequest', initReviewRequest],
+        ['Logout', initLogout],
+        ['MobileMenu', initMobileMenu]
+    ];
+    for (const [name, fn] of inits) {
+        try { fn(); } catch (e) { console.error(`[Dashboard] Error init ${name}:`, e); }
+    }
 });
 
 // ═══════════════════════════════════════════════
