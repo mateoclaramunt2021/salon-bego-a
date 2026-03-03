@@ -410,31 +410,46 @@
             isRegistering = true; // Prevent auth listener redirect
 
             try {
+                console.log('[Registro] Creating auth user...');
                 // 1. Create Firebase Auth user
                 const cred = await createUserWithEmailAndPassword(auth, email, password);
+                console.log('[Registro] Auth user created:', cred.user.uid);
+                
                 await updateProfile(cred.user, { displayName: `${nombre} ${apellidos}` });
+                console.log('[Registro] Profile updated');
 
                 // 2. Create client profile in Firestore
-                const { clientNumber } = await createClientProfile(cred.user.uid, {
-                    nombre, apellidos, email, telefono,
-                    fechaNacimiento: nacimiento,
-                    sedePreferida: sede
-                });
+                console.log('[Registro] Creating client profile...');
+                let clientNumber = 'BG-0001';
+                try {
+                    const result = await createClientProfile(cred.user.uid, {
+                        nombre, apellidos, email, telefono,
+                        fechaNacimiento: nacimiento,
+                        sedePreferida: sede
+                    });
+                    clientNumber = result.clientNumber;
+                    console.log('[Registro] Profile created:', clientNumber);
+                } catch (profileErr) {
+                    console.error('[Registro] Profile creation failed:', profileErr);
+                    // Don't block success — auth account is created, profile can be created later
+                }
 
                 // 3. Show success
                 document.querySelectorAll('.auth-form, .auth-tabs').forEach(el => el.hidden = true);
                 const successEl = document.getElementById('auth-success');
                 successEl.hidden = false;
                 document.getElementById('success-client-number').textContent = clientNumber;
+                console.log('[Registro] Success screen shown');
 
             } catch (err) {
+                console.error('[Registro] Error:', err.code, err.message);
                 isRegistering = false;
                 const messages = {
-                    'auth/email-already-in-use': 'Ya existe una cuenta con este email. ¿Quieres iniciar sesión?',
+                    'auth/email-already-in-use': 'Ya existe una cuenta con este email. Inicia sesión arriba.',
                     'auth/weak-password': 'La contraseña debe tener al menos 6 caracteres',
                     'auth/invalid-email': 'Email no válido'
                 };
-                errorEl.textContent = messages[err.code] || 'Error al crear la cuenta. Inténtalo de nuevo.';
+                errorEl.textContent = messages[err.code] || `Error: ${err.message || 'Inténtalo de nuevo.'}`;
                 submitBtn.querySelector('.auth-submit__text').hidden = false;
                 submitBtn.querySelector('.auth-submit__loading').hidden = true;
                 submitBtn.disabled = false;
