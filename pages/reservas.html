@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -1118,6 +1118,8 @@
                     <li><a href="politica-cookies.html">Cookies</a></li>
                     <li><a href="condiciones-generales.html">Condiciones</a></li>
                     <li><a href="reservas.html">Reservas</a></li>
+                        <li><a href="mi-cuenta.html">Mi Cuenta</a></li>
+                        <li><a href="mi-cuenta.html">Mi Cuenta</a></li>
                 </ul>
             </div>
             <p>&copy; 2026 Estil Navia SL. Todos los derechos reservados.</p>
@@ -1218,6 +1220,76 @@
             </div>
         </div>
     </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- MODAL LOGIN / REGISTRO                        -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="rv-login-modal" class="rv-login-modal" hidden>
+        <div class="rv-login-modal__backdrop" onclick="document.getElementById('rv-login-modal').hidden=true"></div>
+        <div class="rv-login-modal__content">
+            <button class="rv-login-modal__close" onclick="document.getElementById('rv-login-modal').hidden=true">&times;</button>
+            <div class="rv-login-modal__icon">✨</div>
+            <h3 class="rv-login-modal__title">Accede a tu cuenta</h3>
+            <p class="rv-login-modal__text">Para reservar online, gestionar tus citas y acumular puntos de fidelidad, inicia sesión o crea tu cuenta.</p>
+            <div class="rv-login-modal__buttons">
+                <a href="registro.html?tab=login" class="btn btn--primary btn--lg rv-btn-glow" style="width:100%">🔑 Iniciar Sesión</a>
+                <a href="registro.html?tab=registro" class="btn btn--secondary btn--lg" style="width:100%">📝 Crear Cuenta Gratis</a>
+            </div>
+            <div class="rv-login-modal__divider"><span>o también</span></div>
+            <a id="rv-login-wa-fallback" href="https://wa.me/34602449995" target="_blank" class="btn btn--secondary btn--sm" style="width:100%">📱 Reservar por WhatsApp</a>
+            <p class="rv-login-modal__benefits">
+                🎁 <strong>50 puntos</strong> de bienvenida al registrarte<br>
+                🎟️ <strong>Cupón -15%</strong> en tu primer servicio
+            </p>
+        </div>
+    </div>
+
+    <style>
+    .rv-login-modal { position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px; }
+    .rv-login-modal__backdrop { position:absolute;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px); }
+    .rv-login-modal__content { position:relative;background:#1A1D24;border:1px solid rgba(200,162,90,0.2);border-radius:20px;padding:40px 32px;max-width:420px;width:100%;text-align:center; }
+    .rv-login-modal__close { position:absolute;top:12px;right:16px;border:none;background:none;color:rgba(255,255,255,0.5);font-size:28px;cursor:pointer; }
+    .rv-login-modal__close:hover { color:#fff; }
+    .rv-login-modal__icon { font-size:48px;margin-bottom:12px; }
+    .rv-login-modal__title { font-family:'Cormorant Garamond',serif;font-size:26px;color:#C8A25A;margin-bottom:8px; }
+    .rv-login-modal__text { color:rgba(255,255,255,0.6);font-size:14px;line-height:1.5;margin-bottom:24px; }
+    .rv-login-modal__buttons { display:flex;flex-direction:column;gap:12px;margin-bottom:20px; }
+    .rv-login-modal__divider { display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.3);font-size:12px;margin-bottom:16px; }
+    .rv-login-modal__divider::before, .rv-login-modal__divider::after { content:'';flex:1;height:1px;background:rgba(255,255,255,0.1); }
+    .rv-login-modal__benefits { margin-top:20px;padding:16px;background:rgba(200,162,90,0.08);border-radius:12px;font-size:13px;color:rgba(255,255,255,0.7);line-height:1.8; }
+    </style>
+
+    <script>
+    // Intercept membership & pack CTAs → show login modal
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('rv-login-modal');
+        // Target: all CTA buttons that link to WhatsApp for reservations
+        const ctaSelectors = [
+            '.rv-plan__cta',
+            '.rv-oferta-mes__cta',
+            '.rv-pack__cta',
+            '.rv-packs__grid .btn',
+            '.rv-oferta-mes .btn'
+        ];
+        
+        document.querySelectorAll(ctaSelectors.join(', ')).forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Store original WhatsApp URL for fallback 
+                const waFallback = document.getElementById('rv-login-wa-fallback');
+                if (waFallback && this.href) {
+                    waFallback.href = this.href;
+                }
+                // Store plan info if it's a membership
+                if (this.closest('.rv-plan--esencial')) sessionStorage.setItem('pendingPlan', 'plan-esencial');
+                else if (this.closest('.rv-plan--premium')) sessionStorage.setItem('pendingPlan', 'plan-premium');
+                else if (this.closest('.rv-plan--vip')) sessionStorage.setItem('pendingPlan', 'plan-vip');
+                
+                modal.hidden = false;
+            });
+        });
+    });
+    </script>
 
     <script src="../mobile-menu.js"></script>
     <script src="../reservas-dashboard.js"></script>

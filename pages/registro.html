@@ -1,0 +1,441 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crea tu cuenta en Salón Begoña Gómez. Accede a ofertas exclusivas, programa de fidelización y gestiona tus reservas.">
+    <title>Registro / Iniciar Sesión | Salón Begoña Gómez</title>
+    <link rel="icon" type="image/png" href="../assets/LOGO.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../design-system.css">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../responsive.css">
+    <link rel="stylesheet" href="../auth-styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__wrapper">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/LOGO.png" alt="Salón Begoña Gómez" class="logo-img">
+                    <span class="logo-text">Salón Begoña Gómez</span>
+                </a>
+                <button class="header__hamburger" id="hamburger-menu" aria-label="Menú">
+                    <span></span><span></span><span></span>
+                </button>
+                <nav class="nav" id="mobile-menu">
+                    <ul>
+                        <li><a href="especialidades.html">Especialidades</a></li>
+                        <li><a href="sobre-begona.html">Sobre Begoña</a></li>
+                        <li><a href="galeria.html">Galería</a></li>
+                        <li><a href="resenas.html">Reseñas</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="reservas.html">Reservas</a></li>
+                        <li><a href="mi-cuenta.html">Mi Cuenta</a></li>
+                        <li><a href="mi-cuenta.html">Mi Cuenta</a></li>
+                    </ul>
+                </nav>
+                <a href="reservas.html" class="btn btn--primary btn--sm">Reservar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- AUTH CONTAINER -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <main class="auth-main">
+        <div class="auth-container">
+            <!-- LEFT: Visual Branding -->
+            <div class="auth-brand">
+                <div class="auth-brand__content">
+                    <img src="../assets/LOGO.png" alt="Salón Begoña Gómez" class="auth-brand__logo">
+                    <h1 class="auth-brand__title">Tu espacio de belleza personal</h1>
+                    <p class="auth-brand__subtitle">Crea tu cuenta y accede a beneficios exclusivos</p>
+                    <div class="auth-brand__benefits">
+                        <div class="auth-benefit">
+                            <span class="auth-benefit__icon">🎟️</span>
+                            <div>
+                                <strong>Cupón de bienvenida</strong>
+                                <p>-15% en tu primera visita</p>
+                            </div>
+                        </div>
+                        <div class="auth-benefit">
+                            <span class="auth-benefit__icon">⭐</span>
+                            <div>
+                                <strong>Programa de puntos</strong>
+                                <p>Gana puntos con cada visita</p>
+                            </div>
+                        </div>
+                        <div class="auth-benefit">
+                            <span class="auth-benefit__icon">📱</span>
+                            <div>
+                                <strong>Tarjeta digital</strong>
+                                <p>Tu membresía en el móvil</p>
+                            </div>
+                        </div>
+                        <div class="auth-benefit">
+                            <span class="auth-benefit__icon">📅</span>
+                            <div>
+                                <strong>Reservas online</strong>
+                                <p>Reserva en 30 segundos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Forms -->
+            <div class="auth-forms">
+                <!-- TAB SWITCHER -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-auth-tab="login">Iniciar Sesión</button>
+                    <button class="auth-tab" data-auth-tab="registro">Registrarme</button>
+                </div>
+
+                <!-- ═══ LOGIN FORM ═══ -->
+                <form class="auth-form active" id="login-form" data-auth-panel="login">
+                    <h2 class="auth-form__title">Bienvenida de nuevo</h2>
+                    <p class="auth-form__subtitle">Accede con tu email y contraseña</p>
+
+                    <div class="auth-field">
+                        <label for="login-email">Correo electrónico</label>
+                        <input type="email" id="login-email" placeholder="tu@email.com" required autocomplete="email">
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="login-password">Contraseña</label>
+                        <div class="auth-field__password">
+                            <input type="password" id="login-password" placeholder="Tu contraseña" required autocomplete="current-password" minlength="6">
+                            <button type="button" class="auth-field__toggle-pw" aria-label="Mostrar contraseña">👁️</button>
+                        </div>
+                    </div>
+
+                    <div class="auth-error" id="login-error"></div>
+
+                    <button type="submit" class="btn btn--primary btn--lg auth-submit" id="login-submit">
+                        <span class="auth-submit__text">Iniciar Sesión</span>
+                        <span class="auth-submit__loading" hidden>
+                            <span class="auth-spinner"></span> Entrando...
+                        </span>
+                    </button>
+
+                    <p class="auth-switch">¿No tienes cuenta? <button type="button" class="auth-switch__link" data-switch="registro">Regístrate gratis</button></p>
+                </form>
+
+                <!-- ═══ REGISTER FORM ═══ -->
+                <form class="auth-form" id="register-form" data-auth-panel="registro">
+                    <h2 class="auth-form__title">Crea tu cuenta</h2>
+                    <p class="auth-form__subtitle">En 1 minuto. Recibe tu nº de clienta y cupón de bienvenida.</p>
+
+                    <div class="auth-field-row">
+                        <div class="auth-field">
+                            <label for="reg-nombre">Nombre *</label>
+                            <input type="text" id="reg-nombre" placeholder="María" required autocomplete="given-name">
+                        </div>
+                        <div class="auth-field">
+                            <label for="reg-apellidos">Apellidos *</label>
+                            <input type="text" id="reg-apellidos" placeholder="García López" required autocomplete="family-name">
+                        </div>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="reg-email">Correo electrónico *</label>
+                        <input type="email" id="reg-email" placeholder="tu@email.com" required autocomplete="email">
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="reg-telefono">Teléfono (WhatsApp) *</label>
+                        <input type="tel" id="reg-telefono" placeholder="+34 612 345 678" required autocomplete="tel">
+                    </div>
+
+                    <div class="auth-field-row">
+                        <div class="auth-field">
+                            <label for="reg-nacimiento">Fecha de nacimiento</label>
+                            <input type="date" id="reg-nacimiento" autocomplete="bday">
+                        </div>
+                        <div class="auth-field">
+                            <label for="reg-sede">Sede preferida</label>
+                            <select id="reg-sede">
+                                <option value="castelldefels">📍 Castelldefels</option>
+                                <option value="santa-perpetua">📍 Santa Perpètua</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="reg-password">Contraseña *</label>
+                        <div class="auth-field__password">
+                            <input type="password" id="reg-password" placeholder="Mínimo 6 caracteres" required autocomplete="new-password" minlength="6">
+                            <button type="button" class="auth-field__toggle-pw" aria-label="Mostrar contraseña">👁️</button>
+                        </div>
+                        <div class="auth-password-strength" id="reg-pw-strength">
+                            <div class="auth-pw-bar"><div class="auth-pw-bar__fill"></div></div>
+                            <span class="auth-pw-label"></span>
+                        </div>
+                    </div>
+
+                    <div class="auth-field">
+                        <label class="auth-checkbox">
+                            <input type="checkbox" id="reg-terms" required>
+                            <span>Acepto la <a href="politica-privacidad.html" target="_blank">Política de Privacidad</a> y las <a href="condiciones-generales.html" target="_blank">Condiciones</a></span>
+                        </label>
+                    </div>
+
+                    <div class="auth-error" id="register-error"></div>
+
+                    <button type="submit" class="btn btn--primary btn--lg auth-submit" id="register-submit">
+                        <span class="auth-submit__text">Crear mi cuenta</span>
+                        <span class="auth-submit__loading" hidden>
+                            <span class="auth-spinner"></span> Creando cuenta...
+                        </span>
+                    </button>
+
+                    <p class="auth-switch">¿Ya tienes cuenta? <button type="button" class="auth-switch__link" data-switch="login">Inicia sesión</button></p>
+                </form>
+
+                <!-- ═══ SUCCESS MESSAGE ═══ -->
+                <div class="auth-success" id="auth-success" hidden>
+                    <div class="auth-success__icon">🎉</div>
+                    <h2 class="auth-success__title">¡Bienvenida a Salón Begoña!</h2>
+                    <div class="auth-success__details">
+                        <div class="auth-success__card">
+                            <span class="auth-success__label">Tu número de clienta</span>
+                            <span class="auth-success__value" id="success-client-number">BG-0001</span>
+                        </div>
+                        <div class="auth-success__card">
+                            <span class="auth-success__label">Puntos de bienvenida</span>
+                            <span class="auth-success__value">+50 ⭐</span>
+                        </div>
+                        <div class="auth-success__card">
+                            <span class="auth-success__label">Cupón de regalo</span>
+                            <span class="auth-success__value auth-success__coupon">BIENVENIDA-15</span>
+                            <span class="auth-success__coupon-desc">-15% en tu primera visita</span>
+                        </div>
+                    </div>
+                    <div class="auth-success__actions">
+                        <a href="mi-cuenta.html" class="btn btn--primary btn--lg">Ir a mi cuenta</a>
+                        <a href="reservas.html" class="btn btn--secondary btn--lg">Reservar cita</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>Salón Begoña Gómez</h4>
+                    <p>Peluquería premium en Castelldefels y Santa Perpètua de Mogoda</p>
+                </div>
+                <div>
+                    <h4>Castelldefels</h4>
+                    <p>📞 <a href="tel:+34602449995">+34 602 44 99 95</a></p>
+                </div>
+                <div>
+                    <h4>Santa Perpètua</h4>
+                    <p>📞 <a href="tel:+34672928374">+34 672 92 83 74</a></p>
+                </div>
+            </div>
+            <p>&copy; 2026 Salón Begoña Gómez. Estil Navia SL. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../mobile-menu.js"></script>
+    <script type="module">
+        import {
+            auth, db,
+            createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged,
+            createClientProfile, getClientProfile, isAdmin,
+            doc, getDoc
+        } from '../firebase-config.js';
+
+        // ═══════════════════════════════════════════════
+        // CHECK IF ALREADY LOGGED IN
+        // ═══════════════════════════════════════════════
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const profile = await getClientProfile(user.uid);
+                if (isAdmin(user.email)) {
+                    window.location.href = 'dashboard.html';
+                } else if (profile) {
+                    window.location.href = 'mi-cuenta.html';
+                }
+            }
+        });
+
+        // ═══════════════════════════════════════════════
+        // TAB SWITCHING
+        // ═══════════════════════════════════════════════
+        const tabs = document.querySelectorAll('.auth-tab');
+        const forms = document.querySelectorAll('.auth-form');
+        const switchLinks = document.querySelectorAll('.auth-switch__link');
+
+        function switchTab(tabName) {
+            tabs.forEach(t => t.classList.toggle('active', t.dataset.authTab === tabName));
+            forms.forEach(f => f.classList.toggle('active', f.dataset.authPanel === tabName));
+        }
+
+        tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.dataset.authTab)));
+        switchLinks.forEach(link => link.addEventListener('click', () => switchTab(link.dataset.switch)));
+
+        // Check URL params for pre-selecting tab
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('tab') === 'registro') switchTab('registro');
+        if (params.get('plan')) {
+            switchTab('registro');
+            // Store the plan they want so after registration we can redirect
+            sessionStorage.setItem('pendingPlan', params.get('plan'));
+        }
+
+        // ═══════════════════════════════════════════════
+        // PASSWORD VISIBILITY TOGGLE
+        // ═══════════════════════════════════════════════
+        document.querySelectorAll('.auth-field__toggle-pw').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const input = btn.previousElementSibling;
+                input.type = input.type === 'password' ? 'text' : 'password';
+                btn.textContent = input.type === 'password' ? '👁️' : '🙈';
+            });
+        });
+
+        // ═══════════════════════════════════════════════
+        // PASSWORD STRENGTH
+        // ═══════════════════════════════════════════════
+        const regPassword = document.getElementById('reg-password');
+        const pwStrength = document.getElementById('reg-pw-strength');
+
+        if (regPassword && pwStrength) {
+            regPassword.addEventListener('input', () => {
+                const val = regPassword.value;
+                const fill = pwStrength.querySelector('.auth-pw-bar__fill');
+                const label = pwStrength.querySelector('.auth-pw-label');
+                let strength = 0;
+
+                if (val.length >= 6) strength++;
+                if (val.length >= 8) strength++;
+                if (/[A-Z]/.test(val)) strength++;
+                if (/[0-9]/.test(val)) strength++;
+                if (/[^A-Za-z0-9]/.test(val)) strength++;
+
+                const levels = ['', 'Débil', 'Regular', 'Buena', 'Fuerte', 'Excelente'];
+                const colors = ['', '#e74c3c', '#f39c12', '#f1c40f', '#2ecc71', '#27ae60'];
+                const widths = ['0%', '20%', '40%', '60%', '80%', '100%'];
+
+                fill.style.width = widths[strength];
+                fill.style.background = colors[strength];
+                label.textContent = levels[strength];
+                label.style.color = colors[strength];
+            });
+        }
+
+        // ═══════════════════════════════════════════════
+        // LOGIN FORM
+        // ═══════════════════════════════════════════════
+        const loginForm = document.getElementById('login-form');
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const errorEl = document.getElementById('login-error');
+            const submitBtn = document.getElementById('login-submit');
+
+            errorEl.textContent = '';
+            submitBtn.querySelector('.auth-submit__text').hidden = true;
+            submitBtn.querySelector('.auth-submit__loading').hidden = false;
+            submitBtn.disabled = true;
+
+            try {
+                const cred = await signInWithEmailAndPassword(auth, email, password);
+                if (isAdmin(cred.user.email)) {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    window.location.href = 'mi-cuenta.html';
+                }
+            } catch (err) {
+                const messages = {
+                    'auth/user-not-found': 'No existe una cuenta con este email',
+                    'auth/wrong-password': 'Contraseña incorrecta',
+                    'auth/invalid-email': 'Email no válido',
+                    'auth/too-many-requests': 'Demasiados intentos. Espera unos minutos.',
+                    'auth/invalid-credential': 'Email o contraseña incorrectos'
+                };
+                errorEl.textContent = messages[err.code] || 'Error al iniciar sesión. Inténtalo de nuevo.';
+                submitBtn.querySelector('.auth-submit__text').hidden = false;
+                submitBtn.querySelector('.auth-submit__loading').hidden = true;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // ═══════════════════════════════════════════════
+        // REGISTER FORM
+        // ═══════════════════════════════════════════════
+        const registerForm = document.getElementById('register-form');
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById('reg-nombre').value.trim();
+            const apellidos = document.getElementById('reg-apellidos').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const telefono = document.getElementById('reg-telefono').value.trim();
+            const nacimiento = document.getElementById('reg-nacimiento').value;
+            const sede = document.getElementById('reg-sede').value;
+            const password = document.getElementById('reg-password').value;
+            const terms = document.getElementById('reg-terms').checked;
+
+            const errorEl = document.getElementById('register-error');
+            const submitBtn = document.getElementById('register-submit');
+
+            errorEl.textContent = '';
+
+            if (!terms) {
+                errorEl.textContent = 'Debes aceptar la Política de Privacidad';
+                return;
+            }
+
+            submitBtn.querySelector('.auth-submit__text').hidden = true;
+            submitBtn.querySelector('.auth-submit__loading').hidden = false;
+            submitBtn.disabled = true;
+
+            try {
+                // 1. Create Firebase Auth user
+                const cred = await createUserWithEmailAndPassword(auth, email, password);
+                await updateProfile(cred.user, { displayName: `${nombre} ${apellidos}` });
+
+                // 2. Create client profile in Firestore
+                const { clientNumber } = await createClientProfile(cred.user.uid, {
+                    nombre, apellidos, email, telefono,
+                    fechaNacimiento: nacimiento,
+                    sedePreferida: sede
+                });
+
+                // 3. Show success
+                document.querySelectorAll('.auth-form, .auth-tabs').forEach(el => el.hidden = true);
+                const successEl = document.getElementById('auth-success');
+                successEl.hidden = false;
+                document.getElementById('success-client-number').textContent = clientNumber;
+
+                // 4. If they had a pending plan, store it
+                const pendingPlan = sessionStorage.getItem('pendingPlan');
+                if (pendingPlan) {
+                    sessionStorage.setItem('pendingPlan', pendingPlan);
+                }
+
+            } catch (err) {
+                const messages = {
+                    'auth/email-already-in-use': 'Ya existe una cuenta con este email. ¿Quieres iniciar sesión?',
+                    'auth/weak-password': 'La contraseña debe tener al menos 6 caracteres',
+                    'auth/invalid-email': 'Email no válido'
+                };
+                errorEl.textContent = messages[err.code] || 'Error al crear la cuenta. Inténtalo de nuevo.';
+                submitBtn.querySelector('.auth-submit__text').hidden = false;
+                submitBtn.querySelector('.auth-submit__loading').hidden = true;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

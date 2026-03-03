@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tu cuenta personal en Salón Begoña Gómez. Gestiona reservas, puntos, membresía y tarjeta digital.">
+    <title>Mi Cuenta | Salón Begoña Gómez</title>
+    <link rel="icon" type="image/png" href="../assets/LOGO.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../design-system.css">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../responsive.css">
+    <link rel="stylesheet" href="../cliente-portal.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__wrapper">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/LOGO.png" alt="Salón Begoña Gómez" class="logo-img">
+                    <span class="logo-text">Salón Begoña Gómez</span>
+                </a>
+                <button class="header__hamburger" id="hamburger-menu" aria-label="Menú">
+                    <span></span><span></span><span></span>
+                </button>
+                <nav class="nav" id="mobile-menu">
+                    <ul>
+                        <li><a href="especialidades.html">Especialidades</a></li>
+                        <li><a href="reservas.html">Reservas</a></li>
+                        <li><a href="mi-cuenta.html">Mi Cuenta</a></li>
+                        <li><a href="mi-cuenta.html">Mi Cuenta</a></li>
+                        <li><a href="mi-cuenta.html" class="active">Mi Cuenta</a></li>
+                    </ul>
+                </nav>
+                <button class="btn btn--secondary btn--sm" id="btn-logout">Cerrar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- LOADING STATE -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="cp-loading" id="cp-loading">
+        <div class="cp-loading__spinner"></div>
+        <p>Cargando tu cuenta...</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- MAIN PORTAL -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <main class="cp-main" id="cp-main" hidden>
+        <div class="container">
+            <!-- ═══ WELCOME BAR ═══ -->
+            <div class="cp-welcome">
+                <div class="cp-welcome__left">
+                    <div class="cp-welcome__avatar" id="cp-avatar">MG</div>
+                    <div>
+                        <h1 class="cp-welcome__name">Hola, <span id="cp-name">María</span></h1>
+                        <p class="cp-welcome__client-num">Nº Cliente: <strong id="cp-client-num">BG-0001</strong></p>
+                    </div>
+                </div>
+                <div class="cp-welcome__right">
+                    <div class="cp-welcome__level">
+                        <span class="cp-level-icon" id="cp-level-icon">🥉</span>
+                        <span class="cp-level-name" id="cp-level-name">Bronce</span>
+                    </div>
+                    <div class="cp-welcome__points">
+                        <span class="cp-points-num" id="cp-points">50</span>
+                        <span class="cp-points-label">puntos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ NAV TABS ═══ -->
+            <div class="cp-nav">
+                <button class="cp-nav__item active" data-cp-tab="resumen"><span>📊</span> Resumen</button>
+                <button class="cp-nav__item" data-cp-tab="reservar"><span>📅</span> Reservar</button>
+                <button class="cp-nav__item" data-cp-tab="membresia"><span>⭐</span> Membresía</button>
+                <button class="cp-nav__item" data-cp-tab="cupones"><span>🎟️</span> Cupones</button>
+                <button class="cp-nav__item" data-cp-tab="tarjeta"><span>📱</span> Tarjeta</button>
+                <button class="cp-nav__item" data-cp-tab="perfil"><span>👤</span> Perfil</button>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════ -->
+            <!-- TAB: RESUMEN -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <div class="cp-panel active" data-cp-panel="resumen">
+                <!-- Quick Stats -->
+                <div class="cp-stats">
+                    <div class="cp-stat">
+                        <span class="cp-stat__icon">⭐</span>
+                        <span class="cp-stat__value" id="stat-puntos">50</span>
+                        <span class="cp-stat__label">Puntos</span>
+                    </div>
+                    <div class="cp-stat">
+                        <span class="cp-stat__icon">✂️</span>
+                        <span class="cp-stat__value" id="stat-visitas">0</span>
+                        <span class="cp-stat__label">Visitas</span>
+                    </div>
+                    <div class="cp-stat">
+                        <span class="cp-stat__icon">🎟️</span>
+                        <span class="cp-stat__value" id="stat-cupones">1</span>
+                        <span class="cp-stat__label">Cupones</span>
+                    </div>
+                    <div class="cp-stat">
+                        <span class="cp-stat__icon">📅</span>
+                        <span class="cp-stat__value" id="stat-proxima">—</span>
+                        <span class="cp-stat__label">Próxima cita</span>
+                    </div>
+                </div>
+
+                <!-- Level Progress -->
+                <div class="cp-card">
+                    <h3 class="cp-card__title">Tu nivel de fidelidad</h3>
+                    <div class="cp-level-progress">
+                        <div class="cp-level-bar">
+                            <div class="cp-level-bar__fill" id="cp-level-fill" style="width: 10%"></div>
+                        </div>
+                        <div class="cp-level-markers">
+                            <span class="cp-level-marker active">🥉 Bronce<br><small>0 pts</small></span>
+                            <span class="cp-level-marker" id="marker-plata">🥈 Plata<br><small>500 pts</small></span>
+                            <span class="cp-level-marker" id="marker-oro">🥇 Oro<br><small>1.000 pts</small></span>
+                            <span class="cp-level-marker" id="marker-diamante">💎 Diamante<br><small>2.500 pts</small></span>
+                        </div>
+                    </div>
+                    <p class="cp-level-hint" id="cp-level-hint">Te faltan <strong>450 puntos</strong> para subir a Plata (5% dto. permanente)</p>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="cp-quick-actions">
+                    <button class="cp-quick-action" data-goto="reservar">
+                        <span>📅</span>
+                        <strong>Reservar cita</strong>
+                        <small>En 30 segundos</small>
+                    </button>
+                    <button class="cp-quick-action" data-goto="tarjeta">
+                        <span>📱</span>
+                        <strong>Mi tarjeta</strong>
+                        <small>Añadir al móvil</small>
+                    </button>
+                    <a href="reservas.html#rv-membresias" class="cp-quick-action">
+                        <span>⭐</span>
+                        <strong>Ver membresías</strong>
+                        <small>Ahorra todo el año</small>
+                    </a>
+                    <button class="cp-quick-action" data-goto="cupones">
+                        <span>🎟️</span>
+                        <strong>Mis cupones</strong>
+                        <small id="quick-cupon-count">1 disponible</small>
+                    </button>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="cp-card">
+                    <h3 class="cp-card__title">Actividad reciente</h3>
+                    <div class="cp-activity" id="cp-activity">
+                        <div class="cp-activity__item">
+                            <span class="cp-activity__icon">🎉</span>
+                            <div>
+                                <strong>Bienvenida a Salón Begoña</strong>
+                                <p>Has recibido 50 puntos y un cupón -15%</p>
+                            </div>
+                            <span class="cp-activity__time">Hoy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════ -->
+            <!-- TAB: RESERVAR CITA -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <div class="cp-panel" data-cp-panel="reservar">
+                <div class="cp-card">
+                    <h3 class="cp-card__title">📅 Reservar nueva cita</h3>
+                    <form id="cp-booking-form" class="cp-booking">
+                        <!-- Step 1: Sede -->
+                        <div class="cp-booking__step">
+                            <label class="cp-booking__label">1. Elige sede</label>
+                            <div class="cp-booking__sedes">
+                                <label class="cp-sede-option">
+                                    <input type="radio" name="cp-sede" value="castelldefels" checked>
+                                    <span class="cp-sede-option__card">
+                                        <strong>📍 Castelldefels</strong>
+                                        <small>+34 602 44 99 95</small>
+                                    </span>
+                                </label>
+                                <label class="cp-sede-option">
+                                    <input type="radio" name="cp-sede" value="santa-perpetua">
+                                    <span class="cp-sede-option__card">
+                                        <strong>📍 Santa Perpètua</strong>
+                                        <small>+34 672 92 83 74</small>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Services -->
+                        <div class="cp-booking__step">
+                            <label class="cp-booking__label">2. Selecciona servicios</label>
+                            <div class="cp-services-grid" id="cp-services-list">
+                                <!-- Populated by JS -->
+                            </div>
+                            <div class="cp-selected-services" id="cp-selected-services" hidden>
+                                <h4>Servicios seleccionados:</h4>
+                                <ul id="cp-selected-list"></ul>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Date -->
+                        <div class="cp-booking__step">
+                            <label class="cp-booking__label">3. Fecha</label>
+                            <input type="date" id="cp-date" class="cp-booking__input" required>
+                        </div>
+
+                        <!-- Step 4: Time -->
+                        <div class="cp-booking__step" id="cp-time-step" hidden>
+                            <label class="cp-booking__label">4. Hora disponible</label>
+                            <div class="cp-time-slots" id="cp-time-slots">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Coupon -->
+                        <div class="cp-booking__step">
+                            <label class="cp-booking__label">5. Cupón (opcional)</label>
+                            <div class="cp-coupon-field">
+                                <input type="text" id="cp-coupon-code" placeholder="Ej: BIENVENIDA-15" class="cp-booking__input">
+                                <button type="button" class="btn btn--secondary btn--sm" id="cp-apply-coupon">Aplicar</button>
+                            </div>
+                            <div class="cp-coupon-result" id="cp-coupon-result"></div>
+                        </div>
+
+                        <!-- Step 6: Summary -->
+                        <div class="cp-booking__step">
+                            <label class="cp-booking__label">6. Notas (opcional)</label>
+                            <textarea id="cp-notes" class="cp-booking__textarea" placeholder="Ej: Quiero que me atienda Begoña, prefiero productos orgánicos..." rows="3"></textarea>
+                        </div>
+
+                        <!-- Summary -->
+                        <div class="cp-booking__summary" id="cp-summary" hidden>
+                            <h4>📋 Resumen de tu reserva</h4>
+                            <div id="cp-summary-details"></div>
+                            <div class="cp-booking__total">
+                                <span>Total estimado:</span>
+                                <strong id="cp-total">0€</strong>
+                            </div>
+                            <div class="cp-booking__points-earn">
+                                Ganarás <strong id="cp-points-earn">0</strong> puntos con esta visita
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary btn--lg cp-booking__submit" id="cp-book-btn" disabled>
+                            ✨ Confirmar Reserva
+                        </button>
+
+                        <p class="cp-booking__note">Recibirás confirmación por WhatsApp. Si necesitas cambiar la cita, contacta con nosotras.</p>
+                    </form>
+                </div>
+
+                <!-- Upcoming appointments -->
+                <div class="cp-card" id="cp-upcoming-card">
+                    <h3 class="cp-card__title">Tus próximas citas</h3>
+                    <div id="cp-upcoming-list" class="cp-appointments">
+                        <p class="cp-empty">No tienes citas pendientes</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════ -->
+            <!-- TAB: MEMBRESÍA -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <div class="cp-panel" data-cp-panel="membresia">
+                <!-- No membership -->
+                <div class="cp-card" id="cp-no-membership">
+                    <div class="cp-membership-empty">
+                        <span class="cp-membership-empty__icon">⭐</span>
+                        <h3>Aún no tienes membresía</h3>
+                        <p>Con una membresía anual ahorras en cada visita y accedes a servicios exclusivos.</p>
+                        <a href="reservas.html#rv-membresias" class="btn btn--primary btn--lg">Ver Planes Anuales</a>
+                    </div>
+                </div>
+
+                <!-- Has membership -->
+                <div class="cp-card" id="cp-has-membership" hidden>
+                    <div class="cp-membership-active">
+                        <div class="cp-membership__header">
+                            <div>
+                                <span class="cp-membership__badge" id="cp-mem-badge">PREMIUM</span>
+                                <h3 class="cp-membership__plan" id="cp-mem-plan">Membresía Premium</h3>
+                                <p class="cp-membership__dates">
+                                    <span id="cp-mem-inicio">15/01/2026</span> — <span id="cp-mem-fin">15/01/2027</span>
+                                </p>
+                            </div>
+                            <div class="cp-membership__price" id="cp-mem-price">999€/año</div>
+                        </div>
+
+                        <h4 class="cp-membership__services-title">Servicios restantes</h4>
+                        <div class="cp-membership__services" id="cp-mem-services">
+                            <!-- Populated by JS -->
+                        </div>
+
+                        <div class="cp-membership__discount">
+                            <span>🏷️</span>
+                            <span>Tu descuento permanente: <strong id="cp-mem-discount">10%</strong> en todos los extras</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════ -->
+            <!-- TAB: CUPONES -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <div class="cp-panel" data-cp-panel="cupones">
+                <div class="cp-card">
+                    <h3 class="cp-card__title">🎟️ Tus cupones de descuento</h3>
+                    <div class="cp-cupones-grid" id="cp-cupones-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- How to earn coupons -->
+                <div class="cp-card">
+                    <h3 class="cp-card__title">¿Cómo conseguir más cupones?</h3>
+                    <div class="cp-earn-methods">
+                        <div class="cp-earn-method">
+                            <span>🌟</span>
+                            <div>
+                                <strong>Sube de nivel</strong>
+                                <p>Al alcanzar Plata, Oro o Diamante recibes cupones exclusivos</p>
+                            </div>
+                        </div>
+                        <div class="cp-earn-method">
+                            <span>🎂</span>
+                            <div>
+                                <strong>Cumpleaños</strong>
+                                <p>Recibes un -20% automático 7 días antes de tu cumpleaños</p>
+                            </div>
+                        </div>
+                        <div class="cp-earn-method">
+                            <span>👩‍👩‍👧</span>
+                            <div>
+                                <strong>Invita a una amiga</strong>
+                                <p>Si se registra y reserva, ambas recibís un -10%</p>
+                            </div>
+                        </div>
+                        <div class="cp-earn-method">
+                            <span>⭐</span>
+                            <div>
+                                <strong>Canjea puntos</strong>
+                                <p>200 pts = hidratación gratis, 1.000 pts = tratamiento premium</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════ -->
+            <!-- TAB: TARJETA DIGITAL -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <div class="cp-panel" data-cp-panel="tarjeta">
+                <div class="cp-card">
+                    <h3 class="cp-card__title">📱 Tu tarjeta de fidelidad digital</h3>
+                    <p class="cp-card__desc">Guárdala en la cartera de tu móvil para tenerla siempre a mano.</p>
+
+                    <!-- Wallet Card Preview -->
+                    <div class="cp-wallet-card" id="cp-wallet-card">
+                        <div class="cp-wallet__header">
+                            <img src="../assets/LOGO.png" alt="" class="cp-wallet__logo">
+                            <span class="cp-wallet__brand">SALÓN BEGOÑA GÓMEZ</span>
+                        </div>
+                        <div class="cp-wallet__body">
+                            <div class="cp-wallet__name" id="wallet-name">María García</div>
+                            <div class="cp-wallet__num" id="wallet-num">BG-0001</div>
+                            <div class="cp-wallet__level">
+                                <span id="wallet-level-icon">🥉</span>
+                                <span id="wallet-level-name">BRONCE</span>
+                            </div>
+                            <div class="cp-wallet__grid">
+                                <div class="cp-wallet__cell">
+                                    <span class="cp-wallet__cell-label">PUNTOS</span>
+                                    <span class="cp-wallet__cell-value" id="wallet-points">50</span>
+                                </div>
+                                <div class="cp-wallet__cell">
+                                    <span class="cp-wallet__cell-label">MEMBRESÍA</span>
+                                    <span class="cp-wallet__cell-value" id="wallet-membership">—</span>
+                                </div>
+                            </div>
+                            <div class="cp-wallet__services" id="wallet-services" hidden>
+                                <span class="cp-wallet__services-title">SERVICIOS RESTANTES</span>
+                                <div id="wallet-services-list"></div>
+                            </div>
+                        </div>
+                        <div class="cp-wallet__footer">
+                            <div class="cp-wallet__qr" id="wallet-qr">
+                                <!-- QR Code rendered here -->
+                                <canvas id="wallet-qr-canvas"></canvas>
+                            </div>
+                            <div class="cp-wallet__validity">
+                                Válida 2026 · Castelldefels & Sta. Perpètua
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add to Wallet buttons -->
+                    <div class="cp-wallet-actions">
+                        <button class="cp-wallet-btn cp-wallet-btn--apple" id="btn-apple-wallet">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            Añadir a Apple Wallet
+                        </button>
+                        <button class="cp-wallet-btn cp-wallet-btn--google" id="btn-google-wallet">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Añadir a Google Wallet
+                        </button>
+                        <button class="cp-wallet-btn cp-wallet-btn--download" id="btn-download-card">
+                            📥 Descargar tarjeta (imagen)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════ -->
+            <!-- TAB: PERFIL -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <div class="cp-panel" data-cp-panel="perfil">
+                <div class="cp-card">
+                    <h3 class="cp-card__title">👤 Mi perfil</h3>
+                    <form id="cp-profile-form" class="cp-profile-form">
+                        <div class="cp-profile-row">
+                            <div class="cp-profile-field">
+                                <label>Nombre</label>
+                                <input type="text" id="pf-nombre" required>
+                            </div>
+                            <div class="cp-profile-field">
+                                <label>Apellidos</label>
+                                <input type="text" id="pf-apellidos" required>
+                            </div>
+                        </div>
+                        <div class="cp-profile-field">
+                            <label>Email</label>
+                            <input type="email" id="pf-email" disabled>
+                        </div>
+                        <div class="cp-profile-row">
+                            <div class="cp-profile-field">
+                                <label>Teléfono</label>
+                                <input type="tel" id="pf-telefono">
+                            </div>
+                            <div class="cp-profile-field">
+                                <label>Fecha de nacimiento</label>
+                                <input type="date" id="pf-nacimiento">
+                            </div>
+                        </div>
+                        <div class="cp-profile-field">
+                            <label>Sede preferida</label>
+                            <select id="pf-sede">
+                                <option value="castelldefels">📍 Castelldefels</option>
+                                <option value="santa-perpetua">📍 Santa Perpètua</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn--primary">💾 Guardar cambios</button>
+                        <span class="cp-profile-saved" id="pf-saved" hidden>✅ Guardado</span>
+                    </form>
+                </div>
+
+                <!-- Stats -->
+                <div class="cp-card">
+                    <h3 class="cp-card__title">📊 Mis estadísticas</h3>
+                    <div class="cp-profile-stats">
+                        <div class="cp-profile-stat">
+                            <span class="cp-profile-stat__label">Total visitas</span>
+                            <span class="cp-profile-stat__value" id="pf-visitas">0</span>
+                        </div>
+                        <div class="cp-profile-stat">
+                            <span class="cp-profile-stat__label">Total gastado</span>
+                            <span class="cp-profile-stat__value" id="pf-gasto">0€</span>
+                        </div>
+                        <div class="cp-profile-stat">
+                            <span class="cp-profile-stat__label">Puntos totales ganados</span>
+                            <span class="cp-profile-stat__value" id="pf-puntos-total">50</span>
+                        </div>
+                        <div class="cp-profile-stat">
+                            <span class="cp-profile-stat__label">Miembro desde</span>
+                            <span class="cp-profile-stat__value" id="pf-miembro-desde">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>Salón Begoña Gómez</h4>
+                    <p>Peluquería premium</p>
+                </div>
+                <div>
+                    <h4>Castelldefels</h4>
+                    <p>📞 <a href="tel:+34602449995">+34 602 44 99 95</a></p>
+                </div>
+                <div>
+                    <h4>Santa Perpètua</h4>
+                    <p>📞 <a href="tel:+34672928374">+34 672 92 83 74</a></p>
+                </div>
+            </div>
+            <p>&copy; 2026 Salón Begoña Gómez. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../mobile-menu.js"></script>
+    <script type="module" src="../cliente-app.js"></script>
+</body>
+</html>

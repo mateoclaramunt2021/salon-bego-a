@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Config: readable by all authenticated, writable by admin only
+    match /config/{document} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com'];
+    }
+    
+    // Clientes: each client can read/update own doc, admin can read/write all
+    match /clientes/{userId} {
+      allow read: if request.auth != null && (request.auth.uid == userId || request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com']);
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null && (request.auth.uid == userId || request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com']);
+      allow delete: if request.auth != null && request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com'];
+    }
+    
+    // Citas: clients can create and read own, admin can do everything
+    match /citas/{citaId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com'];
+    }
+    
+    // Ventas: admin only
+    match /ventas/{ventaId} {
+      allow read, write: if request.auth != null && request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com'];
+    }
+    
+    // Productos: admin write, authenticated read
+    match /productos/{productoId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com'];
+    }
+    
+    // Servicios: public read, admin write
+    match /servicios/{servicioId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com'];
+    }
+    
+    // Cupones: client can read own, admin can do everything
+    match /cupones/{cuponId} {
+      allow read: if request.auth != null;
+      allow create, update: if request.auth != null;
+      allow delete: if request.auth != null && request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com'];
+    }
+    
+    // Empleadas: admin only write, authenticated read
+    match /empleadas/{empleadaId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com'];
+    }
+    
+    // Ofertas: public read, admin write
+    match /ofertas/{ofertaId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com'];
+    }
+    
+    // Mensajes: client can read/create own, admin all
+    match /mensajes/{mensajeId} {
+      allow read, create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com'];
+    }
+    
+    // Points log: readable by owner, writable by system
+    match /puntosLog/{logId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+    }
+    
+    // Informes: admin only
+    match /informes/{informeId} {
+      allow read, write: if request.auth != null && request.auth.token.email in ['neuriaxx@gmail.com', 'begona@salonbegona.com'];
+    }
+  }
+}
