@@ -6,11 +6,10 @@
 import {
     auth, db,
     onAuthStateChanged, signOut, isAdmin,
-    collection, doc, getDocs, getDoc, setDoc, updateDoc, deleteDoc,
-    query, where, orderBy, onSnapshot, addDoc, serverTimestamp,
+    collection, doc, getDocs, updateDoc, deleteDoc,
+    query, where, orderBy, limit, addDoc, serverTimestamp,
     LEVEL_CONFIG, MEMBERSHIP_PLANS, calculateLevel, addPoints,
-    DEFAULT_SERVICES, initializeServices, BUSINESS_HOURS,
-    createAppointment, updateAppointment
+    initializeServices, BUSINESS_HOURS
 } from './firebase-config.js';
 
 // ═══════════════════════════════════════════════
@@ -40,16 +39,21 @@ onAuthStateChanged(auth, async (user) => {
         return;
     }
 
+    // --- ALWAYS hide loading when done, no matter what ---
     try {
-        $('#db-admin-name').textContent = user.email.split('@')[0];
-        const today = new Date();
-        const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        $('#db-fecha-hoy').textContent = today.toLocaleDateString('es-ES', opts);
-        if ($('#db-agenda-date')) {
-            $('#db-agenda-date').value = today.toISOString().split('T')[0];
+        // Set admin info
+        const adminName = $('#db-admin-name');
+        if (adminName) adminName.textContent = user.email.split('@')[0];
+        const fechaHoy = $('#db-fecha-hoy');
+        if (fechaHoy) {
+            const today = new Date();
+            fechaHoy.textContent = today.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         }
+        const agendaDate = $('#db-agenda-date');
+        if (agendaDate) agendaDate.value = new Date().toISOString().split('T')[0];
 
-        // Load all data (failures are caught inside each function)
+        // Load all data in parallel (each has own try/catch, never throws)
+        console.log('[Dashboard] Loading data...');
         await Promise.all([
             loadClients(),
             loadAppointments(),
@@ -59,7 +63,7 @@ onAuthStateChanged(auth, async (user) => {
         ]);
         console.log('[Dashboard] Data loaded:', { clients: allClients.length, appointments: allAppointments.length, sales: allSales.length, coupons: allCoupons.length, services: allServices.length });
 
-        // Render (each wrapped individually so one failure doesn't block the rest)
+        // Render each section (individually protected)
         const renders = [
             ['KPIs', renderKPIs],
             ['TodayAppointments', renderTodayAppointments],
@@ -69,19 +73,23 @@ onAuthStateChanged(auth, async (user) => {
             ['Memberships', renderMemberships],
             ['Loyalty', renderLoyalty],
             ['CouponsTable', renderCouponsTable],
-            ['Schedule', renderSchedule]
+            ['Schedule', renderSchedule],
+            ['SalesTable', renderSalesTable]
         ];
         for (const [name, fn] of renders) {
-            try { fn(); } catch (e) { console.error(`[Dashboard] Error rendering ${name}:`, e); }
+            try { fn(); console.log(`[Dashboard] ✓ ${name}`); } catch (e) { console.error(`[Dashboard] ✗ ${name}:`, e); }
         }
 
     } catch (e) {
         console.error('[Dashboard] Init error:', e);
+    } finally {
+        // ALWAYS hide loading — even if everything crashed
+        const loading = $('#db-loading');
+        const main = $('#db-main');
+        if (loading) loading.hidden = true;
+        if (main) main.hidden = false;
+        console.log('[Dashboard] ✓ Ready');
     }
-
-    // Always hide loading and show main, even if some renders failed
-    $('#db-loading').hidden = true;
-    $('#db-main').hidden = false;
 
     // Init interactions (each wrapped so one failure doesn't block others)
     const inits = [
@@ -107,34 +115,38 @@ onAuthStateChanged(auth, async (user) => {
 // ═══════════════════════════════════════════════
 async function loadClients() {
     try {
-        const snap = await getDocs(collection(db, 'clientes'));
+        const snap = await getDocs(query(collection(db, 'clientes'), limit(500)));
         allClients = [];
         snap.forEach(d => allClients.push({ id: d.id, ...d.data() }));
-    } catch (e) { allClients = []; }
+        console.log('[Dashboard] Clients loaded:', allClients.length);
+    } catch (e) { console.warn('[Dashboard] loadClients failed:', e.message); allClients = []; }
 }
 
 async function loadAppointments() {
     try {
-        const snap = await getDocs(query(collection(db, 'citas'), orderBy('fecha', 'desc')));
+        const snap = await getDocs(query(collection(db, 'citas'), orderBy('fecha', 'desc'), limit(200)));
         allAppointments = [];
         snap.forEach(d => allAppointments.push({ id: d.id, ...d.data() }));
-    } catch (e) { allAppointments = []; }
+        console.log('[Dashboard] Appointments loaded:', allAppointments.length);
+    } catch (e) { console.warn('[Dashboard] loadAppointments failed:', e.message); allAppointments = []; }
 }
 
 async function loadSales() {
     try {
-        const snap = await getDocs(query(collection(db, 'ventas'), orderBy('fecha', 'desc')));
+        const snap = await getDocs(query(collection(db, 'ventas'), orderBy('fecha', 'desc'), limit(200)));
         allSales = [];
         snap.forEach(d => allSales.push({ id: d.id, ...d.data() }));
-    } catch (e) { allSales = []; }
+        console.log('[Dashboard] Sales loaded:', allSales.length);
+    } catch (e) { console.warn('[Dashboard] loadSales failed:', e.message); allSales = []; }
 }
 
 async function loadCoupons() {
     try {
-        const snap = await getDocs(collection(db, 'cupones'));
+        const snap = await getDocs(query(collection(db, 'cupones'), limit(500)));
         allCoupons = [];
         snap.forEach(d => allCoupons.push({ id: d.id, ...d.data() }));
-    } catch (e) { allCoupons = []; }
+        console.log('[Dashboard] Coupons loaded:', allCoupons.length);
+    } catch (e) { console.warn('[Dashboard] loadCoupons failed:', e.message); allCoupons = []; }
 }
 
 async function loadServices() {
@@ -143,12 +155,16 @@ async function loadServices() {
         allServices = [];
         snap.forEach(d => allServices.push({ id: d.id, ...d.data() }));
         if (allServices.length === 0) {
-            // Initialize default services
-            await initializeServices();
-            const snap2 = await getDocs(collection(db, 'servicios'));
-            snap2.forEach(d => allServices.push({ id: d.id, ...d.data() }));
+            try {
+                await initializeServices();
+                const snap2 = await getDocs(collection(db, 'servicios'));
+                snap2.forEach(d => allServices.push({ id: d.id, ...d.data() }));
+            } catch (initErr) {
+                console.warn('[Dashboard] initializeServices failed:', initErr.message);
+            }
         }
-    } catch (e) { allServices = []; }
+        console.log('[Dashboard] Services loaded:', allServices.length);
+    } catch (e) { console.warn('[Dashboard] loadServices failed:', e.message); allServices = []; }
 }
 
 // ═══════════════════════════════════════════════
@@ -952,7 +968,10 @@ function renderSchedule() {
             const hours = schedule[key];
             let text = 'Cerrado';
             if (hours) {
-                text = hours.map(h => `${h.open}–${h.close}`).join(', ');
+                // hours is { open, close } object, not an array
+                text = Array.isArray(hours)
+                    ? hours.map(h => `${h.open}–${h.close}`).join(', ')
+                    : `${hours.open}–${hours.close}`;
             }
             return `<div class="db-schedule-row"><span class="db-schedule-row__day">${label}</span><span class="db-schedule-row__hours">${text}</span></div>`;
         }).join('');

@@ -659,6 +659,18 @@
 
     </main>
 
+    <!-- Failsafe: if module JS fails entirely, hide loading after 8s -->
+    <script>
+        setTimeout(function() {
+            var ld = document.getElementById('db-loading');
+            var mn = document.getElementById('db-main');
+            if (ld && !ld.hidden) {
+                ld.hidden = true;
+                if (mn) mn.hidden = false;
+                console.warn('[Dashboard] Failsafe timeout: forced loading hide');
+            }
+        }, 8000);
+    </script>
     <script type="module" src="../dashboard-app.js"></script>
 </body>
 </html>
