@@ -226,9 +226,9 @@
             </div>
 
             <!-- Client Detail Modal -->
-            <div id="db-modal-cliente" class="db-modal" hidden>
+            <div id="db-modal-cliente" class="db-modal" hidden onclick="if(event.target===this)this.hidden=true">
                 <div class="db-modal__content db-modal__content--lg">
-                    <button class="db-modal__close">&times;</button>
+                    <button class="db-modal__close" onclick="this.closest('.db-modal').hidden=true">&times;</button>
                     <div id="db-cliente-detail"></div>
                 </div>
             </div>
@@ -312,9 +312,9 @@
             </div>
 
             <!-- Service Edit Modal -->
-            <div id="db-modal-servicio" class="db-modal" hidden>
+            <div id="db-modal-servicio" class="db-modal" hidden onclick="if(event.target===this)this.hidden=true">
                 <div class="db-modal__content">
-                    <button class="db-modal__close">&times;</button>
+                    <button class="db-modal__close" onclick="this.closest('.db-modal').hidden=true">&times;</button>
                     <h3 id="db-service-modal-title">Nuevo Servicio</h3>
                     <form id="db-service-form" class="db-form">
                         <input type="hidden" id="svc-id">
@@ -460,9 +460,9 @@
             </div>
 
             <!-- Coupon Modal -->
-            <div id="db-modal-cupon" class="db-modal" hidden>
+            <div id="db-modal-cupon" class="db-modal" hidden onclick="if(event.target===this)this.hidden=true">
                 <div class="db-modal__content">
-                    <button class="db-modal__close">&times;</button>
+                    <button class="db-modal__close" onclick="this.closest('.db-modal').hidden=true">&times;</button>
                     <h3>Crear Cupón</h3>
                     <form id="db-cupon-form" class="db-form">
                         <div class="db-form__row">

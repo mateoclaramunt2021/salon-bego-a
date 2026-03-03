@@ -362,7 +362,9 @@ textarea.db-input { resize: vertical; }
     position: absolute; top: 12px; right: 16px;
     border: none; background: none;
     color: var(--db-text-muted);
-    font-size: 24px; cursor: pointer;
+    font-size: 28px; cursor: pointer;
+    z-index: 10; padding: 4px 8px;
+    line-height: 1;
 }
 .db-modal__close:hover { color: var(--db-text); }
 .db-modal h3 {
