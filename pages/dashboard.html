@@ -51,6 +51,22 @@
                 <span class="db-nav-icon">🎯</span>
                 <span>Fidelización</span>
             </button>
+            <button class="db-nav-item" data-db-section="tpv">
+                <span class="db-nav-icon">🖥️</span>
+                <span>TPV</span>
+            </button>
+            <button class="db-nav-item" data-db-section="productos">
+                <span class="db-nav-icon">🛍️</span>
+                <span>Productos</span>
+            </button>
+            <button class="db-nav-item" data-db-section="ofertas">
+                <span class="db-nav-icon">🔥</span>
+                <span>Ofertas</span>
+            </button>
+            <button class="db-nav-item" data-db-section="planes">
+                <span class="db-nav-icon">📦</span>
+                <span>Planes Anuales</span>
+            </button>
             <button class="db-nav-item" data-db-section="cupones">
                 <span class="db-nav-icon">🎟️</span>
                 <span>Cupones</span>
@@ -66,6 +82,10 @@
             <button class="db-nav-item" data-db-section="config">
                 <span class="db-nav-icon">⚙️</span>
                 <span>Configuración</span>
+            </button>
+            <button class="db-nav-item db-nav-item--super" data-db-section="superadmin" id="db-nav-superadmin" hidden>
+                <span class="db-nav-icon">🛡️</span>
+                <span>Super Admin</span>
             </button>
         </nav>
 
@@ -648,6 +668,289 @@
                     <div><strong>Web:</strong> begoñagomez.com</div>
                     <div><strong>Firebase:</strong> salonbego-52530</div>
                 </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- TPV — PUNTO DE VENTA                      -->
+        <!-- ══════════════════════════════════════════ -->
+        <section class="db-section" data-db-panel="tpv">
+            <h1 class="db-section__title">🖥️ Terminal Punto de Venta</h1>
+
+            <div class="db-tpv-layout">
+                <!-- Left: Service selection -->
+                <div class="db-tpv-services">
+                    <div class="db-card">
+                        <h3 class="db-card__title">Seleccionar Cliente</h3>
+                        <input type="text" id="tpv-buscar-cliente" class="db-input" style="width:100%" placeholder="🔍 Buscar por nombre, email, nº cliente...">
+                        <div id="tpv-cliente-info" class="db-tpv-client-info" hidden>
+                            <span id="tpv-cliente-nombre"></span>
+                            <span id="tpv-cliente-nivel" class="db-badge"></span>
+                            <button class="db-btn db-btn--sm" onclick="window.tpvClearClient()">✗</button>
+                        </div>
+                    </div>
+
+                    <div class="db-card">
+                        <h3 class="db-card__title">Servicios</h3>
+                        <div id="tpv-servicios-grid" class="db-tpv-items-grid">
+                            <p class="db-empty">Cargando servicios...</p>
+                        </div>
+                    </div>
+
+                    <div class="db-card">
+                        <h3 class="db-card__title">Productos</h3>
+                        <div id="tpv-productos-grid" class="db-tpv-items-grid">
+                            <p class="db-empty">Sin productos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Ticket -->
+                <div class="db-tpv-ticket">
+                    <div class="db-card db-tpv-ticket-card">
+                        <h3 class="db-card__title">🧾 Ticket</h3>
+                        <div id="tpv-items-list" class="db-tpv-ticket-items">
+                            <p class="db-empty">Añade servicios o productos</p>
+                        </div>
+                        <div class="db-tpv-ticket-summary">
+                            <div class="db-tpv-row"><span>Subtotal</span><span id="tpv-subtotal">0,00€</span></div>
+                            <div class="db-tpv-row"><span>Descuento nivel</span><span id="tpv-dto-nivel">0,00€</span></div>
+                            <div class="db-tpv-row">
+                                <span>Cupón</span>
+                                <input type="text" id="tpv-cupon" class="db-input" style="width:120px;padding:4px 8px;font-size:12px" placeholder="Código">
+                            </div>
+                            <div class="db-tpv-row db-tpv-row--total">
+                                <span>TOTAL</span>
+                                <span id="tpv-total">0,00€</span>
+                            </div>
+                        </div>
+                        <div class="db-tpv-actions">
+                            <select id="tpv-sede" class="db-select">
+                                <option value="castelldefels">Castelldefels</option>
+                                <option value="santa-perpetua">Santa Perpètua</option>
+                            </select>
+                            <select id="tpv-metodo" class="db-select">
+                                <option value="efectivo">💵 Efectivo</option>
+                                <option value="tarjeta">💳 Tarjeta</option>
+                                <option value="bizum">📱 Bizum</option>
+                            </select>
+                        </div>
+                        <button id="tpv-cobrar" class="db-btn db-btn--gold db-btn--full" style="margin-top:12px;padding:14px;font-size:16px">💰 Cobrar</button>
+                        <button id="tpv-limpiar" class="db-btn db-btn--full" style="margin-top:8px">🗑 Vaciar Ticket</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- PRODUCTOS                                 -->
+        <!-- ══════════════════════════════════════════ -->
+        <section class="db-section" data-db-panel="productos">
+            <h1 class="db-section__title">Gestión de Productos</h1>
+
+            <div class="db-toolbar">
+                <button id="db-nuevo-producto" class="db-btn db-btn--gold">+ Nuevo Producto</button>
+            </div>
+
+            <div id="db-productos-grid" class="db-services-grid">
+                <p class="db-empty">Cargando productos...</p>
+            </div>
+
+            <!-- Product Modal -->
+            <div id="db-modal-producto" class="db-modal" hidden onclick="if(event.target===this)this.hidden=true">
+                <div class="db-modal__content">
+                    <button class="db-modal__close" onclick="this.closest('.db-modal').hidden=true">&times;</button>
+                    <h3 id="db-producto-modal-title">Nuevo Producto</h3>
+                    <form id="db-producto-form" class="db-form">
+                        <input type="hidden" id="prod-id">
+                        <div class="db-form__row">
+                            <label>Nombre</label>
+                            <input type="text" id="prod-nombre" required class="db-input">
+                        </div>
+                        <div class="db-form__row">
+                            <label>Descripción</label>
+                            <textarea id="prod-descripcion" class="db-input" rows="2"></textarea>
+                        </div>
+                        <div class="db-form__row db-form__row--half">
+                            <div>
+                                <label>Precio (€)</label>
+                                <input type="number" id="prod-precio" min="0" step="0.01" required class="db-input">
+                            </div>
+                            <div>
+                                <label>Stock</label>
+                                <input type="number" id="prod-stock" min="0" class="db-input" value="0">
+                            </div>
+                        </div>
+                        <div class="db-form__row">
+                            <label>Categoría</label>
+                            <select id="prod-categoria" class="db-select">
+                                <option value="capilar">Capilar</option>
+                                <option value="styling">Styling</option>
+                                <option value="color">Color</option>
+                                <option value="accesorios">Accesorios</option>
+                                <option value="otros">Otros</option>
+                            </select>
+                        </div>
+                        <div class="db-form__row">
+                            <label>Imagen URL (opcional)</label>
+                            <input type="url" id="prod-imagen" class="db-input" placeholder="https://...">
+                        </div>
+                        <div class="db-form__row">
+                            <label><input type="checkbox" id="prod-activo" checked> Producto activo</label>
+                        </div>
+                        <button type="submit" class="db-btn db-btn--gold db-btn--full">Guardar Producto</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- OFERTAS                                   -->
+        <!-- ══════════════════════════════════════════ -->
+        <section class="db-section" data-db-panel="ofertas">
+            <h1 class="db-section__title">Gestión de Ofertas</h1>
+
+            <div class="db-toolbar">
+                <button id="db-nueva-oferta" class="db-btn db-btn--gold">+ Nueva Oferta</button>
+            </div>
+
+            <div id="db-ofertas-grid" class="db-services-grid">
+                <p class="db-empty">Cargando ofertas...</p>
+            </div>
+
+            <!-- Offer Modal -->
+            <div id="db-modal-oferta" class="db-modal" hidden onclick="if(event.target===this)this.hidden=true">
+                <div class="db-modal__content">
+                    <button class="db-modal__close" onclick="this.closest('.db-modal').hidden=true">&times;</button>
+                    <h3 id="db-oferta-modal-title">Nueva Oferta</h3>
+                    <form id="db-oferta-form" class="db-form">
+                        <input type="hidden" id="ofe-id">
+                        <div class="db-form__row">
+                            <label>Título</label>
+                            <input type="text" id="ofe-titulo" required class="db-input">
+                        </div>
+                        <div class="db-form__row">
+                            <label>Descripción</label>
+                            <textarea id="ofe-descripcion" class="db-input" rows="2"></textarea>
+                        </div>
+                        <div class="db-form__row db-form__row--half">
+                            <div>
+                                <label>Descuento (%)</label>
+                                <input type="number" id="ofe-descuento" min="1" max="100" class="db-input" value="10">
+                            </div>
+                            <div>
+                                <label>Expira</label>
+                                <input type="date" id="ofe-expira" class="db-input">
+                            </div>
+                        </div>
+                        <div class="db-form__row">
+                            <label>Badge (ej: NUEVO, -20%, EXCLUSIVO)</label>
+                            <input type="text" id="ofe-badge" class="db-input" placeholder="NUEVO">
+                        </div>
+                        <div class="db-form__row">
+                            <label><input type="checkbox" id="ofe-destacada"> Oferta destacada</label>
+                        </div>
+                        <div class="db-form__row">
+                            <label><input type="checkbox" id="ofe-activa" checked> Activa</label>
+                        </div>
+                        <button type="submit" class="db-btn db-btn--gold db-btn--full">Guardar Oferta</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- PLANES ANUALES                            -->
+        <!-- ══════════════════════════════════════════ -->
+        <section class="db-section" data-db-panel="planes">
+            <h1 class="db-section__title">Planes Anuales</h1>
+
+            <div class="db-kpis db-kpis--sm">
+                <div class="db-kpi db-kpi--sm"><span class="db-kpi__value" id="kpi-planes-activos">0</span><span class="db-kpi__label">Planes activos</span></div>
+                <div class="db-kpi db-kpi--sm"><span class="db-kpi__value" id="kpi-planes-ingresos">0€</span><span class="db-kpi__label">Ingresos anuales</span></div>
+            </div>
+
+            <div class="db-toolbar">
+                <button id="db-asignar-plan" class="db-btn db-btn--gold">+ Asignar Plan a Cliente</button>
+            </div>
+
+            <div id="db-planes-table" class="db-table-wrap">
+                <table class="db-table">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Servicio</th>
+                            <th>Precio Anual</th>
+                            <th>Sesiones</th>
+                            <th>Restantes</th>
+                            <th>Estado</th>
+                            <th>Inicio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="db-planes-tbody">
+                        <tr><td colspan="7" class="db-empty">Cargando planes...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="db-card" style="margin-top:20px">
+                <h3 class="db-card__title">📦 Catálogo de Planes (-15%)</h3>
+                <div id="db-planes-catalogo" class="db-services-grid"></div>
+            </div>
+
+            <!-- Assign Plan Modal -->
+            <div id="db-modal-plan" class="db-modal" hidden onclick="if(event.target===this)this.hidden=true">
+                <div class="db-modal__content">
+                    <button class="db-modal__close" onclick="this.closest('.db-modal').hidden=true">&times;</button>
+                    <h3>Asignar Plan Anual</h3>
+                    <form id="db-plan-form" class="db-form">
+                        <div class="db-form__row">
+                            <label>Cliente (email o nº)</label>
+                            <input type="text" id="plan-cliente" required class="db-input" placeholder="BG-0001 o email">
+                        </div>
+                        <div class="db-form__row">
+                            <label>Plan</label>
+                            <select id="plan-servicio" class="db-select"></select>
+                        </div>
+                        <button type="submit" class="db-btn db-btn--gold db-btn--full">Asignar Plan</button>
+                    </form>
+                    <div id="db-plan-result" class="db-alert" hidden></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- SUPER ADMIN                               -->
+        <!-- ══════════════════════════════════════════ -->
+        <section class="db-section" data-db-panel="superadmin">
+            <h1 class="db-section__title">🛡️ Super Admin</h1>
+            <p class="db-section__sub">Panel exclusivo — Solo neuriaxx@gmail.com</p>
+
+            <div class="db-card">
+                <h3 class="db-card__title">Sistema</h3>
+                <div class="db-info-grid" id="db-super-stats">
+                    <div><strong>Firebase:</strong> salonbego-52530</div>
+                    <div><strong>Region:</strong> eur3 (europe-west)</div>
+                    <div><strong>Clientes:</strong> <span id="super-total-clientes">—</span></div>
+                    <div><strong>Ventas:</strong> <span id="super-total-ventas">—</span></div>
+                    <div><strong>Citas:</strong> <span id="super-total-citas">—</span></div>
+                    <div><strong>Cupones:</strong> <span id="super-total-cupones">—</span></div>
+                </div>
+            </div>
+
+            <div class="db-card">
+                <h3 class="db-card__title">Admins Autorizados</h3>
+                <div class="db-info-grid">
+                    <div>🛡️ <strong>neuriaxx@gmail.com</strong> — Super Admin</div>
+                    <div>👤 <strong>begona@salonbegona.com</strong> — Admin</div>
+                </div>
+            </div>
+
+            <div class="db-card">
+                <h3 class="db-card__title">Inicializar Servicios por Defecto</h3>
+                <p style="color:var(--db-text-muted);font-size:13px;margin-bottom:12px">Carga los servicios predefinidos en Firestore si la colección está vacía.</p>
+                <button id="db-init-services" class="db-btn db-btn--gold">🔄 Inicializar Servicios</button>
+                <div id="db-init-result" class="db-alert" hidden></div>
             </div>
         </section>
 

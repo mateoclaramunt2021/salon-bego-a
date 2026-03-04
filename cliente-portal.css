@@ -463,6 +463,261 @@
 .cp-appointment__status--confirmada { background: rgba(46,204,113,0.2); color: #2ecc71; }
 
 /* ═══════════════════════════════════════════════
+   NEW TABS: OFERTAS, PRODUCTOS, PRECIOS, PLANES
+   ═══════════════════════════════════════════════ */
+
+/* Section Header */
+.cp-section-header {
+    margin-bottom: 2rem;
+}
+.cp-section-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+}
+.cp-section-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Offers Grid */
+.cp-offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+.cp-offer-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+.cp-offer-card:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+.cp-offer-card--featured {
+    border-color: var(--gold);
+    background: rgba(200,162,90,0.06);
+}
+.cp-offer-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+.cp-offer-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+.cp-offer-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+.cp-offer-code {
+    display: inline-block;
+    background: var(--bg-warm);
+    color: var(--gold);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px dashed var(--gold);
+    letter-spacing: 0.1em;
+}
+
+/* Products Grid */
+.cp-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+.cp-product-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.cp-product-card:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-md);
+}
+.cp-product-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    background: var(--bg-warm);
+}
+.cp-product-img--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+.cp-product-card h4 {
+    padding: 0.75rem 1rem 0.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.cp-product-card p {
+    padding: 0 1rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.cp-product-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+}
+.cp-stock { font-size: 0.75rem; font-weight: 600; padding: 3px 8px; border-radius: 12px; }
+.cp-stock--ok { background: rgba(45,143,94,0.12); color: var(--success); }
+.cp-stock--out { background: rgba(200,50,50,0.1); color: #c83232; }
+
+/* Price List */
+.cp-price-category {
+    margin-bottom: 1.5rem;
+}
+.cp-price-category h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--gold);
+}
+.cp-price-item {
+    display: flex;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    gap: 0.5rem;
+}
+.cp-price-name {
+    flex-shrink: 0;
+    font-weight: 500;
+    color: var(--text);
+}
+.cp-price-dots {
+    flex: 1;
+    border-bottom: 1px dotted var(--border);
+    min-width: 20px;
+    margin-bottom: 4px;
+}
+.cp-price-value {
+    flex-shrink: 0;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.cp-price-value del {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-right: 0.3rem;
+}
+
+/* Annual Plans */
+.cp-plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+.cp-plan-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+.cp-plan-card:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+.cp-plan-card h4 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+.cp-plan-freq {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+.cp-plan-prices {
+    margin-bottom: 0.5rem;
+}
+.cp-plan-prices del {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    display: block;
+}
+.cp-plan-prices strong {
+    font-size: 1.3rem;
+}
+.cp-plan-save {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--success);
+    margin-bottom: 1rem;
+    background: rgba(45,143,94,0.1);
+    padding: 4px 10px;
+    border-radius: 12px;
+    display: inline-block;
+}
+.cp-plan-card .btn {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+/* Active Plans */
+.cp-active-plan {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.cp-active-plan:last-child { border-bottom: none; }
+.cp-active-plan__info strong {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+.cp-active-plan__bar {
+    height: 6px;
+    background: var(--bg-warm);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0.5rem 0;
+}
+.cp-active-plan__bar div {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+.cp-empty {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════ */
 @media (max-width: 768px) {
@@ -475,6 +730,9 @@
     .cp-membership__services { grid-template-columns: repeat(2, 1fr); }
     .cp-profile-row { grid-template-columns: 1fr; }
     .cp-profile-stats { grid-template-columns: 1fr; }
+    .cp-offers-grid { grid-template-columns: 1fr; }
+    .cp-products-grid { grid-template-columns: repeat(2, 1fr); }
+    .cp-plans-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
     .cp-main { padding-top: 80px; }
@@ -482,4 +740,5 @@
     .cp-quick-actions { grid-template-columns: 1fr; }
     .cp-services-grid { grid-template-columns: 1fr; }
     .cp-cupones-grid { grid-template-columns: 1fr; }
+    .cp-products-grid { grid-template-columns: 1fr; }
 }

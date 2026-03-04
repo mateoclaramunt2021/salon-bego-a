@@ -240,11 +240,11 @@
                     <p>📞 <a href="tel:+34672928374">+34 672 92 83 74</a></p>
                 </div>
             </div>
-            <p>&copy; 2026 Salón Begoña Gómez. Estil Navia SL. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Salón Begoña Gómez. Estil Navia SL. Todos los derechos reservados. <a href="dashboard.html" title="Admin" style="opacity:0.4;font-size:11px;">🔒</a></p>
         </div>
     </footer>
 
-    <script src="../mobile-menu.js"></script>
+    <script src="../mobile-menu.js" defer></script>
     <script type="module">
         import {
             auth, db,
@@ -262,10 +262,6 @@
             if (isRegistering) return; // Don't redirect while registering
             if (user) {
                 try {
-                    if (isAdmin(user.email)) {
-                        window.location.href = 'dashboard.html';
-                        return;
-                    }
                     const profile = await getClientProfile(user.uid);
                     if (profile) {
                         window.location.href = 'mi-cuenta.html';
@@ -359,11 +355,7 @@
 
             try {
                 const cred = await signInWithEmailAndPassword(auth, email, password);
-                if (isAdmin(cred.user.email)) {
-                    window.location.href = 'dashboard.html';
-                } else {
-                    window.location.href = 'mi-cuenta.html';
-                }
+                window.location.href = 'mi-cuenta.html';
             } catch (err) {
                 const messages = {
                     'auth/user-not-found': 'No existe una cuenta con este email',

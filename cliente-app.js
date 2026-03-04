@@ -1,7 +1,7 @@
 /* =====================================================
    CLIENTE APP — SALÓN BEGOÑA GÓMEZ
-   Portal de clienta: perfil, reservas, puntos,
-   membresía, cupones, tarjeta wallet
+   Portal de clienta: ofertas, productos, precios,
+   reservas, planes anuales, cupones, membresía, perfil
    ===================================================== */
 
 import {
@@ -11,6 +11,7 @@ import {
     validateCoupon, useCoupon,
     createAppointment, getAvailableSlots,
     LEVEL_CONFIG, calculateLevel, MEMBERSHIP_PLANS,
+    DEFAULT_SERVICES, ANNUAL_SERVICE_PLANS, getClientAnnualPlans,
     collection, doc, getDocs, getDoc, query, where, orderBy, onSnapshot, serverTimestamp
 } from './firebase-config.js';
 
@@ -39,8 +40,8 @@ onAuthStateChanged(auth, async (user) => {
         return;
     }
     if (isAdmin(user.email)) {
-        window.location.href = 'dashboard.html';
-        return;
+        // Admin can still view their account
+        console.log('[Portal] Admin user accessing mi-cuenta');
     }
 
     currentUser = user;
@@ -72,12 +73,13 @@ onAuthStateChanged(auth, async (user) => {
     // Render everything
     try {
         renderWelcome();
-        renderStats();
-        renderLevel();
+        renderOffers();
+        renderProducts();
+        renderPrices();
         renderBookingServices();
+        renderAnnualPlans();
         renderMembership();
         renderCoupons();
-        renderWalletCard();
         renderProfile();
         loadAppointments();
     } catch (e) {
@@ -93,7 +95,6 @@ onAuthStateChanged(auth, async (user) => {
     initBookingForm();
     initProfileForm();
     initLogout();
-    initQuickActions();
 
     // Set min date for booking
     const dateInput = $('#cp-date');
@@ -152,46 +153,167 @@ function renderWelcome() {
 }
 
 // ═══════════════════════════════════════════════
-// RENDER STATS
+// RENDER OFFERS
 // ═══════════════════════════════════════════════
-function renderStats() {
+function renderOffers() {
     const p = clientProfile;
-    $('#stat-puntos').textContent = p.puntos || 0;
-    $('#stat-visitas').textContent = p.visitas || 0;
-    const cupones = (p.cupones || []).length;
-    $('#stat-cupones').textContent = cupones;
-    $('#quick-cupon-count').textContent = `${cupones} disponible${cupones !== 1 ? 's' : ''}`;
+    const level = LEVEL_CONFIG[p.nivel] || LEVEL_CONFIG.bronce;
+    const nivelEl = $('#ofertas-nivel');
+    const dtoEl = $('#ofertas-descuento');
+    if (nivelEl) nivelEl.textContent = level.name;
+    if (dtoEl) dtoEl.textContent = `${level.discount || 0}%`;
+
+    // Load offers from Firestore
+    const grid = $('#cp-offers-grid');
+    if (!grid) return;
+
+    getDocs(collection(db, 'ofertas')).then(snap => {
+        let html = '';
+        snap.forEach(d => {
+            const o = d.data();
+            if (!o.activa) return;
+            html += `
+                <div class="cp-offer-card${o.destacada ? ' cp-offer-card--featured' : ''}">
+                    ${o.badge ? `<span class="cp-offer-badge">${o.badge}</span>` : ''}
+                    <h3>${o.titulo}</h3>
+                    <p>${o.descripcion}</p>
+                    ${o.codigo ? `<span class="cp-offer-code">${o.codigo}</span>` : ''}
+                    ${o.validoHasta ? `<small>Válido hasta ${o.validoHasta}</small>` : ''}
+                </div>`;
+        });
+        // Keep the welcome offer card, append dynamic ones
+        grid.insertAdjacentHTML('beforeend', html);
+    }).catch(e => console.warn('Error loading offers:', e));
 }
 
 // ═══════════════════════════════════════════════
-// RENDER LEVEL PROGRESS
+// RENDER PRODUCTS
 // ═══════════════════════════════════════════════
-function renderLevel() {
-    const pts = clientProfile.puntosHistorico || clientProfile.puntos || 0;
-    const maxPts = 2500;
-    const pct = Math.min((pts / maxPts) * 100, 100);
-    $('#cp-level-fill').style.width = `${pct}%`;
+function renderProducts() {
+    const grid = $('#cp-products-grid');
+    if (!grid) return;
 
-    // Highlight achieved markers
-    if (pts >= 500) $('#marker-plata')?.classList.add('active');
-    if (pts >= 1000) $('#marker-oro')?.classList.add('active');
-    if (pts >= 2500) $('#marker-diamante')?.classList.add('active');
-
-    // Hint text
-    const level = clientProfile.nivel || 'bronce';
-    const nextLevels = { bronce: { name: 'Plata', pts: 500, perk: '5% dto. permanente' }, plata: { name: 'Oro', pts: 1000, perk: '10% dto. + regalo cumpleaños' }, oro: { name: 'Diamante', pts: 2500, perk: '15% dto. + WhatsApp directo' } };
-    const next = nextLevels[level];
-    const hintEl = $('#cp-level-hint');
-    if (next && hintEl) {
-        const remaining = next.pts - pts;
-        if (remaining > 0) {
-            hintEl.innerHTML = `Te faltan <strong>${remaining} puntos</strong> para subir a ${next.name} (${next.perk})`;
-        } else {
-            hintEl.innerHTML = `<strong>¡Enhorabuena!</strong> Ya eres nivel ${LEVEL_CONFIG[level]?.name || level}`;
+    getDocs(collection(db, 'productos')).then(snap => {
+        if (snap.empty) {
+            grid.innerHTML = '<p class="cp-empty">Próximamente: productos exclusivos del salón</p>';
+            return;
         }
-    } else if (hintEl) {
-        hintEl.innerHTML = '<strong>¡Eres Diamante!</strong> El nivel máximo. Disfruta de todos los beneficios.';
+        let html = '';
+        snap.forEach(d => {
+            const prod = d.data();
+            html += `
+                <div class="cp-product-card">
+                    ${prod.imagen ? `<img src="${prod.imagen}" alt="${prod.nombre}" class="cp-product-img">` : '<div class="cp-product-img cp-product-img--placeholder">🧴</div>'}
+                    <h4>${prod.nombre}</h4>
+                    <p>${prod.descripcion || ''}</p>
+                    <div class="cp-product-price">
+                        <strong>${prod.precio?.toFixed(2) || '—'}€</strong>
+                        ${prod.stock > 0 ? '<span class="cp-stock cp-stock--ok">En stock</span>' : '<span class="cp-stock cp-stock--out">Agotado</span>'}
+                    </div>
+                </div>`;
+        });
+        grid.innerHTML = html;
+    }).catch(e => {
+        grid.innerHTML = '<p class="cp-empty">Próximamente: productos exclusivos del salón</p>';
+    });
+}
+
+// ═══════════════════════════════════════════════
+// RENDER PRICES WITH LEVEL DISCOUNT
+// ═══════════════════════════════════════════════
+function renderPrices() {
+    const container = $('#cp-price-list');
+    if (!container) return;
+
+    const p = clientProfile;
+    const level = LEVEL_CONFIG[p.nivel] || LEVEL_CONFIG.bronce;
+    const discount = level.discount || 0;
+
+    const nivelEl = $('#precios-nivel');
+    const dtoEl = $('#precios-dto');
+    if (nivelEl) nivelEl.textContent = level.name;
+    if (dtoEl) dtoEl.textContent = `${discount}%`;
+
+    // Group services by category
+    const categories = {};
+    const catNames = { cortes: '✂️ Cortes', rubios: '💛 Rubios', color: '🎨 Color', tratamientos: '💆 Tratamientos', alisados: '✨ Alisados', canas: '🤍 Canas' };
+
+    (services.length ? services : DEFAULT_SERVICES).forEach(s => {
+        if (!s.activo && s.activo !== undefined) return;
+        const cat = s.categoria || 'otros';
+        if (!categories[cat]) categories[cat] = [];
+        categories[cat].push(s);
+    });
+
+    let html = '';
+    for (const [cat, items] of Object.entries(categories)) {
+        html += `<div class="cp-price-category">
+            <h3>${catNames[cat] || cat}</h3>
+            <div class="cp-price-items">`;
+        items.forEach(s => {
+            const original = s.precio;
+            const discounted = discount > 0 ? (original * (1 - discount / 100)).toFixed(0) : null;
+            html += `
+                <div class="cp-price-item">
+                    <span class="cp-price-name">${s.nombre}</span>
+                    <span class="cp-price-dots"></span>
+                    <span class="cp-price-value">
+                        ${discounted ? `<del>${original}€</del> <strong class="text-gold">${discounted}€</strong>` : `<strong>${original}€</strong>`}
+                    </span>
+                </div>`;
+        });
+        html += '</div></div>';
     }
+    container.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER ANNUAL PLANS
+// ═══════════════════════════════════════════════
+async function renderAnnualPlans() {
+    // Active plans
+    try {
+        const myPlans = await getClientAnnualPlans(currentUser.uid);
+        const container = $('#cp-my-plans');
+        const list = $('#cp-active-plans-list');
+        if (myPlans.length > 0 && container && list) {
+            container.hidden = false;
+            list.innerHTML = myPlans.map(p => `
+                <div class="cp-active-plan">
+                    <div class="cp-active-plan__info">
+                        <strong>${p.nombre}</strong>
+                        <small>${p.sesionesRestantes}/${p.sesionesTotal} sesiones restantes</small>
+                    </div>
+                    <div class="cp-active-plan__bar">
+                        <div style="width:${((p.sesionesTotal - p.sesionesRestantes) / p.sesionesTotal) * 100}%"></div>
+                    </div>
+                    <small>Válido hasta ${p.fin}</small>
+                </div>
+            `).join('');
+        }
+    } catch (e) { console.warn('Error loading active plans:', e); }
+
+    // Catalog
+    const catalog = $('#cp-plans-catalog');
+    if (!catalog) return;
+
+    let html = '<div class="cp-plans-grid">';
+    ANNUAL_SERVICE_PLANS.forEach(plan => {
+        const normalAnual = plan.precioUnitario * plan.sesiones;
+        html += `
+            <div class="cp-plan-card">
+                <h4>${plan.nombre}</h4>
+                <div class="cp-plan-freq">${plan.frecuencia} · ${plan.sesiones} sesiones/año</div>
+                <div class="cp-plan-prices">
+                    <del>${normalAnual.toFixed(0)}€/año</del>
+                    <strong class="text-gold">${plan.precioAnual.toFixed(0)}€/año</strong>
+                </div>
+                <div class="cp-plan-save">Ahorras ${plan.ahorro.toFixed(0)}€</div>
+                <a href="https://wa.me/34602449995?text=${encodeURIComponent('Hola, me interesa el plan anual: ' + plan.nombre)}" target="_blank" class="btn btn--primary btn--sm">Contratar</a>
+            </div>`;
+    });
+    html += '</div>';
+    catalog.innerHTML = html;
 }
 
 // ═══════════════════════════════════════════════
@@ -595,9 +717,6 @@ function renderMembership() {
         }).join('');
     }
 
-    // Update wallet card membership too
-    const walletMem = $('#wallet-membership');
-    if (walletMem) walletMem.textContent = plan.name;
 }
 
 // ═══════════════════════════════════════════════
@@ -643,86 +762,6 @@ async function renderCoupons() {
 
     } catch (e) {
         container.innerHTML = '<p class="cp-empty">No tienes cupones activos</p>';
-    }
-}
-
-// ═══════════════════════════════════════════════
-// RENDER WALLET CARD
-// ═══════════════════════════════════════════════
-function renderWalletCard() {
-    const p = clientProfile;
-    const fullName = `${p.nombre || ''} ${p.apellidos || ''}`.trim();
-    const level = LEVEL_CONFIG[p.nivel] || LEVEL_CONFIG.bronce;
-
-    $('#wallet-name').textContent = fullName;
-    $('#wallet-num').textContent = p.clientNumber || '—';
-    $('#wallet-level-icon').textContent = level.icon;
-    $('#wallet-level-name').textContent = level.name.toUpperCase();
-    $('#wallet-points').textContent = p.puntos || 0;
-
-    // Membership
-    if (p.membresiaId) {
-        const plan = MEMBERSHIP_PLANS[p.membresiaId];
-        $('#wallet-membership').textContent = plan?.name || '—';
-
-        // Show services remaining
-        const servicesDiv = $('#wallet-services');
-        const servicesList = $('#wallet-services-list');
-        if (servicesDiv && servicesList && p.serviciosRestantes) {
-            servicesDiv.hidden = false;
-            const icons = { cortes: '✂️', coloraciones: '🎨', hidrataciones: '💧', tratamientos: '💆', especiales: '✨' };
-            const labels = { cortes: 'Cortes', coloraciones: 'Coloraciones', hidrataciones: 'Hidrataciones', tratamientos: 'Tratamientos', especiales: 'Especiales' };
-            const plan2 = MEMBERSHIP_PLANS[p.membresiaId];
-            servicesList.innerHTML = Object.entries(plan2?.services || {}).map(([key, total]) => {
-                const remaining = p.serviciosRestantes[key] ?? total;
-                return `<div class="cp-wallet__service-row"><span>${icons[key] || ''} ${labels[key] || key}</span><span>${remaining}/${total}</span></div>`;
-            }).join('');
-        }
-    }
-
-    // Simple QR code (text-based, no library needed)
-    const canvas = $('#wallet-qr-canvas');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        canvas.width = 100; canvas.height = 100;
-        // Draw a simple placeholder QR pattern
-        ctx.fillStyle = '#fff';
-        ctx.fillRect(0, 0, 100, 100);
-        ctx.fillStyle = '#0F1115';
-        ctx.font = 'bold 12px Inter, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(p.clientNumber || 'BG-0001', 50, 45);
-        ctx.font = '9px Inter, sans-serif';
-        ctx.fillText('Salón Begoña', 50, 62);
-        ctx.fillText('Gómez', 50, 74);
-        // Border
-        ctx.strokeStyle = '#C8A25A';
-        ctx.lineWidth = 3;
-        ctx.strokeRect(2, 2, 96, 96);
-    }
-
-    // Download card button
-    const downloadBtn = $('#btn-download-card');
-    if (downloadBtn) {
-        downloadBtn.addEventListener('click', () => {
-            // Create a simple downloadable card image via canvas
-            const cardEl = $('#cp-wallet-card');
-            alert(`Tu tarjeta digital:\n\nNombre: ${fullName}\nNº Cliente: ${p.clientNumber}\nNivel: ${level.name}\nPuntos: ${p.puntos}\n\nMuestra este número en tu próxima visita.`);
-        });
-    }
-
-    // Apple/Google wallet buttons
-    const appleBtn = $('#btn-apple-wallet');
-    const googleBtn = $('#btn-google-wallet');
-    if (appleBtn) {
-        appleBtn.addEventListener('click', () => {
-            alert('La tarjeta de Apple Wallet estará disponible próximamente. Por ahora, puedes descargar la versión imagen o hacer una captura de pantalla.');
-        });
-    }
-    if (googleBtn) {
-        googleBtn.addEventListener('click', () => {
-            alert('La tarjeta de Google Wallet estará disponible próximamente. Por ahora, puedes descargar la versión imagen o hacer una captura de pantalla.');
-        });
     }
 }
 
@@ -790,16 +829,6 @@ function initTabs() {
     });
 }
 
-function initQuickActions() {
-    $$('.cp-quick-action[data-goto]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = btn.dataset.goto;
-            $$('.cp-nav__item').forEach(t => t.classList.toggle('active', t.dataset.cpTab === target));
-            $$('.cp-panel').forEach(p => p.classList.toggle('active', p.dataset.cpPanel === target));
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    });
-}
 
 // ═══════════════════════════════════════════════
 // LOGOUT

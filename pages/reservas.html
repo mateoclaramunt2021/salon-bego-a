@@ -1117,7 +1117,7 @@
                     <li><a href="politica-privacidad.html">Privacidad</a></li>
                     <li><a href="politica-cookies.html">Cookies</a></li>
                     <li><a href="condiciones-generales.html">Condiciones</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="dashboard.html" title="Admin" style="opacity:0.4;font-size:11px;">&#x1F512;</a></li>
                 </ul>
             </div>
             <p>&copy; 2026 Salón Begoña Gómez. Todos los derechos reservados.</p>
@@ -1128,96 +1128,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- ═══════════════════════════════════════════════ -->
-    <!-- DASHBOARD ADMIN PANEL -->
-    <!-- ═══════════════════════════════════════════════ -->
-    <div class="rv-admin" id="rv-admin-panel" hidden>
-        <div class="rv-admin__header">
-            <h2>🔧 Dashboard de Gestión</h2>
-            <button class="rv-admin__close" id="rv-admin-close">✕</button>
-        </div>
-        <div class="rv-admin__body">
-            <!-- SECCIÓN: Ofertas Mensuales -->
-            <div class="rv-admin__section">
-                <h3>📅 Oferta del Mes</h3>
-                <div class="rv-admin__field">
-                    <label>Mes activo:</label>
-                    <select id="admin-month">
-                        <option value="enero">Enero — Año Nuevo, Pelo Nuevo</option>
-                        <option value="febrero">Febrero — San Valentín Beauty</option>
-                        <option value="marzo" selected>Marzo — Primavera Curly</option>
-                        <option value="abril">Abril — Renovación Capilar</option>
-                        <option value="mayo">Mayo — Mes de la Madre</option>
-                        <option value="junio">Junio — Summer Ready</option>
-                        <option value="julio">Julio — Protección Solar Capilar</option>
-                        <option value="agosto">Agosto — Back to Natural</option>
-                        <option value="septiembre">Septiembre — Vuelta al Cole Beauty</option>
-                        <option value="octubre">Octubre — Alisado Season</option>
-                        <option value="noviembre">Noviembre — Black Friday Beauty</option>
-                        <option value="diciembre">Diciembre — Navidad Brillante</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- SECCIÓN: Toggle Packs -->
-            <div class="rv-admin__section">
-                <h3>📦 Packs Activos</h3>
-                <div class="rv-admin__toggles" id="admin-packs-toggles">
-                    <!-- Generado por JS -->
-                </div>
-            </div>
-
-            <!-- SECCIÓN: Ofertas Semanales -->
-            <div class="rv-admin__section">
-                <h3>📅 Ofertas Semanales</h3>
-                <div class="rv-admin__toggles" id="admin-weekly-toggles">
-                    <!-- Generado por JS -->
-                </div>
-            </div>
-
-            <!-- SECCIÓN: Textos de Urgencia -->
-            <div class="rv-admin__section">
-                <h3>⚡ Textos de Urgencia</h3>
-                <div class="rv-admin__field">
-                    <label>Texto hero (plazas):</label>
-                    <input type="text" id="admin-urgency-hero" value="Solo 8 plazas disponibles esta semana">
-                </div>
-                <div class="rv-admin__field">
-                    <label>Texto badge hero:</label>
-                    <input type="text" id="admin-badge-text" value="🔥 Ofertas Marzo 2026">
-                </div>
-                <div class="rv-admin__field">
-                    <label>Texto CTA final:</label>
-                    <input type="text" id="admin-final-urgency" value="Las plazas de esta semana se agotan rápido. Reserva ahora y asegura tu momento de belleza.">
-                </div>
-            </div>
-
-            <!-- SECCIÓN: Precios Rápidos -->
-            <div class="rv-admin__section">
-                <h3>💰 Editor Rápido de Precios</h3>
-                <p class="rv-admin__note">Los precios se actualizan en la tabla y en el formulario.</p>
-                <div class="rv-admin__prices" id="admin-prices">
-                    <!-- Generado por JS -->
-                </div>
-            </div>
-
-            <!-- SECCIÓN: Membresías -->
-            <div class="rv-admin__section">
-                <h3>⭐ Membresías</h3>
-                <div class="rv-admin__toggles" id="admin-membership-toggles">
-                    <!-- Generado por JS -->
-                </div>
-            </div>
-
-            <!-- ACCIONES -->
-            <div class="rv-admin__actions">
-                <button class="btn btn--primary" id="admin-save">💾 Guardar Cambios</button>
-                <button class="btn btn--secondary" id="admin-reset">🔄 Restaurar Defaults</button>
-                <button class="btn btn--secondary" id="admin-export">📋 Exportar Config</button>
-            </div>
-        </div>
-    </div>
 
     <!-- ═══════════════════════════════════════════════ -->
     <!-- MODAL LOGIN / REGISTRO                        -->
@@ -1290,7 +1200,7 @@
     });
     </script>
 
-    <script src="../mobile-menu.js"></script>
+    <script src="../mobile-menu.js" defer></script>
     <script src="../reservas-dashboard.js"></script>
 </body>
 </html>

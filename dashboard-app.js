@@ -5,11 +5,12 @@
 
 import {
     auth, db,
-    onAuthStateChanged, signOut, isAdmin,
+    onAuthStateChanged, signOut, isAdmin, isSuperAdmin,
     collection, doc, getDocs, updateDoc, deleteDoc,
     query, where, orderBy, limit, addDoc, serverTimestamp,
     LEVEL_CONFIG, MEMBERSHIP_PLANS, calculateLevel, addPoints,
-    initializeServices, BUSINESS_HOURS
+    initializeServices, BUSINESS_HOURS,
+    DEFAULT_SERVICES, ANNUAL_SERVICE_PLANS, subscribeAnnualPlan, getClientAnnualPlans
 } from './firebase-config.js';
 
 // ═══════════════════════════════════════════════
@@ -20,6 +21,11 @@ let allAppointments = [];
 let allSales = [];
 let allCoupons = [];
 let allServices = [];
+let allProducts = [];
+let allOffers = [];
+let allPlans = [];
+let tpvItems = [];
+let tpvClient = null;
 
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
@@ -59,9 +65,18 @@ onAuthStateChanged(auth, async (user) => {
             loadAppointments(),
             loadSales(),
             loadCoupons(),
-            loadServices()
+            loadServices(),
+            loadProducts(),
+            loadOffers(),
+            loadPlans()
         ]);
         console.log('[Dashboard] Data loaded:', { clients: allClients.length, appointments: allAppointments.length, sales: allSales.length, coupons: allCoupons.length, services: allServices.length });
+
+        // Show super-admin nav if applicable
+        if (isSuperAdmin(user.email)) {
+            const saNav = $('#db-nav-superadmin');
+            if (saNav) saNav.hidden = false;
+        }
 
         // Render each section (individually protected)
         const renders = [
@@ -74,7 +89,13 @@ onAuthStateChanged(auth, async (user) => {
             ['Loyalty', renderLoyalty],
             ['CouponsTable', renderCouponsTable],
             ['Schedule', renderSchedule],
-            ['SalesTable', renderSalesTable]
+            ['SalesTable', renderSalesTable],
+            ['TPV', renderTPVServices],
+            ['ProductsGrid', renderProductsGrid],
+            ['OffersGrid', renderOffersGrid],
+            ['PlansTable', renderPlansTable],
+            ['PlansCatalog', renderPlansCatalog],
+            ['SuperAdmin', renderSuperAdmin]
         ];
         for (const [name, fn] of renders) {
             try { fn(); console.log(`[Dashboard] ✓ ${name}`); } catch (e) { console.error(`[Dashboard] ✗ ${name}:`, e); }
@@ -96,6 +117,11 @@ onAuthStateChanged(auth, async (user) => {
         ['ExportCSV', initExportCSV],
         ['AgendaFilters', initAgendaFilters],
         ['ReviewRequest', initReviewRequest],
+        ['TPV', initTPV],
+        ['ProductForm', initProductForm],
+        ['OfferForm', initOfferForm],
+        ['PlanForm', initPlanForm],
+        ['SuperAdminActions', initSuperAdmin],
         ['Logout', initLogout],
         ['MobileMenu', initMobileMenu]
     ];
@@ -1014,6 +1040,11 @@ function initNavigation() {
             if (target === 'agenda') renderAgenda();
             if (target === 'ventas') renderSalesTable();
             if (target === 'clientes') renderClientsTable();
+            if (target === 'tpv') { renderTPVServices(); renderTPVTicket(); }
+            if (target === 'productos') renderProductsGrid();
+            if (target === 'ofertas') renderOffersGrid();
+            if (target === 'planes') { renderPlansTable(); renderPlansCatalog(); }
+            if (target === 'superadmin') renderSuperAdmin();
 
             // Close mobile sidebar
             $('#db-sidebar')?.classList.remove('open');
@@ -1066,5 +1097,525 @@ function initLogout() {
     $('#db-logout')?.addEventListener('click', async () => {
         await signOut(auth);
         window.location.href = 'registro.html';
+    });
+}
+
+// ═══════════════════════════════════════════════
+// DATA LOADERS — PRODUCTS, OFFERS, PLANS
+// ═══════════════════════════════════════════════
+async function loadProducts() {
+    try {
+        const snap = await getDocs(collection(db, 'productos'));
+        allProducts = [];
+        snap.forEach(d => allProducts.push({ id: d.id, ...d.data() }));
+    } catch (e) { console.warn('[Dashboard] loadProducts failed:', e.message); allProducts = []; }
+}
+
+async function loadOffers() {
+    try {
+        const snap = await getDocs(collection(db, 'ofertas'));
+        allOffers = [];
+        snap.forEach(d => allOffers.push({ id: d.id, ...d.data() }));
+    } catch (e) { console.warn('[Dashboard] loadOffers failed:', e.message); allOffers = []; }
+}
+
+async function loadPlans() {
+    try {
+        const snap = await getDocs(collection(db, 'planesAnuales'));
+        allPlans = [];
+        snap.forEach(d => allPlans.push({ id: d.id, ...d.data() }));
+    } catch (e) { console.warn('[Dashboard] loadPlans failed:', e.message); allPlans = []; }
+}
+
+// ═══════════════════════════════════════════════
+// TPV — PUNTO DE VENTA
+// ═══════════════════════════════════════════════
+function renderTPVServices() {
+    const grid = $('#tpv-servicios-grid');
+    if (!grid) return;
+    const active = allServices.filter(s => s.activo !== false);
+    if (active.length === 0) { grid.innerHTML = '<p class="db-empty">Sin servicios</p>'; return; }
+    grid.innerHTML = active.map(s => `
+        <button class="db-tpv-item" onclick="window.tpvAddItem('svc','${s.id}')">
+            <span class="db-tpv-item__name">${s.nombre}</span>
+            <span class="db-tpv-item__price">${s.precio}€</span>
+        </button>
+    `).join('');
+
+    // Products in TPV
+    const pgrid = $('#tpv-productos-grid');
+    if (!pgrid) return;
+    const activeP = allProducts.filter(p => p.activo !== false && (p.stock || 0) > 0);
+    if (activeP.length === 0) { pgrid.innerHTML = '<p class="db-empty">Sin productos</p>'; return; }
+    pgrid.innerHTML = activeP.map(p => `
+        <button class="db-tpv-item" onclick="window.tpvAddItem('prod','${p.id}')">
+            <span class="db-tpv-item__name">${p.nombre}</span>
+            <span class="db-tpv-item__price">${p.precio}€</span>
+        </button>
+    `).join('');
+}
+
+function renderTPVTicket() {
+    const list = $('#tpv-items-list');
+    if (!list) return;
+    if (tpvItems.length === 0) {
+        list.innerHTML = '<p class="db-empty">Añade servicios o productos</p>';
+        $('#tpv-subtotal').textContent = '0,00€';
+        $('#tpv-dto-nivel').textContent = '0,00€';
+        $('#tpv-total').textContent = '0,00€';
+        return;
+    }
+
+    list.innerHTML = tpvItems.map((item, i) => `
+        <div class="db-tpv-ticket-line">
+            <span>${item.nombre}</span>
+            <span>${item.precio.toFixed(2)}€</span>
+            <button class="db-btn db-btn--sm db-btn--red" onclick="window.tpvRemoveItem(${i})">✗</button>
+        </div>
+    `).join('');
+
+    const subtotal = tpvItems.reduce((s, i) => s + i.precio, 0);
+    const levelDiscount = tpvClient ? (LEVEL_CONFIG[tpvClient.nivel || 'bronce']?.discount || 0) : 0;
+    const dtoAmount = subtotal * levelDiscount;
+    const total = subtotal - dtoAmount;
+
+    $('#tpv-subtotal').textContent = subtotal.toFixed(2) + '€';
+    $('#tpv-dto-nivel').textContent = dtoAmount > 0 ? `-${dtoAmount.toFixed(2)}€` : '0,00€';
+    $('#tpv-total').textContent = total.toFixed(2) + '€';
+}
+
+window.tpvAddItem = (type, id) => {
+    if (type === 'svc') {
+        const svc = allServices.find(s => s.id === id);
+        if (svc) tpvItems.push({ tipo: 'servicio', id: svc.id, nombre: svc.nombre, precio: svc.precio });
+    } else {
+        const prod = allProducts.find(p => p.id === id);
+        if (prod) tpvItems.push({ tipo: 'producto', id: prod.id, nombre: prod.nombre, precio: prod.precio });
+    }
+    renderTPVTicket();
+};
+
+window.tpvRemoveItem = (idx) => {
+    tpvItems.splice(idx, 1);
+    renderTPVTicket();
+};
+
+window.tpvClearClient = () => {
+    tpvClient = null;
+    $('#tpv-cliente-info').hidden = true;
+    $('#tpv-buscar-cliente').value = '';
+    renderTPVTicket();
+};
+
+function initTPV() {
+    // Client search
+    const input = $('#tpv-buscar-cliente');
+    if (input) {
+        input.addEventListener('input', () => {
+            const val = input.value.trim().toLowerCase();
+            if (val.length < 2) return;
+            const match = allClients.find(c =>
+                (c.clientNumber || '').toLowerCase() === val ||
+                (c.email || '').toLowerCase() === val ||
+                ((c.nombre || '') + ' ' + (c.apellidos || '')).toLowerCase().includes(val)
+            );
+            if (match) {
+                tpvClient = match;
+                const levelIcons = { bronce: '🥉', plata: '🥈', oro: '🥇', diamante: '💎' };
+                $('#tpv-cliente-nombre').textContent = `${match.nombre} ${match.apellidos || ''} (${match.clientNumber || ''})`;
+                $('#tpv-cliente-nivel').textContent = `${levelIcons[match.nivel || 'bronce']} ${(match.nivel || 'bronce')}`;
+                $('#tpv-cliente-nivel').className = 'db-badge db-badge--gold';
+                $('#tpv-cliente-info').hidden = false;
+                renderTPVTicket();
+            }
+        });
+    }
+
+    // Cobrar
+    $('#tpv-cobrar')?.addEventListener('click', async () => {
+        if (tpvItems.length === 0) { alert('Añade al menos un servicio o producto'); return; }
+
+        const subtotal = tpvItems.reduce((s, i) => s + i.precio, 0);
+        const levelDiscount = tpvClient ? (LEVEL_CONFIG[tpvClient.nivel || 'bronce']?.discount || 0) : 0;
+        const dtoAmount = subtotal * levelDiscount;
+        const total = subtotal - dtoAmount;
+        const sede = $('#tpv-sede').value;
+        const metodo = $('#tpv-metodo').value;
+
+        const ventaData = {
+            fecha: new Date().toISOString().split('T')[0],
+            clienteId: tpvClient?.id || null,
+            clienteNombre: tpvClient ? `${tpvClient.nombre} ${tpvClient.apellidos || ''}` : 'Cliente sin registrar',
+            clientNumber: tpvClient?.clientNumber || null,
+            servicios: tpvItems.filter(i => i.tipo === 'servicio').map(i => i.nombre),
+            productos: tpvItems.filter(i => i.tipo === 'producto').map(i => i.nombre),
+            totalOriginal: subtotal,
+            descuento: dtoAmount,
+            total,
+            sede,
+            metodoPago: metodo,
+            estado: 'completada',
+            creadoEn: serverTimestamp()
+        };
+
+        try {
+            const ref = await addDoc(collection(db, 'ventas'), ventaData);
+            allSales.unshift({ id: ref.id, ...ventaData });
+
+            // Add points to client
+            if (tpvClient) {
+                const points = Math.floor(total);
+                await addPoints(tpvClient.id, points, `Venta TPV ${ventaData.fecha}`);
+                tpvClient.puntos = (tpvClient.puntos || 0) + points;
+                tpvClient.visitas = (tpvClient.visitas || 0) + 1;
+                tpvClient.gastoTotal = (tpvClient.gastoTotal || 0) + total;
+            }
+
+            // Decrement product stock
+            for (const item of tpvItems.filter(i => i.tipo === 'producto')) {
+                const prod = allProducts.find(p => p.id === item.id);
+                if (prod && prod.stock > 0) {
+                    await updateDoc(doc(db, 'productos', item.id), { stock: prod.stock - 1 });
+                    prod.stock--;
+                }
+            }
+
+            alert(`✅ Venta registrada: ${total.toFixed(2)}€ (${metodo})`);
+            tpvItems = [];
+            tpvClient = null;
+            $('#tpv-cliente-info').hidden = true;
+            $('#tpv-buscar-cliente').value = '';
+            renderTPVTicket();
+            renderTPVServices();
+            renderKPIs();
+        } catch (e) {
+            alert('❌ Error al registrar venta: ' + e.message);
+        }
+    });
+
+    // Limpiar
+    $('#tpv-limpiar')?.addEventListener('click', () => {
+        tpvItems = [];
+        renderTPVTicket();
+    });
+}
+
+// ═══════════════════════════════════════════════
+// PRODUCTS MANAGEMENT
+// ═══════════════════════════════════════════════
+function renderProductsGrid() {
+    const container = $('#db-productos-grid');
+    if (!container) return;
+    if (allProducts.length === 0) {
+        container.innerHTML = '<p class="db-empty">No hay productos. Crea uno para empezar.</p>';
+        return;
+    }
+    container.innerHTML = allProducts.map(p => `
+        <div class="db-service-card">
+            <div class="db-service-card__header">
+                <span class="db-service-card__name">${p.nombre}</span>
+                <span class="db-service-card__price">${p.precio}€</span>
+            </div>
+            <div class="db-service-card__meta">
+                <span>${p.categoria || 'Sin cat.'}</span>
+                <span>Stock: ${p.stock || 0}</span>
+                <span class="db-badge ${p.activo !== false ? 'db-badge--green' : 'db-badge--red'}">${p.activo !== false ? 'Activo' : 'Inactivo'}</span>
+            </div>
+            ${p.descripcion ? `<p style="font-size:12px;color:var(--db-text-muted)">${p.descripcion}</p>` : ''}
+            <div class="db-service-card__actions">
+                <button class="db-btn db-btn--sm" onclick="window.dbEditProduct('${p.id}')">✏️ Editar</button>
+                <button class="db-btn db-btn--sm db-btn--red" onclick="window.dbDeleteProduct('${p.id}')">🗑</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+window.dbEditProduct = (id) => {
+    const p = allProducts.find(x => x.id === id);
+    if (!p) return;
+    $('#db-producto-modal-title').textContent = 'Editar Producto';
+    $('#prod-id').value = id;
+    $('#prod-nombre').value = p.nombre || '';
+    $('#prod-descripcion').value = p.descripcion || '';
+    $('#prod-precio').value = p.precio || 0;
+    $('#prod-stock').value = p.stock || 0;
+    $('#prod-categoria').value = p.categoria || 'capilar';
+    $('#prod-imagen').value = p.imagen || '';
+    $('#prod-activo').checked = p.activo !== false;
+    $('#db-modal-producto').hidden = false;
+};
+
+window.dbDeleteProduct = async (id) => {
+    if (!confirm('¿Eliminar este producto?')) return;
+    try {
+        await deleteDoc(doc(db, 'productos', id));
+        allProducts = allProducts.filter(p => p.id !== id);
+        renderProductsGrid();
+    } catch (e) { alert('Error al eliminar'); }
+};
+
+function initProductForm() {
+    $('#db-nuevo-producto')?.addEventListener('click', () => {
+        $('#db-producto-modal-title').textContent = 'Nuevo Producto';
+        $('#prod-id').value = '';
+        $('#db-producto-form').reset();
+        $('#prod-activo').checked = true;
+        $('#db-modal-producto').hidden = false;
+    });
+
+    $('#db-producto-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = {
+            nombre: $('#prod-nombre').value.trim(),
+            descripcion: $('#prod-descripcion').value.trim(),
+            precio: parseFloat($('#prod-precio').value),
+            stock: parseInt($('#prod-stock').value) || 0,
+            categoria: $('#prod-categoria').value,
+            imagen: $('#prod-imagen').value.trim() || null,
+            activo: $('#prod-activo').checked,
+            actualizadoEn: serverTimestamp()
+        };
+        const existingId = $('#prod-id').value;
+        try {
+            if (existingId) {
+                await updateDoc(doc(db, 'productos', existingId), data);
+                const idx = allProducts.findIndex(p => p.id === existingId);
+                if (idx >= 0) allProducts[idx] = { id: existingId, ...data };
+            } else {
+                data.creadoEn = serverTimestamp();
+                const ref = await addDoc(collection(db, 'productos'), data);
+                allProducts.push({ id: ref.id, ...data });
+            }
+            $('#db-modal-producto').hidden = true;
+            renderProductsGrid();
+            renderTPVServices();
+        } catch (err) { alert('Error al guardar producto'); }
+    });
+}
+
+// ═══════════════════════════════════════════════
+// OFFERS MANAGEMENT
+// ═══════════════════════════════════════════════
+function renderOffersGrid() {
+    const container = $('#db-ofertas-grid');
+    if (!container) return;
+    if (allOffers.length === 0) {
+        container.innerHTML = '<p class="db-empty">No hay ofertas. Crea una para que aparezca en el portal de clientes.</p>';
+        return;
+    }
+    container.innerHTML = allOffers.map(o => {
+        const expired = o.expira && new Date(o.expira) < new Date();
+        return `
+        <div class="db-service-card">
+            <div class="db-service-card__header">
+                <span class="db-service-card__name">${o.titulo}</span>
+                <span class="db-badge ${o.activa && !expired ? 'db-badge--green' : 'db-badge--red'}">${o.activa && !expired ? 'Activa' : expired ? 'Expirada' : 'Inactiva'}</span>
+            </div>
+            <div class="db-service-card__meta">
+                <span>-${o.descuento || 0}%</span>
+                ${o.badge ? `<span class="db-badge db-badge--gold">${o.badge}</span>` : ''}
+                ${o.destacada ? '<span>⭐ Destacada</span>' : ''}
+                ${o.expira ? `<span>Hasta ${o.expira}</span>` : ''}
+            </div>
+            ${o.descripcion ? `<p style="font-size:12px;color:var(--db-text-muted)">${o.descripcion}</p>` : ''}
+            <div class="db-service-card__actions">
+                <button class="db-btn db-btn--sm" onclick="window.dbEditOffer('${o.id}')">✏️</button>
+                <button class="db-btn db-btn--sm db-btn--red" onclick="window.dbDeleteOffer('${o.id}')">🗑</button>
+            </div>
+        </div>
+        `;
+    }).join('');
+}
+
+window.dbEditOffer = (id) => {
+    const o = allOffers.find(x => x.id === id);
+    if (!o) return;
+    $('#db-oferta-modal-title').textContent = 'Editar Oferta';
+    $('#ofe-id').value = id;
+    $('#ofe-titulo').value = o.titulo || '';
+    $('#ofe-descripcion').value = o.descripcion || '';
+    $('#ofe-descuento').value = o.descuento || 10;
+    $('#ofe-expira').value = o.expira || '';
+    $('#ofe-badge').value = o.badge || '';
+    $('#ofe-destacada').checked = !!o.destacada;
+    $('#ofe-activa').checked = o.activa !== false;
+    $('#db-modal-oferta').hidden = false;
+};
+
+window.dbDeleteOffer = async (id) => {
+    if (!confirm('¿Eliminar esta oferta?')) return;
+    try {
+        await deleteDoc(doc(db, 'ofertas', id));
+        allOffers = allOffers.filter(o => o.id !== id);
+        renderOffersGrid();
+    } catch (e) { alert('Error al eliminar'); }
+};
+
+function initOfferForm() {
+    $('#db-nueva-oferta')?.addEventListener('click', () => {
+        $('#db-oferta-modal-title').textContent = 'Nueva Oferta';
+        $('#ofe-id').value = '';
+        $('#db-oferta-form').reset();
+        $('#ofe-activa').checked = true;
+        $('#db-modal-oferta').hidden = false;
+    });
+
+    $('#db-oferta-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = {
+            titulo: $('#ofe-titulo').value.trim(),
+            descripcion: $('#ofe-descripcion').value.trim(),
+            descuento: parseInt($('#ofe-descuento').value) || 10,
+            expira: $('#ofe-expira').value || null,
+            badge: $('#ofe-badge').value.trim() || null,
+            destacada: $('#ofe-destacada').checked,
+            activa: $('#ofe-activa').checked,
+            actualizadoEn: serverTimestamp()
+        };
+        const existingId = $('#ofe-id').value;
+        try {
+            if (existingId) {
+                await updateDoc(doc(db, 'ofertas', existingId), data);
+                const idx = allOffers.findIndex(o => o.id === existingId);
+                if (idx >= 0) allOffers[idx] = { id: existingId, ...data };
+            } else {
+                data.creadoEn = serverTimestamp();
+                const ref = await addDoc(collection(db, 'ofertas'), data);
+                allOffers.push({ id: ref.id, ...data });
+            }
+            $('#db-modal-oferta').hidden = true;
+            renderOffersGrid();
+        } catch (err) { alert('Error al guardar oferta'); }
+    });
+}
+
+// ═══════════════════════════════════════════════
+// ANNUAL PLANS MANAGEMENT
+// ═══════════════════════════════════════════════
+function renderPlansTable() {
+    const tbody = $('#db-planes-tbody');
+    if (!tbody) return;
+
+    const activePlans = allPlans.filter(p => p.estado === 'activo');
+    const totalIncome = activePlans.reduce((s, p) => s + (p.precioAnual || 0), 0);
+    const kpiActivos = $('#kpi-planes-activos');
+    const kpiIngresos = $('#kpi-planes-ingresos');
+    if (kpiActivos) kpiActivos.textContent = activePlans.length;
+    if (kpiIngresos) kpiIngresos.textContent = totalIncome.toFixed(0) + '€';
+
+    if (allPlans.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="db-empty">Sin planes anuales asignados</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = allPlans.map(p => {
+        const clientName = allClients.find(c => c.id === p.userId)?.nombre || p.userId;
+        const plan = ANNUAL_SERVICE_PLANS.find(ap => ap.id === p.planId);
+        return `
+        <tr>
+            <td>${clientName}</td>
+            <td>${plan?.nombre || p.planId}</td>
+            <td><strong>${p.precioAnual || 0}€</strong></td>
+            <td>${p.sesionesTotales || 0}</td>
+            <td><strong>${p.sesionesRestantes || 0}</strong></td>
+            <td><span class="db-badge ${p.estado === 'activo' ? 'db-badge--green' : 'db-badge--gray'}">${p.estado || '—'}</span></td>
+            <td>${p.fechaInicio ? new Date(p.fechaInicio.seconds * 1000).toLocaleDateString('es-ES') : '—'}</td>
+        </tr>
+        `;
+    }).join('');
+}
+
+function renderPlansCatalog() {
+    const container = $('#db-planes-catalogo');
+    if (!container) return;
+    container.innerHTML = ANNUAL_SERVICE_PLANS.map(p => `
+        <div class="db-service-card">
+            <div class="db-service-card__header">
+                <span class="db-service-card__name">${p.nombre}</span>
+                <span class="db-service-card__price">${p.precioAnual}€<small>/año</small></span>
+            </div>
+            <div class="db-service-card__meta">
+                <span>${p.frecuencia}</span>
+                <span>${p.sesiones} sesiones</span>
+                <span style="color:var(--db-green)">Ahorra ${p.ahorro}€</span>
+            </div>
+            <p style="font-size:12px;color:var(--db-text-muted)">Precio unitario: ${p.precioUnitario}€ × ${p.sesiones} = ${p.precioUnitario * p.sesiones}€ → <strong>${p.precioAnual}€</strong></p>
+        </div>
+    `).join('');
+}
+
+function initPlanForm() {
+    // Populate select
+    const sel = $('#plan-servicio');
+    if (sel) {
+        sel.innerHTML = ANNUAL_SERVICE_PLANS.map(p => `<option value="${p.id}">${p.nombre} — ${p.precioAnual}€/año (ahorra ${p.ahorro}€)</option>`).join('');
+    }
+
+    $('#db-asignar-plan')?.addEventListener('click', () => {
+        $('#db-plan-form').reset();
+        $('#db-plan-result').hidden = true;
+        $('#db-modal-plan').hidden = false;
+    });
+
+    $('#db-plan-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const clientInput = $('#plan-cliente').value.trim();
+        const planId = $('#plan-servicio').value;
+        const resultEl = $('#db-plan-result');
+
+        const client = allClients.find(c =>
+            c.clientNumber?.toLowerCase() === clientInput.toLowerCase() ||
+            c.email?.toLowerCase() === clientInput.toLowerCase()
+        );
+
+        if (!client) {
+            resultEl.hidden = false;
+            resultEl.className = 'db-alert db-alert--error';
+            resultEl.textContent = `❌ Cliente "${clientInput}" no encontrado`;
+            return;
+        }
+
+        try {
+            await subscribeAnnualPlan(client.id, planId);
+            resultEl.hidden = false;
+            resultEl.className = 'db-alert db-alert--success';
+            resultEl.textContent = `✅ Plan asignado correctamente a ${client.nombre}`;
+            await loadPlans();
+            renderPlansTable();
+        } catch (err) {
+            resultEl.hidden = false;
+            resultEl.className = 'db-alert db-alert--error';
+            resultEl.textContent = '❌ Error: ' + err.message;
+        }
+    });
+}
+
+// ═══════════════════════════════════════════════
+// SUPER ADMIN
+// ═══════════════════════════════════════════════
+function renderSuperAdmin() {
+    const el = (id) => document.getElementById(id);
+    if (el('super-total-clientes')) el('super-total-clientes').textContent = allClients.length;
+    if (el('super-total-ventas')) el('super-total-ventas').textContent = allSales.length;
+    if (el('super-total-citas')) el('super-total-citas').textContent = allAppointments.length;
+    if (el('super-total-cupones')) el('super-total-cupones').textContent = allCoupons.length;
+}
+
+function initSuperAdmin() {
+    $('#db-init-services')?.addEventListener('click', async () => {
+        const resultEl = $('#db-init-result');
+        try {
+            await initializeServices();
+            await loadServices();
+            renderServicesGrid();
+            renderTPVServices();
+            resultEl.hidden = false;
+            resultEl.className = 'db-alert db-alert--success';
+            resultEl.textContent = `✅ Servicios inicializados: ${allServices.length} cargados`;
+        } catch (e) {
+            resultEl.hidden = false;
+            resultEl.className = 'db-alert db-alert--error';
+            resultEl.textContent = '❌ Error: ' + e.message;
+        }
     });
 }

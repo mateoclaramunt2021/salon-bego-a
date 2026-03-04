@@ -512,6 +512,92 @@ textarea.db-input { resize: vertical; }
 .db-agenda-grid { display: flex; flex-direction: column; gap: 8px; }
 
 /* ═══════════════════════════════
+   TPV — PUNTO DE VENTA
+   ═══════════════════════════════ */
+.db-tpv-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 24px;
+    align-items: start;
+}
+.db-tpv-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+}
+.db-tpv-item {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 14px 10px;
+    background: var(--db-surface);
+    border: 1px solid var(--db-border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-body);
+    color: var(--db-text);
+}
+.db-tpv-item:hover {
+    border-color: var(--db-gold);
+    background: rgba(200,162,90,0.08);
+}
+.db-tpv-item__name { font-size: 12px; font-weight: 500; text-align: center; }
+.db-tpv-item__price { font-size: 15px; font-weight: 700; color: var(--db-gold); margin-top: 4px; }
+
+.db-tpv-client-info {
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: rgba(200,162,90,0.08);
+    border-radius: 8px;
+    font-size: 14px; font-weight: 500;
+}
+
+.db-tpv-ticket-card {
+    position: sticky; top: 24px;
+}
+.db-tpv-ticket-items {
+    min-height: 80px;
+    margin-bottom: 16px;
+}
+.db-tpv-ticket-line {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--db-border);
+    font-size: 13px;
+}
+.db-tpv-ticket-summary {
+    border-top: 2px solid var(--db-border);
+    padding-top: 12px;
+    margin-bottom: 16px;
+}
+.db-tpv-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 4px 0;
+    font-size: 13px;
+    color: var(--db-text-muted);
+}
+.db-tpv-row--total {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--db-gold);
+    padding-top: 10px;
+    border-top: 1px solid var(--db-border);
+    margin-top: 8px;
+}
+.db-tpv-actions {
+    display: flex; gap: 10px;
+}
+.db-tpv-actions .db-select { flex: 1; }
+
+/* Super Admin nav */
+.db-nav-item--super {
+    border-top: 1px solid var(--db-border);
+    margin-top: 8px;
+    padding-top: 12px;
+}
+
+/* ═══════════════════════════════
    RESPONSIVE
    ═══════════════════════════════ */
 @media (max-width: 900px) {
@@ -535,6 +621,8 @@ textarea.db-input { resize: vertical; }
     .db-toolbar { flex-direction: column; align-items: stretch; }
     .db-toolbar__filters { flex-direction: column; }
     .db-input--search { min-width: 100%; }
+    .db-tpv-layout { grid-template-columns: 1fr; }
+    .db-tpv-ticket-card { position: static; }
 }
 
 @media (max-width: 480px) {
@@ -544,4 +632,5 @@ textarea.db-input { resize: vertical; }
     .db-table { font-size: 12px; }
     .db-table th, .db-table td { padding: 8px 10px; }
     .db-form__row--half { flex-direction: column; }
+    .db-tpv-items-grid { grid-template-columns: repeat(2, 1fr); }
 }

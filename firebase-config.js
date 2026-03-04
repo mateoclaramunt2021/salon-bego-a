@@ -450,6 +450,88 @@ async function getAvailableSlots(sede, fecha) {
 }
 
 // ═══════════════════════════════════════════════
+// PLANES ANUALES DE SERVICIOS (-15%)
+// ═══════════════════════════════════════════════
+
+const ANNUAL_SERVICE_PLANS = [
+    { id: 'anual-corte-mujer',       serviceId: 'corte-mujer',       nombre: 'Corte Mujer',              precioUnitario: 45,  frecuencia: 'mensual',    sesiones: 12, precioAnual: 459,    ahorro: 81 },
+    { id: 'anual-corte-curly-seco',  serviceId: 'corte-curly-seco',  nombre: 'Corte Curly en Seco',       precioUnitario: 60,  frecuencia: 'mensual',    sesiones: 12, precioAnual: 612,    ahorro: 108 },
+    { id: 'anual-corte-curly-premium', serviceId: 'corte-curly-premium', nombre: 'Corte Curly Premium',   precioUnitario: 85,  frecuencia: 'mensual',    sesiones: 12, precioAnual: 867,    ahorro: 153 },
+    { id: 'anual-lavado-peinado',    serviceId: 'lavado-peinado',    nombre: 'Lavado + Peinado',          precioUnitario: 25,  frecuencia: 'mensual',    sesiones: 12, precioAnual: 255,    ahorro: 45 },
+    { id: 'anual-tinte-raiz',        serviceId: 'tinte-raiz',        nombre: 'Tinte Raíz Orgánico',      precioUnitario: 50,  frecuencia: 'cada 5 sem', sesiones: 10, precioAnual: 425,    ahorro: 75 },
+    { id: 'anual-tinte-organico',    serviceId: 'tinte-organico',    nombre: 'Tinte Orgánico Completo',   precioUnitario: 70,  frecuencia: 'cada 6 sem', sesiones: 8,  precioAnual: 476,    ahorro: 84 },
+    { id: 'anual-mechas',            serviceId: 'mechas-completas',  nombre: 'Mechas Completas',          precioUnitario: 95,  frecuencia: 'trimestral', sesiones: 4,  precioAnual: 323,    ahorro: 57 },
+    { id: 'anual-balayage',          serviceId: 'balayage',          nombre: 'Balayage Artesanal',        precioUnitario: 130, frecuencia: 'cada 4 meses', sesiones: 3, precioAnual: 331.50, ahorro: 58.50 },
+    { id: 'anual-babylights',        serviceId: 'babylights',        nombre: 'Babylights',                precioUnitario: 115, frecuencia: 'trimestral', sesiones: 4,  precioAnual: 391,    ahorro: 69 },
+    { id: 'anual-hidratacion',       serviceId: 'hidratacion',       nombre: 'Hidratación Profunda',      precioUnitario: 35,  frecuencia: 'mensual',    sesiones: 12, precioAnual: 357,    ahorro: 63 },
+    { id: 'anual-nutricion',         serviceId: 'spa-capilar',       nombre: 'Nutrición Premium',         precioUnitario: 45,  frecuencia: 'mensual',    sesiones: 12, precioAnual: 459,    ahorro: 81 },
+    { id: 'anual-keratina',          serviceId: 'keratina',          nombre: 'Alisado Keratina',          precioUnitario: 160, frecuencia: 'cada 4 meses', sesiones: 3, precioAnual: 408,    ahorro: 72 },
+    { id: 'anual-botox',             serviceId: 'botox-capilar',     nombre: 'Botox Capilar',             precioUnitario: 100, frecuencia: 'trimestral', sesiones: 4,  precioAnual: 340,    ahorro: 60 },
+    { id: 'anual-cobertura-canas',   serviceId: 'cobertura-canas',   nombre: 'Cobertura de Canas',        precioUnitario: 65,  frecuencia: 'cada 5 sem', sesiones: 10, precioAnual: 552.50, ahorro: 97.50 },
+    { id: 'anual-transicion-canas',  serviceId: 'transicion-canas',  nombre: 'Transición a Canas',        precioUnitario: 90,  frecuencia: 'cada 6 sem', sesiones: 8,  precioAnual: 612,    ahorro: 108 }
+];
+
+async function subscribeAnnualPlan(userId, planId) {
+    const plan = ANNUAL_SERVICE_PLANS.find(p => p.id === planId);
+    if (!plan) throw new Error('Plan no encontrado');
+
+    const now = new Date();
+    const fin = new Date(now);
+    fin.setFullYear(fin.getFullYear() + 1);
+
+    const ref = doc(collection(db, 'planesAnuales'));
+    await setDoc(ref, {
+        userId,
+        planId: plan.id,
+        serviceId: plan.serviceId,
+        nombre: plan.nombre,
+        precioUnitario: plan.precioUnitario,
+        precioAnual: plan.precioAnual,
+        sesionesTotal: plan.sesiones,
+        sesionesUsadas: 0,
+        sesionesRestantes: plan.sesiones,
+        inicio: now.toISOString().split('T')[0],
+        fin: fin.toISOString().split('T')[0],
+        estado: 'activo',
+        creadoEn: serverTimestamp()
+    });
+    return ref.id;
+}
+
+async function getClientAnnualPlans(userId) {
+    const q = query(
+        collection(db, 'planesAnuales'),
+        where('userId', '==', userId),
+        where('estado', '==', 'activo')
+    );
+    const snap = await getDocs(q);
+    const plans = [];
+    snap.forEach(d => plans.push({ id: d.id, ...d.data() }));
+    return plans;
+}
+
+async function useAnnualPlanSession(planDocId) {
+    const ref = doc(db, 'planesAnuales', planDocId);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) throw new Error('Plan no encontrado');
+    const data = snap.data();
+    if (data.sesionesRestantes <= 0) throw new Error('Sin sesiones restantes');
+    
+    await updateDoc(ref, {
+        sesionesUsadas: increment(1),
+        sesionesRestantes: increment(-1)
+    });
+}
+
+// ═══════════════════════════════════════════════
+// SUPER ADMIN CHECK
+// ═══════════════════════════════════════════════
+
+function isSuperAdmin(email) {
+    return email === 'neuriaxx@gmail.com';
+}
+
+// ═══════════════════════════════════════════════
 // EXPORTS
 // ═══════════════════════════════════════════════
 export {
@@ -459,7 +541,7 @@ export {
     // Firestore
     collection, doc, setDoc, getDoc, getDocs, updateDoc, deleteDoc, addDoc, query, where, orderBy, limit, onSnapshot, serverTimestamp, increment, arrayUnion, arrayRemove, writeBatch,
     // Custom functions
-    isAdmin, ADMIN_EMAILS,
+    isAdmin, isSuperAdmin, ADMIN_EMAILS,
     generateClientNumber, createClientProfile, getClientProfile, updateClientProfile,
     calculateLevel, LEVEL_CONFIG, POINTS_CONFIG, addPoints,
     validateCoupon, useCoupon,
@@ -467,5 +549,6 @@ export {
     createSale, updateStock,
     DEFAULT_SERVICES, initializeServices,
     MEMBERSHIP_PLANS, activateMembership, useServiceFromMembership,
+    ANNUAL_SERVICE_PLANS, subscribeAnnualPlan, getClientAnnualPlans, useAnnualPlanSession,
     BUSINESS_HOURS, getAvailableSlots
 };
