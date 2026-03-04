@@ -31,7 +31,7 @@
     padding-top: 100px;
     padding-bottom: 4rem;
     min-height: 100vh;
-    background: var(--bg, #0F1115);
+    background: var(--bg, #111111);
 }
 
 /* ═══════════════════════════════════════════════
@@ -55,7 +55,7 @@
     border-radius: 50%;
     background: linear-gradient(135deg, var(--gold, #C8A25A), #a17c3a);
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 1.1rem; color: #0F1115;
+    font-weight: 700; font-size: 1.1rem; color: #111111;
 }
 .cp-welcome__name {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
@@ -96,7 +96,7 @@
 .cp-nav__item:hover { border-color: rgba(200,162,90,0.3); color: #fff; }
 .cp-nav__item.active {
     background: var(--gold, #C8A25A);
-    color: #0F1115;
+    color: #111111;
     border-color: var(--gold);
     font-weight: 600;
 }
@@ -248,7 +248,7 @@
     justify-content: center; font-size: 0.7rem; transition: all 0.3s ease;
 }
 .cp-service-item.selected .cp-service-item__check {
-    background: var(--gold); border-color: var(--gold); color: #0F1115;
+    background: var(--gold); border-color: var(--gold); color: #111111;
 }
 
 .cp-booking__input,
@@ -274,7 +274,7 @@
     transition: all 0.3s ease; font-family: var(--font-body, 'Inter', sans-serif);
 }
 .cp-time-slot:hover:not(.disabled) { border-color: var(--gold); }
-.cp-time-slot.selected { background: var(--gold); color: #0F1115; border-color: var(--gold); font-weight: 600; }
+.cp-time-slot.selected { background: var(--gold); color: #111111; border-color: var(--gold); font-weight: 600; }
 .cp-time-slot.disabled { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
 
 .cp-coupon-field { display: flex; gap: 0.75rem; }
@@ -313,7 +313,7 @@
 .cp-membership__badge {
     display: inline-block;
     padding: 4px 16px; border-radius: 6px;
-    background: var(--gold); color: #0F1115;
+    background: var(--gold); color: #111111;
     font-size: 0.75rem; font-weight: 700; letter-spacing: 1px;
     margin-bottom: 0.5rem;
 }
@@ -375,7 +375,7 @@
 .cp-wallet-card {
     max-width: 380px; margin: 0 auto 2rem;
     border-radius: 20px; overflow: hidden;
-    background: linear-gradient(160deg, #1a1c22 0%, #0F1115 40%, rgba(200,162,90,0.15) 100%);
+    background: linear-gradient(160deg, #1a1a1a 0%, #111111 40%, rgba(200,162,90,0.15) 100%);
     border: 1px solid rgba(200,162,90,0.3);
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
@@ -438,7 +438,7 @@
     outline: none; border-color: var(--gold);
 }
 .cp-profile-field input:disabled { opacity: 0.5; cursor: not-allowed; }
-.cp-profile-field select option { background: #1a1c22; }
+.cp-profile-field select option { background: #1a1a1a; }
 .cp-profile-saved { color: #2ecc71; font-size: 0.85rem; margin-left: 1rem; }
 
 .cp-profile-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }

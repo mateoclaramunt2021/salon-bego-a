@@ -192,6 +192,45 @@ function initScrollAnimations() {
     $$('.card, .servicio, .proceso__step').forEach(el => {
         observer.observe(el);
     });
+
+    // Reveal animations (new system)
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    $$('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+        revealObserver.observe(el);
+    });
+}
+
+// ============================================
+// STICKY MOBILE CTA
+// ============================================
+
+function initStickyCTA() {
+    const cta = document.querySelector('.sticky-cta');
+    if (!cta) return;
+
+    let lastScroll = 0;
+    const heroEnd = document.querySelector('.hero-fullscreen');
+    if (!heroEnd) return;
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const heroBottom = heroEnd.offsetTop + heroEnd.offsetHeight;
+        
+        if (scrollY > heroBottom && scrollY > 100) {
+            cta.classList.add('visible');
+        } else {
+            cta.classList.remove('visible');
+        }
+        lastScroll = scrollY;
+    }, { passive: true });
 }
 
 // ============================================
@@ -317,6 +356,7 @@ function init() {
     new ReviewCarousel();
     new Lightbox();
     initScrollAnimations();
+    initStickyCTA();
     initSmoothScroll();
     initLazyLoading();
     initHoverEffects();

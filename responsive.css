@@ -167,7 +167,7 @@
         min-height: 100vh;
         padding: 0;
         padding-top: 70px;
-        background: linear-gradient(180deg, rgba(15,17,21,0.98) 0%, rgba(15,17,21,0.95) 50%, rgba(15,17,21,0.85) 100%), 
+        background: linear-gradient(180deg, rgba(17, 17, 17,0.98) 0%, rgba(17, 17, 17,0.95) 50%, rgba(17, 17, 17,0.85) 100%), 
                     url('assets/portada-begona.jpeg') center 30%/cover no-repeat scroll !important;
         background-attachment: scroll !important;
         display: flex;
@@ -267,7 +267,7 @@
 
     .hero-bio-panel {
         gap: 12px;
-        background: rgba(15, 17, 21, 0.8) !important;
+        background: rgba(17, 17, 17, 0.8) !important;
         backdrop-filter: blur(4px);
         padding: 14px;
         border-radius: 8px;
@@ -857,7 +857,7 @@
     /* ===== HEADER ===== */
     .header {
         padding: 16px 0;
-        background: linear-gradient(135deg, rgba(15, 17, 21, 0.98) 0%, rgba(26, 29, 35, 0.95) 100%);
+        background: linear-gradient(135deg, rgba(17, 17, 17, 0.98) 0%, rgba(26, 29, 35, 0.95) 100%);
     }
 
     .header__wrapper {
@@ -917,7 +917,7 @@
         height: 100vh;
         padding-top: 0;
         padding-bottom: 0;
-        background: linear-gradient(90deg, rgba(15,17,21,0.92) 0%, rgba(15,17,21,0.70) 45%, rgba(15,17,21,0.30) 70%), 
+        background: linear-gradient(90deg, rgba(17, 17, 17,0.92) 0%, rgba(17, 17, 17,0.70) 45%, rgba(17, 17, 17,0.30) 70%), 
                     url('assets/portada-begona.jpeg') center 5%/cover no-repeat fixed !important;
         background-size: cover !important;
         background-repeat: no-repeat !important;

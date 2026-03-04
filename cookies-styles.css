@@ -12,7 +12,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(135deg, rgba(15, 17, 21, 0.98) 0%, rgba(26, 29, 35, 0.95) 100%);
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.98) 0%, rgba(26, 29, 35, 0.95) 100%);
     border-top: 2px solid #D4AE68;
     padding: 25px;
     z-index: 999;

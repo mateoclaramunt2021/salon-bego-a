@@ -9,7 +9,7 @@
 .auth-main {
     min-height: 100vh;
     padding-top: 80px;
-    background: var(--bg, #0F1115);
+    background: var(--bg, #111111);
 }
 
 .auth-container {
@@ -24,7 +24,7 @@
    LEFT: BRAND PANEL
    ═══════════════════════════════════════════════ */
 .auth-brand {
-    background: linear-gradient(135deg, rgba(200, 162, 90, 0.15) 0%, rgba(15, 17, 21, 0.95) 100%);
+    background: linear-gradient(135deg, rgba(200, 162, 90, 0.15) 0%, rgba(17, 17, 17, 0.95) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -138,7 +138,7 @@
 
 .auth-tab.active {
     background: var(--gold, #C8A25A);
-    color: #0F1115;
+    color: #111111;
 }
 
 /* Form */

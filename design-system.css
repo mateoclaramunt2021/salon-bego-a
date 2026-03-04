@@ -6,24 +6,30 @@
    ===================================================== */
 
 :root {
-    /* =========== COLORES =========== */
-    --bg: #0F1115;
-    --bg-light: #1A1D23;
+    /* =========== COLORES — TEMA BLANCO PREMIUM =========== */
+    --bg: #FFFFFF;
+    --bg-warm: #FAF8F5;
+    --bg-dark: #111111;
+    --bg-light: #FAF8F5;
     --surface: #FFFFFF;
     --surface-2: #F5F1EC;
-    --text: #FFFFFF;
-    --text-dark: #0F1115;
-    --text-muted: rgba(255, 255, 255, 0.72);
-    --text-subtle: rgba(255, 255, 255, 0.55);
+    --text: #111111;
+    --text-dark: #111111;
+    --text-light: #FFFFFF;
+    --text-muted: #6B6B6B;
+    --text-subtle: #999999;
     --gold: #C8A25A;
-    --gold-soft: rgba(200, 162, 90, 0.15);
-    --gold-medium: rgba(200, 162, 90, 0.3);
-    --gold-strong: rgba(200, 162, 90, 0.5);
-    --gold-glass: rgba(200, 162, 90, 0.12);
+    --gold-hover: #B8923A;
+    --gold-soft: rgba(200, 162, 90, 0.1);
+    --gold-medium: rgba(200, 162, 90, 0.2);
+    --gold-strong: rgba(200, 162, 90, 0.4);
+    --gold-glass: rgba(200, 162, 90, 0.08);
     --nude: #D8B4A0;
-    --border: rgba(200, 162, 90, 0.2);
-    --border-subtle: rgba(200, 162, 90, 0.12);
-    --divider: rgba(200, 162, 90, 0.25);
+    --beige: #F5F1EC;
+    --success: #2D8F5E;
+    --border: #E8E4DF;
+    --border-subtle: #F0ECE7;
+    --divider: #E0DCD7;
 
     /* =========== TIPOGRAFÍA — PACK A =========== */
     --font-display: 'Cormorant Garamond', Georgia, serif;
@@ -68,13 +74,13 @@
     --radius-xl: 24px;
     --radius-full: 9999px;
 
-    /* =========== SOMBRAS =========== */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
-    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.2);
-    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.3);
-    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.4);
-    --shadow-elevation: 0 10px 28px rgba(200, 162, 90, 0.22);
-    --shadow-elevation-hover: 0 18px 40px rgba(200, 162, 90, 0.38);
+    /* =========== SOMBRAS — LIGHT THEME =========== */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+    --shadow-elevation: 0 10px 28px rgba(200, 162, 90, 0.15);
+    --shadow-elevation-hover: 0 18px 40px rgba(200, 162, 90, 0.25);
 
     /* =========== LAYOUT =========== */
     --container-width: 1200px;
@@ -250,7 +256,23 @@ p {
 }
 
 .section--dark {
-    background-color: var(--bg);
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+.section--dark h1,
+.section--dark h2,
+.section--dark h3 {
+    color: var(--text-light);
+}
+
+.section--dark p,
+.section--dark .lead {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.section--warm {
+    background-color: var(--bg-warm);
     color: var(--text);
 }
 
@@ -521,19 +543,18 @@ p {
    =================================================== */
 
 .card {
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--surface);
     border: 1.5px solid var(--border);
     border-radius: var(--radius-md);
     padding: var(--space-5);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-sm);
     transition: all var(--dur-normal) var(--ease-out);
 }
 
 .card:hover {
-    background: rgba(0, 0, 0, 0.52);
-    border-color: rgba(200, 162, 90, 0.28);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+    border-color: var(--gold-medium);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
 }
 
 .card--light {
@@ -579,19 +600,19 @@ p {
    =================================================== */
 
 .glass-panel {
-    background: rgba(0, 0, 0, 0.50);
+    background: rgba(255, 255, 255, 0.85);
     border: 1.5px solid var(--border);
     border-radius: var(--radius-md);
     padding: var(--space-5);
     backdrop-filter: blur(12px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-md);
     transition: all var(--dur-normal) var(--ease-out);
 }
 
 .glass-panel:hover {
-    background: rgba(0, 0, 0, 0.52);
-    border-color: rgba(200, 162, 90, 0.28);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--gold-medium);
+    box-shadow: var(--shadow-lg);
 }
 
 /* ===================================================
@@ -739,6 +760,108 @@ p {
 }
 
 /* ===================================================
+   SCROLL REVEAL — IntersectionObserver based
+   =================================================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s var(--ease-in-out), transform 0.7s var(--ease-in-out);
+    will-change: opacity, transform;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-32px);
+    transition: opacity 0.7s var(--ease-in-out), transform 0.7s var(--ease-in-out);
+}
+
+.reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(32px);
+    transition: opacity 0.7s var(--ease-in-out), transform 0.7s var(--ease-in-out);
+}
+
+.reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.6s var(--ease-in-out), transform 0.6s var(--ease-in-out);
+}
+
+.reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Stagger children delays */
+.reveal-stagger > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger > *:nth-child(2) { transition-delay: 100ms; }
+.reveal-stagger > *:nth-child(3) { transition-delay: 200ms; }
+.reveal-stagger > *:nth-child(4) { transition-delay: 300ms; }
+.reveal-stagger > *:nth-child(5) { transition-delay: 400ms; }
+.reveal-stagger > *:nth-child(6) { transition-delay: 500ms; }
+
+/* ===================================================
+   STICKY MOBILE CTA
+   =================================================== */
+
+.sticky-cta {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+    padding: 12px 18px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(100%);
+    transition: transform 0.4s var(--ease-in-out);
+}
+
+.sticky-cta.visible {
+    transform: translateY(0);
+}
+
+.sticky-cta__inner {
+    display: flex;
+    gap: 10px;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.sticky-cta .btn {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+    padding: 12px 16px;
+    min-height: 44px;
+}
+
+@media (max-width: 768px) {
+    .sticky-cta {
+        display: block;
+    }
+}
+
+/* ===================================================
    ACTION BAR — Sección CTA estándar
    =================================================== */
 
@@ -880,7 +1003,7 @@ p {
 .specialty-item__desc {
     font-family: var(--font-body);
     font-size: 15px;
-    color: rgba(15, 17, 21, 0.8);
+    color: rgba(17, 17, 17, 0.8);
     margin: 0;
     line-height: 1.6;
     font-weight: 400;
@@ -975,7 +1098,7 @@ p {
     font-family: var(--font-body);
     font-size: 13px;
     font-weight: 500;
-    color: rgba(15, 17, 21, 0.75);
+    color: rgba(17, 17, 17, 0.75);
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -1094,7 +1217,7 @@ p {
 /* HERO SECTION PREMIUM */
 .specialties-hero {
     padding: var(--space-9) 0 var(--space-8) 0;
-    background: linear-gradient(135deg, #0F1115 0%, #1A1D23 100%);
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a1a 100%);
     position: relative;
 }
 
@@ -1171,7 +1294,7 @@ p {
     display: flex;
     gap: var(--space-3);
     position: relative;
-    background: rgba(15, 17, 21, 0.04);
+    background: rgba(17, 17, 17, 0.04);
     border: 1px solid rgba(200, 162, 90, 0.2);
     border-radius: 50px;
     padding: 8px;
@@ -1183,7 +1306,7 @@ p {
     font-family: var(--font-body);
     font-size: 14px;
     font-weight: 600;
-    color: rgba(15, 17, 21, 0.6);
+    color: rgba(17, 17, 17, 0.6);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     padding: 12px 24px;
@@ -1198,11 +1321,11 @@ p {
 }
 
 .specialties-tab:hover {
-    color: rgba(15, 17, 21, 0.85);
+    color: rgba(17, 17, 17, 0.85);
 }
 
 .specialties-tab--active {
-    color: #0F1115;
+    color: #111111;
 }
 
 .specialties-tabs__indicator {
