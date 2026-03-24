@@ -28,9 +28,8 @@
     <link rel="stylesheet" href="responsive.css">
     <!-- HERO SIDEBAR: CTAs EN LATERAL DERECHO -->
     <link rel="stylesheet" href="hero-sidebar.css">
-    <!-- LEGAL PAGES & COOKIES STYLES -->
+    <!-- LEGAL PAGES STYLES -->
     <link rel="stylesheet" href="legal-styles.css">
-    <link rel="stylesheet" href="cookies-styles.css">
     
     <!-- FAVICON -->
     <link rel="icon" type="image/png" href="assets/LOGO.png">
@@ -129,11 +128,8 @@
                         <li><a href="pages/galeria.html">Galería</a></li>
                         <li><a href="pages/resenas.html">Reseñas</a></li>
                         <li><a href="pages/contacto.html">Contacto</a></li>
-                        <li><a href="pages/reservas.html">Reservas</a></li>
-                        <li><a href="pages/mi-cuenta.html">Mi Cuenta</a></li>
                     </ul>
                 </nav>
-                <a href="pages/reservas.html" class="btn btn--primary btn--sm">Reservar</a>
             </div>
         </div>
     </header>
@@ -493,80 +489,13 @@
                     <li><a href="pages/politica-privacidad.html">Privacidad</a></li>
                     <li><a href="pages/politica-cookies.html">Cookies</a></li>
                     <li><a href="pages/condiciones-generales.html">Condiciones</a></li>
-                    <li><a href="pages/dashboard.html" title="Admin" style="opacity:0.4;font-size:11px;">🔒</a></li>
-                    <li><a href="#" id="cookie-settings-link" class="cookie-settings-trigger">⚙️ Cookies</a></li>
                 </ul>
             </div>
             <p>&copy; 2026 Salón Begoña Gómez. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- Cookie Banner -->
-    <div id="cookie-banner" class="cookie-banner" role="region" aria-label="Aviso de cookies">
-        <div class="cookie-banner__content">
-            <div class="cookie-banner__message">
-                <h3>Preferencias de Cookies</h3>
-                <p>Utilizamos cookies para mejorar tu experiencia. Puedes aceptar todas o personalizar tus preferencias.</p>
-            </div>
-            <div class="cookie-banner__buttons">
-                <button id="cookie-reject-btn" class="btn btn--secondary">Rechazar</button>
-                <button id="cookie-configure-btn" class="btn btn--secondary">Personalizar</button>
-                <button id="cookie-accept-btn" class="btn btn--primary">Aceptar Todas</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Cookie Settings Modal -->
-    <div id="cookie-modal" class="cookie-modal" role="dialog" aria-labelledby="cookie-modal-title" aria-hidden="true">
-        <div class="cookie-modal__backdrop"></div>
-        <div class="cookie-modal__content">
-            <div class="cookie-modal__header">
-                <h2 id="cookie-modal-title">Preferencias de Cookies</h2>
-                <button class="cookie-modal__close" id="cookie-modal-close" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="cookie-modal__body">
-                <!-- Necesarias (siempre activas) -->
-                <div class="cookie-category">
-                    <div class="cookie-category__header">
-                        <div>
-                            <h3>Cookies Necesarias</h3>
-                            <p>Requeridas para el funcionamiento básico del sitio. No se pueden desactivar.</p>
-                        </div>
-                        <input type="checkbox" id="cookie-necessary" class="cookie-toggle" disabled checked>
-                    </div>
-                </div>
-
-                <!-- Analíticas -->
-                <div class="cookie-category">
-                    <div class="cookie-category__header">
-                        <div>
-                            <h3>Cookies Analíticas</h3>
-                            <p>Nos ayudan a entender cómo usas el sitio y mejorarlo. Completamente anónimas.</p>
-                        </div>
-                        <input type="checkbox" id="cookie-analytics" class="cookie-toggle">
-                    </div>
-                </div>
-
-                <!-- Marketing -->
-                <div class="cookie-category">
-                    <div class="cookie-category__header">
-                        <div>
-                            <h3>Cookies de Marketing</h3>
-                            <p>Nos permiten mostrar publicidad relevante y medir su efectividad.</p>
-                        </div>
-                        <input type="checkbox" id="cookie-marketing" class="cookie-toggle">
-                    </div>
-                </div>
-            </div>
-            <div class="cookie-modal__footer">
-                <button id="cookie-modal-save" class="btn btn--primary">Guardar Preferencias</button>
-            </div>
-        </div>
-    </div>
-
     <script src="script.js" defer></script>
-    <script src="booking-menu.js" defer></script>
     <script src="mobile-menu.js" defer></script>
-    <script src="cookies-manager.js" defer></script>
 </body>
 </html>
